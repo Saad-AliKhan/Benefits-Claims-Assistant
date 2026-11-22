@@ -1,0 +1,33 @@
+# Builds the Android app (android/) into an installable APK on GitHub's free build machines.
+# Every push that changes android/ builds it; or run it by hand: Actions > Android APK > Run workflow.
+# Download: open the finished run > Artifacts > LastMile-apk (a zip with the .apk inside).
+name: Android APK
+
+on:
+  push:
+    paths: ["android/**", ".github/workflows/android.yml"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+      - name: Build the APK
+        working-directory: android
+        run: gradle --no-daemon assembleRelease
+      - name: Name the file
+        run: cp android/app/build/outputs/apk/release/app-release.apk LastMile-${{ github.run_number }}.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LastMile-apk
+          path: LastMile-*.apk
+          retention-days: 30

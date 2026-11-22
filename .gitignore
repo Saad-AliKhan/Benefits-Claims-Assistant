@@ -17,3 +17,8 @@ private_samples/
 tools/bin/
 models/
 data/recordings/
+android/*.apk
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties

@@ -230,6 +230,11 @@
     $("out-btn").addEventListener("click", LM.logout);
     $("new-btn").addEventListener("click", restart);
     $("sms-btn").addEventListener("click", showSms);
+    if (window.LMNative) {   // inside the Android app: a way back to the server setup screen
+      const gear = el("button", { type: "button", class: "link", "aria-label": "Server", title: "Server", text: "⚙️",
+                                  onclick: () => window.LMNative.changeServer() });
+      document.querySelector(".cz-tools").prepend(gear);
+    }
     window.addEventListener("online", retry);
     await resume();
   }

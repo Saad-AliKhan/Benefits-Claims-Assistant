@@ -37,6 +37,22 @@ def assistant_page(request: Request):
     return _page(request, "assistant.html", "Assistant", body_class="citizen")
 
 
+APK = Path(__file__).resolve().parents[2] / "android" / "LastMile.apk"
+
+
+@router.get("/app", response_class=HTMLResponse)
+def android_app_page(request: Request):
+    """How to get the Android app on this phone (the APK is built on GitHub: see android/README.md)."""
+    return _page(request, "app.html", "Android app", body_class="citizen", apk=APK.is_file())
+
+
+@router.get("/app/LastMile.apk")
+def android_apk():
+    if not APK.is_file():
+        return RedirectResponse("/app")
+    return FileResponse(APK, media_type="application/vnd.android.package-archive", filename="LastMile.apk")
+
+
 @router.get("/record", response_class=HTMLResponse)
 def record_page(request: Request):
     return _page(request, "record.html", "Voice recordings (testing)", body_class="citizen")

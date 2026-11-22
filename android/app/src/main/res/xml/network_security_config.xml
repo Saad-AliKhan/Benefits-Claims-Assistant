@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The server is the demo laptop: https through the free tunnel, or plain http on a local network
+     (typed addresses like http://192.168.1.5:8080). Prototype only: a real deployment uses https only. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

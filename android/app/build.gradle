@@ -1,0 +1,31 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "pk.lastmile.app"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "pk.lastmile.app"
+        minSdk 24          // Android 7: most cheap phones still in use
+        targetSdk 35
+        versionCode 1
+        versionName "0.1-prototype"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug   // prototype: installable APK without a keystore
+        }
+    }
+    lint {
+        checkReleaseBuilds false   // prototype: a lint warning must not stop the APK
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+// No libraries: plain Android framework only, so the app stays small (~100 KB) and builds anywhere.

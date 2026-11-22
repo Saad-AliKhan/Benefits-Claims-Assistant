@@ -110,9 +110,23 @@
   if ("serviceWorker" in navigator && !navigator.serviceWorker.controller) {
     window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
   }
+  /* The Android app (android/): it shows these same pages; the page knows by the user agent. */
+  LM.inApp = () => /LastMileApp\//.test(navigator.userAgent);
+  LM.onAndroid = () => /Android/i.test(navigator.userAgent);
+  LM.appLink = () => "intent://setup?server=" + encodeURIComponent(location.origin) +
+    "#Intent;scheme=lastmile;package=pk.lastmile.app;S.browser_fallback_url=" +
+    encodeURIComponent(location.origin + "/app") + ";end";
+  window.addEventListener("DOMContentLoaded", () => {
+    // In an Android browser (not in the app): offer the app; in the app: nothing to install.
+    if (!LM.onAndroid() || LM.inApp() || location.pathname !== "/login" || document.getElementById("get-app")) return;
+    const a = LM.el("a", { id: "get-app", class: "install", href: LM.appLink() }, "📲 ایپ میں کھولیں · Open in app");
+    document.body.append(a);
+  });
+
   let installEvent = null;
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
+    if (LM.inApp() || LM.onAndroid()) return;   // Android: the native app is offered instead
     installEvent = e;
     if (document.getElementById("install-app")) return;
     const b = LM.el("button", { id: "install-app", class: "install", type: "button" }, "📲 ایپ انسٹال کریں · Install app");
