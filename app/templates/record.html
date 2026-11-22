@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <header class="cz-top"><span id="who"></span>
+    <span class="cz-tools"><button id="out-btn" type="button" class="link" aria-label="Log out">🚪</button></span></header>
+  <div id="app" aria-live="polite"></div>
+{% endblock %}
+{% block scripts %}
+  <script src="/static/api.js"></script>
+  <script src="/static/voice.js"></script>
+  <script src="/static/record.js"></script>
+{% endblock %}

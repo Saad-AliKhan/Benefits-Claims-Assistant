@@ -34,11 +34,29 @@ def vocabulary_prompt() -> str:
     return "، ".join(list(words)[:25])
 
 
-@lru_cache(maxsize=1)
-def load_model():
+ALIASES = {"turbo": "large-v3-turbo", "large-v3-turbo": "large-v3-turbo"}
+
+
+def resolve(name: str) -> str:
+    """A model downloaded by tools/fetch_models.ps1 (models/whisper-small, models/whisper-turbo) is used
+    from there; otherwise faster-whisper downloads it by name. A folder path is used as it is."""
+    if Path(name).is_dir():
+        return str(Path(name))
+    short = "turbo" if ALIASES.get(name) == "large-v3-turbo" else name
+    local = HERE / "models" / f"whisper-{short}"
+    return str(local) if (local / "model.bin").is_file() else ALIASES.get(name, name)
+
+
+_models: dict = {}
+
+
+def load_model(name: str | None = None):
     from faster_whisper import WhisperModel  # imported here so mock mode needs no model
 
-    return WhisperModel(MODEL_NAME, device="cpu", compute_type="int8", cpu_threads=CPU_THREADS)
+    key = resolve(name or MODEL_NAME)
+    if key not in _models:
+        _models[key] = WhisperModel(key, device="cpu", compute_type="int8", cpu_threads=CPU_THREADS)
+    return _models[key]
 
 
 def decode(data: bytes) -> np.ndarray:
@@ -55,7 +73,7 @@ def decode(data: bytes) -> np.ndarray:
     return audio
 
 
-def transcribe(audio: np.ndarray) -> dict:
+def transcribe(audio: np.ndarray, model: str | None = None) -> dict:
     """quality: ok | silent (nothing said) | noisy (sound, but no clear speech: ask for a quieter place)."""
     seconds = len(audio) / 16000
     peak = float(np.abs(audio).max()) if len(audio) else 0.0
@@ -65,8 +83,13 @@ def transcribe(audio: np.ndarray) -> dict:
     audio = (audio / peak * 0.9).astype(np.float32)   # quiet phone recordings -> normal level
     t0 = time.time()
     with _lock:
-        segments, _ = load_model().transcribe(audio, language="ur", task="transcribe", beam_size=5,
-                                              vad_filter=True, initial_prompt=vocabulary_prompt())
+        # No initial_prompt: with a short or unclear clip Whisper repeated the prompt's word list for over a
+        # minute (seen on a 2 s clip). Spelling of claim words is fixed afterwards by urdu_intent's
+        # sound-alike correction instead. Output length is capped by the clip length for the same reason.
+        segments, _ = load_model(model).transcribe(audio, language="ur", task="transcribe", beam_size=5,
+                                                   vad_filter=True, condition_on_previous_text=False,
+                                                   without_timestamps=True,
+                                                   max_new_tokens=int(20 + 10 * seconds))
         segments = list(segments)
         text = " ".join(s.text.strip() for s in segments).strip()
     no_speech = max((s.no_speech_prob for s in segments), default=1.0)

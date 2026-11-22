@@ -169,12 +169,18 @@ def _norm(t: str | None) -> str:
     return re.sub(r"[؟?!۔.,،]", " ", (t or "").strip().lower()).strip()
 
 
+NEG_WORDS = {"نہیں", "غلط", "nahi", "nahin", "nhi", "nai", "no", "ghalat", "galat", "mat"}
+
+
 def yes_no(text: str | None) -> bool | None:
-    t = _norm(text)
+    """'ہاں جی' / 'جی' / 'ٹھیک ہے' -> True; 'نہیں' (also 'نہی', 'نئیں': noon ghunna dropped by speech
+    recognition), 'جی نہیں', 'نا جی' -> False; anything else -> None (ask again). A 'no' word anywhere wins."""
+    from urdu_intent.normalize import normalize
+    t = normalize(_norm(text))
     if not t:
         return None
     words = t.split()
-    if t in NO or any(w in ("نہیں", "nahi", "nahin", "nhi", "no", "غلط", "ghalat", "galat") for w in words):
+    if t in NO or any(w in NEG_WORDS for w in words) or words[0] in ("نا", "نہ", "na", "naa"):
         return False
     if t in YES or (len(words) <= 4 and any(w in YES for w in words)):
         return True

@@ -20,7 +20,22 @@
         "meri darkhwast ka kya bana",
         "mera case kahan tak pohancha",
         "claim ka status kya hai",
-        "application manzoor hui ya nahi"
+        "application manzoor hui ya nahi",
+        "میری درخواست کا کچھ پتہ چلا",
+        "میرا کیس کہاں پہنچا ہے",
+        "درخواست دیے کافی دن ہو گئے کچھ بتائیں",
+        "میری فائل آگے گئی یا نہیں",
+        "کیا میری درخواست پاس ہو گئی",
+        "میری درخواست کس حال میں ہے",
+        "میں نے جو فارم بھرا تھا اس کا کیا ہوا",
+        "میری امی کی درخواست کا کیا بنا",
+        "کیس کی تازہ صورتحال بتا دیں",
+        "meri application ka kya hua",
+        "mera case pass hua ya nahi",
+        "darkhwast ka kuch pata chala",
+        "file kahan tak gayi",
+        "application ka status check karna hai",
+        "mera claim approve hua"
       ],
       "keywords": {
         "صورتحال": 2.5,
@@ -41,7 +56,12 @@
         "kya bana": 2.5,
         "status": 2.5,
         "manzoor": 1.5,
-        "pohancha": 1.5
+        "pohancha": 1.5,
+        "پاس": 1.5,
+        "فارم بھرا": 1.5,
+        "pass": 1.5,
+        "approve": 1.5,
+        "file ka kya": 2.5
       }
     },
     "required_documents": {
@@ -60,7 +80,19 @@
         "ساتھ کیا لے کر آنا ہے",
         "kaun se kaghzat chahiye",
         "kya kya documents lane hain",
-        "kaghaz kaun se lagenge"
+        "kaghaz kaun se lagenge",
+        "درخواست کے ساتھ کیا کیا لگانا ہے",
+        "کون کون سے کاغذ ساتھ لاؤں",
+        "کاغذات کی لسٹ بتا دیں",
+        "فارم کے ساتھ کون سی کاپیاں جمع کرانی ہیں",
+        "مجھے کون سے ثبوت دینے ہوں گے",
+        "درخواست دینے کے لیے کیا کیا چیزیں ضروری ہیں",
+        "کیا شوہر کا شناختی کارڈ بھی لانا ہے",
+        "تصویریں بھی لگانی ہیں کیا",
+        "kaun se kaghaz chahiye",
+        "documents kya kya lagenge",
+        "kya kya saath lana hai",
+        "kaghzat ki list bata dein"
       ],
       "keywords": {
         "کاغذات": 3,
@@ -82,7 +114,10 @@
         "kaghzat": 3,
         "kaghaz": 2,
         "documents": 3,
-        "kagzat": 3
+        "kagzat": 3,
+        "ثبوت": 2,
+        "لگانا": 1,
+        "saath lana": 1.5
       }
     },
     "eligibility": {
@@ -101,7 +136,18 @@
         "کس کو یہ پیسے ملتے ہیں",
         "kya main ahl hoon",
         "kya mujhe yeh madad mil sakti hai",
-        "kaun haqdar hai"
+        "kaun haqdar hai",
+        "کیا میں یہ پیسے لے سکتی ہوں",
+        "یہ امداد کس کو ملتی ہے",
+        "کیا بیوہ عورتوں کو یہ ملتا ہے",
+        "میں اس کی شرطیں پوری کرتی ہوں یا نہیں",
+        "کیا مجھے بھی یہ مدد مل سکتی ہے",
+        "کن لوگوں کو یہ رقم دی جاتی ہے",
+        "کیا میرا حق بنتا ہے",
+        "kya main is ke liye eligible hoon",
+        "kya mujhe bhi mil sakta hai",
+        "ye madad kis ko milti hai",
+        "kya bewa ko milta hai"
       ],
       "keywords": {
         "اہل": 3,
@@ -122,7 +168,15 @@
         "haqdar": 3,
         "mustahiq": 3,
         "mil sakti": 1.5,
-        "eligible": 3
+        "eligible": 3,
+        "شرطیں": 2.5,
+        "حق بنتا": 2.5,
+        "کس کو ملتی": 2.5,
+        "کس کو ملتا": 2.5,
+        "kis ko milti": 2.5,
+        "کو بھی ملتا": 2.5,
+        "طلاق": 2,
+        "مطلقہ": 2
       }
     },
     "talk_to_officer": {
@@ -140,7 +194,19 @@
         "میں خود دفتر آ کر ملنا چاہتی ہوں",
         "afsar se baat karni hai",
         "kisi insan se baat karwa dein",
-        "helpline number kya hai"
+        "helpline number kya hai",
+        "مجھے کسی آدمی سے بات کرنی ہے",
+        "کسی افسر سے میری بات کروائیں",
+        "میں مشین سے نہیں انسان سے بات کرنا چاہتی ہوں",
+        "کوئی مجھے فون کر لے",
+        "کسی ذمہ دار سے بات کرا دیں",
+        "آپ کے صاحب سے بات کرنی ہے",
+        "کسی خاتون افسر سے بات ہو سکتی ہے",
+        "مجھے کال کر لیں",
+        "kisi insaan se baat karni hai",
+        "officer se baat karwa dein",
+        "mujhe call kar lein",
+        "kisi bande se baat karao"
       ],
       "keywords": {
         "افسر": 3,
@@ -161,7 +227,16 @@
         "officer": 3,
         "insan": 2,
         "helpline": 3,
-        "baat karni": 1.5
+        "baat karni": 1.5,
+        "انسان سے": 2.5,
+        "آدمی سے": 2,
+        "بات کروا": 2.5,
+        "صاحب": 1.5,
+        "فون کر لے": 2,
+        "کال کر": 2,
+        "insaan": 2.5,
+        "baat karwa": 2.5,
+        "call kar": 2
       }
     },
     "payment_status": {
@@ -177,7 +252,20 @@
         "paise kab milenge",
         "raqam kab aayegi",
         "payment ho gayi ya nahi",
-        "qist kab aayegi"
+        "qist kab aayegi",
+        "میری رقم کب تک ملے گی",
+        "پیسے بھیج دیے یا ابھی نہیں",
+        "ادائیگی کب ہو گی",
+        "قسط کب آئے گی",
+        "میرے اکاؤنٹ میں پیسے کب آئیں گے",
+        "رقم جاری ہوئی کہ نہیں",
+        "کیا میرے پیسے نکل گئے ہیں",
+        "پیسوں کا کیا بنا",
+        "مجھے پیسے کس دن ملیں گے",
+        "payment kab aayegi",
+        "raqam kab tak aayegi",
+        "paison ka kya bana",
+        "paise bhej diye kya"
       ],
       "keywords": {
         "پیسے": 2,
@@ -190,7 +278,15 @@
         "paise": 2,
         "raqam": 2,
         "payment": 3,
-        "qist": 2.5
+        "qist": 2.5,
+        "بھیج دیے": 1.5,
+        "جاری ہوئی": 2,
+        "پیسوں": 2,
+        "paison": 2,
+        "kab milenge": 1.5,
+        "رقم آ گئی": 3,
+        "paise aa gaye": 3,
+        "امدادی رقم": 2
       }
     },
     "how_to_apply": {
@@ -210,7 +306,20 @@
         "mujhe sarkari paise chahiye",
         "mere shohar faut ho gaye hain madad chahiye",
         "apply karna hai",
-        "darkhwast deni hai"
+        "darkhwast deni hai",
+        "مجھے فارم بھرنا ہے",
+        "درخواست کہاں جمع کراؤں",
+        "میرے شوہر کا انتقال ہو گیا ہے مجھے مدد چاہیے",
+        "میں بیوہ ہوں امداد کے لیے اپلائی کرنا ہے",
+        "نئی درخواست دینی ہے",
+        "امداد لینے کا طریقہ بتائیں",
+        "میرے میاں فوت ہو گئے ہیں کیا کروں",
+        "میں اپنا نام لکھوانا چاہتی ہوں",
+        "apply kaise karun",
+        "form kaise bharna hai",
+        "mere shohar ka inteqal ho gaya madad chahiye",
+        "naam likhwana hai",
+        "registration karwani hai"
       ],
       "keywords": {
         "اپلائی": 3,
@@ -230,7 +339,12 @@
         "madad chahiye": 2.5,
         "faut ho gaye": 2,
         "apply": 3,
-        "darkhwast deni": 3
+        "darkhwast deni": 3,
+        "نام لکھوانا": 2.5,
+        "انتقال": 2,
+        "form": 1.5,
+        "registration": 2.5,
+        "inteqal": 2
       }
     },
     "consent_privacy": {
@@ -245,7 +359,19 @@
         "میری معلومات کس کے پاس ہیں",
         "میں نے کس چیز کی اجازت دی تھی",
         "meri ijazat wapas le lo",
-        "mera data kaun dekhta hai"
+        "mera data kaun dekhta hai",
+        "میری معلومات کس کس کو دکھائیں گے",
+        "میرا ڈیٹا محفوظ ہے",
+        "آپ میرا شناختی کارڈ کیوں دیکھ رہے ہیں",
+        "میں اجازت واپس لینا چاہتی ہوں",
+        "میری معلومات آگے تو نہیں جائیں گی",
+        "میرے بارے میں کیا کیا رکھا ہے",
+        "میری تصویر کہاں جائے گی",
+        "میں نہیں چاہتی کوئی میرا ریکارڈ دیکھے",
+        "meri maloomat kaun dekhega",
+        "mera data safe hai",
+        "ijazat wapas leni hai",
+        "meri details aage to nahi jayengi"
       ],
       "keywords": {
         "رضامندی": 3,
@@ -256,7 +382,9 @@
         "واپس لینا": 1.5,
         "پرائیویسی": 3,
         "ijazat": 2.5,
-        "data": 2.5
+        "data": 2.5,
+        "محفوظ": 2,
+        "maloomat": 2
       }
     },
     "report_fraud": {
@@ -276,7 +404,20 @@
         "fraud call aayi thi",
         "kisi ne pin manga",
         "koi paise mang raha hai",
-        "agent kehta hai pehle paise do"
+        "agent kehta hai pehle paise do",
+        "ایک آدمی کہہ رہا ہے پیسے دو تو درخواست منظور کروا دوں گا",
+        "کسی نے فون پر میرا کوڈ مانگا",
+        "ایک بندہ گھر آیا اور فیس مانگ رہا تھا",
+        "مجھے میسج آیا کہ انعام نکلا ہے پیسے بھیجو",
+        "ایجنٹ نے پانچ ہزار مانگے ہیں",
+        "کسی نے کہا اپنا پن بتاؤ",
+        "یہ فراڈ تو نہیں",
+        "مجھ سے رشوت مانگی گئی",
+        "kisi ne code manga",
+        "agent paise maang raha hai",
+        "ye fraud to nahi",
+        "kisi ne pin poocha",
+        "rishwat mangi"
       ],
       "keywords": {
         "دھوکہ": 3,
@@ -304,7 +445,15 @@
         "pin manga": 3,
         "paise mang": 2.5,
         "pehle paise": 3,
-        "dhoka": 3
+        "dhoka": 3,
+        "فیس": 2,
+        "کوڈ": 2.5,
+        "code": 2,
+        "pin": 2.5,
+        "otp": 3,
+        "او ٹی پی": 3,
+        "نام ڈلوا": 2.5,
+        "ڈلوا دوں": 2.5
       }
     },
     "complaint": {
@@ -318,14 +467,30 @@
         "میرا کام نہیں ہو رہا شکایت کہاں کروں",
         "عملے کا رویہ ٹھیک نہیں تھا",
         "shikayat karni hai",
-        "complaint darj karwani hai"
+        "complaint darj karwani hai",
+        "دفتر والوں نے بہت برا سلوک کیا",
+        "میں آپ کے عملے سے بہت تنگ ہوں",
+        "کوئی میری بات نہیں سن رہا",
+        "مجھے بار بار چکر لگوائے جا رہے ہیں",
+        "یہاں کوئی کام ٹھیک نہیں ہوتا میں شکایت کرنا چاہتی ہوں",
+        "میرے ساتھ زیادتی ہوئی ہے",
+        "ایک ملازم نے بدتمیزی کی",
+        "koi meri baat nahi sun raha",
+        "staff ne bad tameezi ki"
       ],
       "keywords": {
         "شکایت": 3,
         "درج": 1,
         "رویہ": 2,
         "shikayat": 3,
-        "complaint": 3
+        "complaint": 3,
+        "سلوک": 2.5,
+        "تنگ": 2,
+        "زیادتی": 2.5,
+        "بدتمیزی": 3,
+        "چکر": 1.5,
+        "tameezi": 2.5,
+        "complain": 3
       }
     },
     "update_details": {
@@ -339,7 +504,16 @@
         "میرا پتہ تبدیل ہو گیا ہے",
         "نیا موبائل نمبر لگوانا ہے",
         "mera number badal gaya",
-        "account change karna hai"
+        "account change karna hai",
+        "نیا نمبر لکھ لیں",
+        "میں نے بینک اکاؤنٹ تبدیل کر لیا ہے",
+        "میرا پتہ بدل گیا ہے",
+        "اکاؤنٹ نمبر اپڈیٹ کرنا ہے",
+        "سم بدل گئی ہے",
+        "میرا پرانا نمبر بند ہو گیا",
+        "پیسے نئے اکاؤنٹ میں بھیجیں",
+        "naya number likh lein",
+        "address change ho gaya"
       ],
       "keywords": {
         "تبدیل": 2.5,
@@ -352,7 +526,15 @@
         "بدل": 2,
         "badal": 2,
         "number badal": 3,
-        "change": 2
+        "change": 2,
+        "نیا نمبر": 3,
+        "سم": 2,
+        "اپڈیٹ": 2.5,
+        "نئے اکاؤنٹ": 2.5,
+        "naya number": 3,
+        "نیا اکاؤنٹ": 3,
+        "naya account": 3,
+        "khulwaya": 2
       }
     },
     "greeting": {
@@ -364,7 +546,12 @@
         "السلام علیکم",
         "آپ سے مل کر اچھا لگا",
         "assalam o alaikum",
-        "salam"
+        "salam",
+        "سلام جی",
+        "آداب",
+        "سلام باجی",
+        "السلام علیکم کیسی ہیں",
+        "aoa"
       ],
       "keywords": {
         "السلام": 3,
@@ -372,7 +559,8 @@
         "مل کر اچھا": 2,
         "salam": 3,
         "alaikum": 2,
-        "aoa": 3
+        "aoa": 3,
+        "آداب": 3
       }
     },
     "repeat": {
@@ -386,7 +574,17 @@
         "پھر سے بولیں",
         "dobara batayein",
         "samajh nahi aaya",
-        "phir se bolein"
+        "phir se bolein",
+        "پھر سے بتائیں",
+        "میں نے سنا نہیں",
+        "سمجھ نہیں آئی ایک بار پھر",
+        "کیا کہا آپ نے",
+        "آواز نہیں آئی پھر بولیں",
+        "ایک دفعہ اور سنائیں",
+        "dobara bolein",
+        "phir se batayen",
+        "samajh nahi aayi",
+        "kya kaha"
       ],
       "keywords": {
         "دوبارہ": 2.5,
@@ -394,7 +592,11 @@
         "پھر سے": 2,
         "dobara": 2.5,
         "samajh nahi": 3,
-        "phir se": 2
+        "phir se": 2,
+        "سنا نہیں": 2.5,
+        "کیا کہا": 2.5,
+        "ایک دفعہ اور": 2.5,
+        "kya kaha": 2.5
       }
     },
     "payment_amount": {
@@ -411,7 +613,16 @@
         "kitne paise milenge",
         "raqam kitni hai",
         "mujhe kitni raqam milegi",
-        "kitne rupay milain ge"
+        "kitne rupay milain ge",
+        "کتنی رقم ملے گی",
+        "مجھے کتنے روپے دیں گے",
+        "امداد کتنی ہے",
+        "پیسے کتنے ہوں گے",
+        "بچوں کے حساب سے کتنا ملے گا",
+        "کل کتنی رقم بنتی ہے",
+        "پچیس ہزار ہی ملیں گے یا زیادہ",
+        "kitna milega",
+        "amount kitna hai"
       ],
       "keywords": {
         "کتنی": 2.5,
@@ -423,7 +634,10 @@
         "kitne": 2.5,
         "kitni": 2.5,
         "kitne paise": 3,
-        "rupay": 1
+        "rupay": 1,
+        "کتنا ملے": 3,
+        "kitna milega": 3,
+        "amount": 2.5
       }
     },
     "payment_not_received": {
@@ -439,7 +653,18 @@
         "paise nahi aaye",
         "account mein paise nahi aaye",
         "sms aaya par paise nahi mile",
-        "raqam nahi pohanchi"
+        "raqam nahi pohanchi",
+        "میسج آ گیا لیکن پیسے نہیں آئے",
+        "اکاؤنٹ میں رقم نہیں پہنچی",
+        "تین دن ہو گئے ابھی تک کچھ نہیں ملا",
+        "آپ نے کہا بھیج دیے مگر مجھے نہیں ملے",
+        "اے ٹی ایم سے پیسے نہیں نکلے اکاؤنٹ خالی ہے",
+        "رقم کہیں اور چلی گئی ہے",
+        "میرے پیسے غائب ہیں",
+        "paise nahi aaye abhi tak",
+        "account mein paise nahi pohanche",
+        "message aaya magar paise nahi mile",
+        "raqam nahi mili"
       ],
       "keywords": {
         "نہیں آئے": 3,
@@ -449,7 +674,12 @@
         "nahi mile": 3,
         "nahi pohanchi": 3,
         "اکاؤنٹ": 1,
-        "account": 1
+        "account": 1,
+        "غائب": 2.5,
+        "خالی": 2.5,
+        "کہیں اور": 2,
+        "nahi pohanche": 3,
+        "nahi mili": 2
       }
     },
     "how_to_collect": {
@@ -466,7 +696,17 @@
         "paise kahan se nikalwaun",
         "raqam kahan se milegi",
         "paise lene kahan jana hai",
-        "cash kaise milega"
+        "cash kaise milega",
+        "کیا مجھے بینک جانا پڑے گا",
+        "رقم لینے کس جگہ جانا ہے",
+        "اے ٹی ایم سے نکال سکتی ہوں",
+        "پیسے نقد ملیں گے یا اکاؤنٹ میں",
+        "میرا اکاؤنٹ نہیں ہے تو پیسے کیسے لوں",
+        "رقم وصول کرنے کا طریقہ بتائیں",
+        "paise kahan se nikalun",
+        "cash milega ya account mein",
+        "bank jana parega kya",
+        "atm se nikal sakti hoon"
       ],
       "keywords": {
         "کہاں سے": 2.5,
@@ -478,7 +718,16 @@
         "kahan se": 2.5,
         "nikalwaun": 3,
         "nikalna": 2.5,
-        "cash": 2.5
+        "cash": 2.5,
+        "بینک میں ہو گی": 2,
+        "کیش ملے": 2.5,
+        "نقد": 2.5,
+        "اے ٹی ایم": 2.5,
+        "وصول": 2.5,
+        "بینک جانا": 2.5,
+        "atm": 2.5,
+        "nikalun": 3,
+        "bank jana": 2.5
       }
     },
     "why_decision": {
@@ -493,7 +742,18 @@
         "میری درخواست مسترد کیوں ہوئی",
         "meri darkhwast kyun ruki hai",
         "claim kyun reject hua",
-        "wajah batayein"
+        "wajah batayein",
+        "مجھے کیوں منع کیا گیا",
+        "میری درخواست رد کیوں ہوئی",
+        "انکار کی وجہ کیا ہے",
+        "مجھے کیوں نہیں ملا جبکہ میں بیوہ ہوں",
+        "یہ فیصلہ کس بنیاد پر کیا",
+        "میرا کیس افسر کے پاس کیوں گیا",
+        "وجہ بتائیں",
+        "mujhe kyun mana kiya",
+        "reject kyun hua",
+        "wajah kya hai",
+        "faisla aisa kyun hua"
       ],
       "keywords": {
         "کیوں": 3,
@@ -503,7 +763,11 @@
         "wajah": 3,
         "رکی": 1.5,
         "ruki": 1.5,
-        "reject": 1.5
+        "reject": 1.5,
+        "منع کیا": 2.5,
+        "انکار": 2.5,
+        "بنیاد": 2,
+        "mana kiya": 2.5
       }
     },
     "what_is_missing": {
@@ -518,7 +782,15 @@
         "اب مجھے کیا کرنا ہے",
         "aur kya bhejna hai",
         "ab mujhe kya karna hai",
-        "kya kami hai"
+        "kya kami hai",
+        "اور کون سی چیز رہ گئی ہے",
+        "کون سا کاغذ باقی ہے",
+        "آگے کیا کرنا ہوگا",
+        "میں نے سب دے دیا اب کیا چاہیے",
+        "کیا کچھ رہ گیا ہے",
+        "ab kya karna hai",
+        "kya reh gaya hai",
+        "kami kya hai"
       ],
       "keywords": {
         "کمی": 3,
@@ -527,7 +799,14 @@
         "کیا مانگا": 2.5,
         "kami": 3,
         "kya bhejna": 3,
-        "kya karna": 2.5
+        "kya karna": 2.5,
+        "رہ گئی": 2.5,
+        "رہ گیا": 2.5,
+        "باقی": 2,
+        "آگے کیا": 2.5,
+        "reh gaya": 2.5,
+        "ab kya": 2,
+        "aage kya": 2.5
       }
     },
     "how_long": {
@@ -544,7 +823,14 @@
         "kitne din lagenge",
         "kitna waqt lagega",
         "kab tak intezar karun",
-        "kitni der lagegi"
+        "kitni der lagegi",
+        "کتنا انتظار کرنا پڑے گا",
+        "اس میں کتنا ٹائم لگتا ہے",
+        "کب تک جواب آئے گا",
+        "ہفتہ لگے گا یا مہینہ",
+        "kitna time lagega",
+        "faisla kab tak hoga",
+        "kab tak jawab aayega"
       ],
       "keywords": {
         "دن": 2.5,
@@ -558,7 +844,12 @@
         "der": 2.5,
         "kab tak": 2.5,
         "intezar": 2.5,
-        "lagenge": 1.5
+        "lagenge": 1.5,
+        "کتنے دن": 3,
+        "ٹائم": 2,
+        "کب تک جواب": 2.5,
+        "kitne din": 3,
+        "time lagega": 3
       }
     },
     "appeal": {
@@ -573,7 +864,16 @@
         "میرے کیس پر نظرثانی کریں",
         "main is faislay se mutafiq nahi",
         "faisla ghalat hai",
-        "appeal karni hai"
+        "appeal karni hai",
+        "میں اس فیصلے کو نہیں مانتی",
+        "دوبارہ غور کریں",
+        "اپیل کرنی ہے",
+        "میرا کیس پھر سے دیکھا جائے",
+        "یہ فیصلہ غلط ہے نظرثانی کریں",
+        "مجھے انصاف چاہیے دوبارہ چیک کریں",
+        "فیصلے کے خلاف درخواست دینی ہے",
+        "dobara check karein",
+        "case phir se dekhein"
       ],
       "keywords": {
         "اپیل": 3,
@@ -582,7 +882,17 @@
         "نظرثانی": 3,
         "appeal": 3,
         "mutafiq": 3,
-        "faisla ghalat": 3
+        "faisla ghalat": 3,
+        "نہیں مانتی": 3,
+        "غور": 2,
+        "انصاف": 2.5,
+        "خلاف": 2.5,
+        "پھر سے دیکھا": 2.5,
+        "dobara check": 2.5,
+        "مطمئن نہیں": 3,
+        "نظر ثانی": 3,
+        "dobara dekhein": 2.5,
+        "faisle ke khilaf": 3
       }
     },
     "withdraw_claim": {
@@ -595,14 +905,30 @@
         "میرا کلیم ختم کر دیں",
         "درخواست منسوخ کر دیں",
         "darkhwast wapas leni hai",
-        "claim cancel kar dein"
+        "claim cancel kar dein",
+        "مجھے یہ درخواست نہیں چاہیے",
+        "میں اپنا نام واپس لیتی ہوں",
+        "درخواست ختم کر دیں",
+        "میں یہ امداد نہیں لینا چاہتی",
+        "کیس بند کر دیں",
+        "میری درخواست کینسل کر دیں",
+        "application cancel kar dein",
+        "case band kar dein"
       ],
       "keywords": {
         "منسوخ": 3,
         "درخواست واپس": 3,
         "کلیم ختم": 3,
         "cancel": 3,
-        "darkhwast wapas": 3
+        "darkhwast wapas": 3,
+        "ختم کر": 2.5,
+        "کینسل": 3,
+        "بند کر": 2.5,
+        "نام واپس": 3,
+        "band kar": 2.5,
+        "ختم کروانا": 3,
+        "wapas lena": 2.5,
+        "wapas leni": 2.5
       }
     },
     "send_document": {
@@ -616,7 +942,17 @@
         "تصویر بھیجنی ہے",
         "tasveer bhejni hai",
         "card ki photo bhejni hai",
-        "certificate kaise bhejun"
+        "certificate kaise bhejun",
+        "میں تصویر بھیجنا چاہتی ہوں",
+        "کاغذ کی فوٹو کیسے بھیجوں",
+        "شناختی کارڈ کی تصویر لگانی ہے",
+        "سرٹیفکیٹ اپلوڈ کرنا ہے",
+        "نیا کاغذ بھیجنا ہے",
+        "فوٹو کھینچ کر بھیج دوں",
+        "photo bhejni hai",
+        "tasveer kaise bhejun",
+        "document upload karna hai",
+        "card ki photo bhej doon"
       ],
       "keywords": {
         "تصویر": 3,
@@ -626,7 +962,10 @@
         "tasveer": 3,
         "photo": 3,
         "bhejni": 2,
-        "bhejun": 2
+        "bhejun": 2,
+        "فوٹو": 2.5,
+        "اپلوڈ": 3,
+        "upload": 3
       }
     },
     "cnic_problem": {
@@ -641,7 +980,17 @@
         "میرے کارڈ پر ابھی بھی والد کا نام ہے",
         "mera card gum ho gaya",
         "card expire ho gaya hai",
-        "id card kho gaya"
+        "id card kho gaya",
+        "میرا شناختی کارڈ کھو گیا ہے",
+        "کارڈ کی تاریخ ختم ہو گئی",
+        "میرا کارڈ پرانا ہے",
+        "میرے پاس شناختی کارڈ نہیں ہے",
+        "کارڈ ٹوٹ گیا ہے",
+        "نیا کارڈ بنوانا ہے",
+        "شناختی کارڈ چوری ہو گیا",
+        "card expire ho gaya",
+        "id card nahi hai",
+        "naya card banwana hai"
       ],
       "keywords": {
         "گم": 3,
@@ -651,7 +1000,13 @@
         "gum": 3,
         "expire": 3,
         "kho gaya": 3,
-        "naya card": 3
+        "naya card": 3,
+        "کھو گیا": 2.5,
+        "ٹوٹ گیا": 2.5,
+        "چوری": 2.5,
+        "نیا کارڈ": 3,
+        "تاریخ ختم": 2.5,
+        "card": 1.5
       }
     },
     "no_death_certificate": {
@@ -666,7 +1021,16 @@
         "یونین کونسل میں وفات درج کروانی ہے",
         "death certificate nahi hai",
         "wafat ka certificate nahi bana",
-        "union council mein darj karwana hai"
+        "union council mein darj karwana hai",
+        "وفات کا سرٹیفکیٹ نہیں بنا",
+        "ڈیتھ سرٹیفکیٹ کہاں سے ملے گا",
+        "موت کا سرٹیفکیٹ گم ہو گیا",
+        "یونین کونسل والے سرٹیفکیٹ نہیں دے رہے",
+        "وفات کا اندراج کیسے کرواؤں",
+        "سرٹیفکیٹ کے بغیر درخواست ہو سکتی ہے",
+        "certificate kahan se banega",
+        "wafat darj nahi hui",
+        "certificate kho gaya"
       ],
       "keywords": {
         "سرٹیفکیٹ نہیں": 3,
@@ -674,7 +1038,15 @@
         "یونین کونسل": 3,
         "کہاں سے بنواؤں": 2.5,
         "certificate nahi": 3,
-        "union council": 3
+        "union council": 3,
+        "بنواؤں": 2,
+        "بنوانا": 2,
+        "اندراج کیسے": 2.5,
+        "سرٹیفکیٹ کے بغیر": 3,
+        "certificate kahan": 2.5,
+        "darj nahi": 3,
+        "وفات نامہ": 3,
+        "nahi bana": 2
       }
     },
     "wrong_details": {
@@ -688,7 +1060,17 @@
         "میرے شوہر کا نام غلط ہے",
         "تاریخ پیدائش غلط ہے",
         "mera naam ghalat likha hai",
-        "naam ki spelling ghalat hai"
+        "naam ki spelling ghalat hai",
+        "میرا نام غلط لکھا ہوا ہے",
+        "شوہر کا نام صحیح نہیں",
+        "میرے کاغذ میں غلطی ہے",
+        "شناختی کارڈ نمبر غلط درج ہے",
+        "آپ نے میرا نام غلط پڑھا",
+        "ہجے غلط ہیں درست کریں",
+        "mera naam ghalat hai",
+        "details ghalat hain",
+        "tareekh ghalat likhi hai",
+        "ghalti theek karni hai"
       ],
       "keywords": {
         "غلط لکھا": 3,
@@ -697,7 +1079,11 @@
         "غلط درج": 2.5,
         "ghalat": 2.5,
         "galat": 2.5,
-        "spelling": 2.5
+        "spelling": 2.5,
+        "غلطی": 2.5,
+        "ہجے": 2.5,
+        "تاریخ پیدائش": 2,
+        "ghalti": 2.5
       }
     },
     "household_change": {
@@ -712,17 +1098,35 @@
         "میرے ساتھ بچے بھی رہتے ہیں",
         "mere bachay zyada hain",
         "meri aamdani kam ho gayi",
-        "ghar mein kamane wala koi nahi"
+        "ghar mein kamane wala koi nahi",
+        "میرا بچہ پیدا ہوا ہے",
+        "میری بیٹی کی شادی ہو گئی",
+        "ہم نے گھر بدل لیا",
+        "میرے بیٹے نے نوکری شروع کر دی",
+        "گھر میں ایک فرد کم ہو گیا",
+        "میں نے دوسری شادی کر لی ہے",
+        "بچے اب میرے ساتھ نہیں رہتے",
+        "ghar badal liya",
+        "bacha paida hua hai",
+        "beta kamane laga hai"
       ],
       "keywords": {
-        "بچے": 2.5,
-        "بچوں": 2,
+        "بچے": 1.5,
+        "بچوں": 1.5,
         "آمدنی": 3,
         "کمانے": 3,
-        "bachay": 2.5,
-        "bachon": 2,
+        "bachay": 1.5,
+        "bachon": 1.5,
         "aamdani": 3,
-        "kamane": 3
+        "kamane": 3,
+        "پیدا": 2.5,
+        "شادی": 2.5,
+        "گھر بدل": 3,
+        "نوکری": 2,
+        "فرد": 2,
+        "shadi": 2.5,
+        "paida": 2.5,
+        "ghar badal": 3
       }
     },
     "other_programmes": {
@@ -740,7 +1144,18 @@
         "pension kaise milegi",
         "بیوہ پنشن کیسے ملے گی",
         "کیا مجھے کفالت بھی مل سکتی ہے",
-        "koi aur scheme bhi hai"
+        "koi aur scheme bhi hai",
+        "اور کون سی امداد مل سکتی ہے",
+        "بی آئی ایس پی میں نام کیسے آئے",
+        "بچوں کی تعلیم کے لیے کوئی مدد ہے",
+        "راشن کی کوئی سکیم ہے",
+        "صحت کارڈ کیسے بنے گا",
+        "کفالت پروگرام کے بارے میں بتائیں",
+        "کوئی اور سرکاری مدد",
+        "aur koi madad hai",
+        "bisp mein naam kaise aayega",
+        "rashan ki scheme",
+        "sehat card kaise banega"
       ],
       "keywords": {
         "کوئی اور": 3,
@@ -754,7 +1169,15 @@
         "ehsaas": 3,
         "kafaalat": 3,
         "scheme": 1.5,
-        "سکیم": 1.5
+        "سکیم": 1.5,
+        "راشن": 2.5,
+        "صحت کارڈ": 3,
+        "تعلیم": 2,
+        "سرکاری": 1.5,
+        "rashan": 2.5,
+        "sehat card": 3,
+        "kaunsi scheme": 2.5,
+        "aur kaunsi": 2
       }
     },
     "helper_visit": {
@@ -770,7 +1193,15 @@
         "koi ghar aa kar madad kar de",
         "main parh nahi sakti",
         "kisi ko bhej dein",
-        "koi ghar aa jaye"
+        "koi ghar aa jaye",
+        "میں دفتر نہیں آ سکتی کوئی آ جائے",
+        "مجھے پڑھنا نہیں آتا کوئی مدد کرے",
+        "کسی باجی کو بھیج دیں",
+        "میں بیمار ہوں گھر سے نہیں نکل سکتی",
+        "لیڈی ہیلتھ ورکر کو بھیجیں",
+        "koi ghar aa kar madad kare",
+        "main daftar nahi aa sakti",
+        "mujhe parhna nahi aata"
       ],
       "keywords": {
         "گھر آ کر": 3,
@@ -779,7 +1210,13 @@
         "ہیلتھ ورکر": 3,
         "ghar aa kar": 3,
         "parh nahi": 3,
-        "bhej dein": 2
+        "bhej dein": 2,
+        "پڑھنا نہیں آتا": 3,
+        "نہیں نکل سکتی": 2.5,
+        "ghar aa": 3,
+        "parhna nahi": 3,
+        "گھر آ جائے": 3,
+        "چل نہیں سکتی": 3
       }
     },
     "office_info": {
@@ -794,7 +1231,16 @@
         "قریبی مرکز کون سا ہے",
         "daftar kahan hai",
         "office kab khulta hai",
-        "daftar ka pata batayein"
+        "daftar ka pata batayein",
+        "آفس کتنے بجے کھلتا ہے",
+        "میں خود آ کر ملنا چاہتی ہوں کہاں آؤں",
+        "ہفتے کو دفتر کھلا ہوتا ہے",
+        "قریبی دفتر کون سا ہے",
+        "دفتر کا فون نمبر دیں",
+        "office kahan hai",
+        "daftar kab khulta hai",
+        "office ka address",
+        "kitne baje band hota hai"
       ],
       "keywords": {
         "دفتر کہاں": 3,
@@ -803,7 +1249,13 @@
         "دفتر کا پتہ": 3,
         "daftar": 2,
         "khulta": 3,
-        "office": 2
+        "office": 2,
+        "آفس": 2.5,
+        "کتنے بجے": 3,
+        "baje": 2,
+        "address": 2,
+        "کھلا رہتا": 3,
+        "کس وقت": 2
       }
     },
     "urgent_help": {
@@ -820,7 +1272,17 @@
         "ghar mein khane ko kuch nahi",
         "mujhe dhamkiyan mil rahi hain",
         "meri jaan ko khatra hai",
-        "foran madad chahiye"
+        "foran madad chahiye",
+        "گھر میں کھانے کو کچھ نہیں",
+        "میرا بچہ بہت بیمار ہے فوری مدد چاہیے",
+        "مجھے مارا پیٹا جا رہا ہے",
+        "مجھے گھر سے نکال دیا گیا ہے",
+        "ایمرجنسی ہے",
+        "کوئی مجھے دھمکیاں دے رہا ہے",
+        "ہسپتال جانا ہے پیسے نہیں",
+        "emergency hai",
+        "jaan ko khatra hai",
+        "khane ko kuch nahi"
       ],
       "keywords": {
         "دھمکی": 3,
@@ -828,14 +1290,23 @@
         "خطرہ": 3,
         "کھانے کو": 3,
         "فوری": 2,
-        "بیمار": 2.5,
+        "بیمار": 1.5,
         "نکال رہے": 3,
         "dhamki": 3,
         "dhamkiyan": 3,
         "khatra": 3,
         "khane ko": 3,
         "foran": 2,
-        "bemar": 2.5
+        "bemar": 1.5,
+        "جان کو خطرہ": 3,
+        "مارا": 2.5,
+        "ایمرجنسی": 3,
+        "نکال دیا": 2.5,
+        "ہسپتال": 2.5,
+        "emergency": 3,
+        "zaroori madad": 3,
+        "بہت ضروری": 2.5,
+        "فوری مدد": 3
       }
     },
     "thanks_goodbye": {
@@ -851,7 +1322,13 @@
         "بس اور کچھ نہیں",
         "shukriya",
         "allah hafiz",
-        "bas aur kuch nahi"
+        "bas aur kuch nahi",
+        "اللہ آپ کا بھلا کرے",
+        "جزاک اللہ",
+        "بس اتنا ہی خدا حافظ",
+        "ٹھیک ہے شکریہ بس",
+        "اور کچھ نہیں شکریہ",
+        "thank you"
       ],
       "keywords": {
         "شکریہ": 3,
@@ -859,7 +1336,12 @@
         "اور کچھ نہیں": 3,
         "shukriya": 3,
         "hafiz": 3,
-        "kuch nahi": 2
+        "kuch nahi": 2,
+        "جزاک اللہ": 3,
+        "بھلا کرے": 2.5,
+        "اللہ حافظ": 3,
+        "allah hafiz": 3,
+        "thank": 2.5
       }
     },
     "speak_slowly": {
@@ -872,7 +1354,14 @@
         "تھوڑا آہستہ بتائیں",
         "جلدی جلدی نہ بولیں",
         "ahista bolein",
-        "dheere bolo"
+        "dheere bolo",
+        "تھوڑا آہستہ بولیں",
+        "اتنا تیز نہ بولیں",
+        "آرام سے بتائیں",
+        "رک رک کر بولیں",
+        "میں بوڑھی ہوں آہستہ بولیں",
+        "itna tez na bolo",
+        "aaram se batayen"
       ],
       "keywords": {
         "آہستہ": 3,
@@ -880,7 +1369,13 @@
         "جلدی جلدی": 2.5,
         "ahista": 3,
         "aahista": 3,
-        "dheere": 3
+        "dheere": 3,
+        "تیز نہ": 3,
+        "آرام سے": 2.5,
+        "رک رک": 3,
+        "tez na": 3,
+        "aaram se": 2.5,
+        "ٹھہر ٹھہر": 3
       }
     }
   }

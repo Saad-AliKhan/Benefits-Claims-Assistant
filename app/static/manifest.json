@@ -1,10 +1,21 @@
 {
-  "name": "Last Mile (Prototype)",
+  "name": "Last Mile - widow support assistant (prototype)",
   "short_name": "Last Mile",
-  "start_url": "/citizen",
+  "description": "Talk in Urdu to apply for widow support and ask about your claim (prototype, fake data).",
+  "lang": "ur",
+  "dir": "auto",
+  "id": "/assistant",
+  "start_url": "/assistant",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "background_color": "#f6f6f2",
   "theme_color": "#0b6b3a",
-  "icons": [{ "src": "/static/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+  "icons": [
+    { "src": "/static/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/static/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/static/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/static/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/static/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
 }

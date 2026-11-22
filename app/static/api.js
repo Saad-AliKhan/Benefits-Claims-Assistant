@@ -104,4 +104,25 @@
   LM.when = (iso) => (iso ? new Date(/Z$|[+-]\d\d:?\d\d$/.test(iso) ? iso : iso + "Z").toLocaleString() : "");
 
   LM.fmt = (n) => Number(n || 0).toLocaleString("en-US");
+
+  /* Phone app: the site installs like an app (home-screen icon, full screen, opens on the assistant).
+     Chrome offers it after "beforeinstallprompt"; we show one big button for it. */
+  if ("serviceWorker" in navigator && !navigator.serviceWorker.controller) {
+    window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+  }
+  let installEvent = null;
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    installEvent = e;
+    if (document.getElementById("install-app")) return;
+    const b = LM.el("button", { id: "install-app", class: "install", type: "button" }, "📲 ایپ انسٹال کریں · Install app");
+    b.addEventListener("click", async () => {
+      if (!installEvent) return;
+      installEvent.prompt();
+      try { await installEvent.userChoice; } catch (err) {}
+      installEvent = null; b.remove();
+    });
+    document.body.append(b);
+  });
+  window.addEventListener("appinstalled", () => { const b = document.getElementById("install-app"); if (b) b.remove(); });
 })();

@@ -37,6 +37,15 @@ __all__ = ["detect_intent", "MIN_SCORE", "MIN_MARGIN", "intents"]
 MIN_SCORE = 0.40    # below this nothing matches well enough -> "unclear"
 MIN_MARGIN = 0.08   # best must beat the runner-up by this much -> otherwise "unclear" (ambiguous)
 W_KEYWORDS, W_SIMILARITY = 0.55, 0.45
+# Second opinion by meaning (urdu_intent/meaning.py, only when its model files are present). It may only
+# turn an "unclear" into an intent, never change a confident answer, and only to the keyword matcher's own
+# first choice (two different methods agreeing). Tuned on evaluate_intents.py.
+MEANING_MIN = 0.78      # its best intent must be at least this similar
+MEANING_MARGIN = 0.06   # and this far ahead of the next intent
+# ...and a weak keyword answer (score below VETO_BELOW) that the meaning model finds unrelated to the
+# question (similarity below VETO_SIMILARITY) becomes "unclear": two methods strongly disagreeing = ask again.
+VETO_BELOW = 0.60
+VETO_SIMILARITY = 0.45
 
 
 @lru_cache(maxsize=1)
@@ -145,15 +154,42 @@ def detect_intent(text: str) -> dict:
     ranked = sorted(scores.items(), key=lambda kv: -kv[1])
     (best, top), (_, second) = ranked[0], ranked[1]
     alternatives = [{"intent": n, "score": round(s, 3)} for n, s in ranked[:3]]
-    if top < MIN_SCORE:
-        return {**base, "intent": "unclear", "reason": "no_good_match", "confidence": round(top, 3),
-                "alternatives": alternatives, "matched_keywords": hits[best]}
-    if top - second < MIN_MARGIN:
-        return {**base, "intent": "unclear", "reason": "ambiguous", "confidence": round(top, 3),
+    unsure = "no_good_match" if top < MIN_SCORE else "ambiguous" if top - second < MIN_MARGIN else None
+    if unsure:
+        rescued = _by_meaning(fixed.text, {ranked[0][0]})
+        if rescued is None:
+            return {**base, "intent": "unclear", "reason": unsure, "confidence": round(top, 3),
+                    "alternatives": alternatives, "matched_keywords": hits[best]}
+        name, sim, margin = rescued
+        spec = intents()[name]
+        return {**base, "intent": name, "confidence": round(min(0.9, sim), 3), "label_ur": spec["label_ur"],
+                "label_en": spec["label_en"], "action": spec["action"], "needs_backend": spec["needs_backend"],
+                "alternatives": alternatives, "matched_keywords": hits[name], "method": "meaning",
+                "meaning": {"similarity": round(sim, 3), "margin": round(margin, 3)}}
+    if top < VETO_BELOW and _meaning_disagrees(fixed.text, best):
+        return {**base, "intent": "unclear", "reason": "methods_disagree", "confidence": round(top, 3),
                 "alternatives": alternatives, "matched_keywords": hits[best]}
     spec = intents()[best]
     # confidence: how high the score is, discounted when the runner-up is close
     confidence = min(0.99, top * (0.6 + 0.4 * min(1.0, (top - second) / 0.3)) / 0.8)
     return {**base, "intent": best, "confidence": round(confidence, 3), "label_ur": spec["label_ur"],
             "label_en": spec["label_en"], "action": spec["action"], "needs_backend": spec["needs_backend"],
-            "alternatives": alternatives, "matched_keywords": hits[best]}
+            "alternatives": alternatives, "matched_keywords": hits[best], "method": "keywords"}
+
+
+def _meaning_disagrees(text: str, intent: str) -> bool:
+    from . import meaning
+    sims = meaning.scores(text)
+    return bool(sims) and sims.get(intent, 0.0) < VETO_SIMILARITY
+
+
+def _by_meaning(text: str, keyword_top: set):
+    from . import meaning
+    sims = meaning.scores(text)
+    if not sims:
+        return None
+    ranked = sorted(sims.items(), key=lambda kv: -kv[1])
+    (name, top), (_, second) = ranked[0], ranked[1]
+    if name in keyword_top and top >= MEANING_MIN and top - second >= MEANING_MARGIN:
+        return name, top, top - second
+    return None

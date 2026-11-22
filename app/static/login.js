@@ -2,6 +2,8 @@
 (function () {
   "use strict";
   const $ = (id) => document.getElementById(id);
+  // Opened from the home-screen icon while already logged in: go straight to her page.
+  if (LM.token()) LM.api("/auth/me").then((me) => location.replace(me.home)).catch(() => {});
   document.querySelectorAll(".demo [data-e]").forEach((b) => b.addEventListener("click", () => {
     $("email").value = b.dataset.e; $("pw").value = "demo1234"; $("pw").focus();
   }));

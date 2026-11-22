@@ -1,0 +1,318 @@
+{
+ "_about": "Held-out set 2 (2026-11-22): written BEFORE the 2nd round of intent examples was added, and only run once at the end. Never used to adjust keywords, examples or thresholds.",
+ "tests": [
+  {
+   "text": "مہینہ ہو گیا درخواست دی تھی اس کا کیا بنا",
+   "intent": "application_status"
+  },
+  {
+   "text": "meri file ka kya scene hai",
+   "intent": "application_status",
+   "tag": "roman"
+  },
+  {
+   "text": "ساتھ میں کون سی کاپیاں لانی پڑیں گی",
+   "intent": "required_documents"
+  },
+  {
+   "text": "kaunse papers jama karwane hain",
+   "intent": "required_documents",
+   "tag": "roman"
+  },
+  {
+   "text": "کیا طلاق یافتہ عورت کو بھی یہ ملتا ہے",
+   "intent": "eligibility"
+  },
+  {
+   "text": "kya main is scheme ki haqdar hoon",
+   "intent": "eligibility",
+   "tag": "roman"
+  },
+  {
+   "text": "کسی ذمہ دار بندے سے رابطہ کروا دیں",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "insaan se baat karwa do",
+   "intent": "talk_to_officer",
+   "tag": "roman"
+  },
+  {
+   "text": "میری امدادی رقم آ گئی کیا",
+   "intent": "payment_status"
+  },
+  {
+   "text": "paise aa gaye hain kya",
+   "intent": "payment_status",
+   "tag": "roman"
+  },
+  {
+   "text": "خاوند کی وفات ہو گئی ہے امداد کے لیے نام کیسے لکھواؤں",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "apply karne ka tareeqa batayen",
+   "intent": "how_to_apply",
+   "tag": "roman"
+  },
+  {
+   "text": "میری ذاتی معلومات کون کون دیکھ سکتا ہے",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "mera data kis ko diya jayega",
+   "intent": "consent_privacy",
+   "tag": "roman"
+  },
+  {
+   "text": "ایک عورت کہتی ہے دو ہزار دو تو نام ڈلوا دوں گی",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "phone par otp manga gaya",
+   "intent": "report_fraud",
+   "tag": "roman"
+  },
+  {
+   "text": "عملہ میرے ساتھ ٹھیک بات نہیں کرتا",
+   "intent": "complaint"
+  },
+  {
+   "text": "mujhe complain karni hai",
+   "intent": "complaint",
+   "tag": "roman"
+  },
+  {
+   "text": "میرا فون نمبر تبدیل ہو چکا ہے",
+   "intent": "update_details"
+  },
+  {
+   "text": "bank account naya khulwaya hai",
+   "intent": "update_details",
+   "tag": "roman"
+  },
+  {
+   "text": "السلام علیکم باجی",
+   "intent": "greeting"
+  },
+  {
+   "text": "salam ji",
+   "intent": "greeting",
+   "tag": "roman"
+  },
+  {
+   "text": "دوبارہ سنا دیں ذرا",
+   "intent": "repeat"
+  },
+  {
+   "text": "phir se kahiye",
+   "intent": "repeat",
+   "tag": "roman"
+  },
+  {
+   "text": "کل ملا کر کتنے پیسے ملیں گے مجھے",
+   "intent": "payment_amount"
+  },
+  {
+   "text": "kitni raqam milegi",
+   "intent": "payment_amount",
+   "tag": "roman"
+  },
+  {
+   "text": "بینک گئی تھی وہاں پیسے نہیں آئے تھے",
+   "intent": "payment_not_received"
+  },
+  {
+   "text": "paise account mein nahi aaye",
+   "intent": "payment_not_received",
+   "tag": "roman"
+  },
+  {
+   "text": "رقم نکلوانے کہاں جاؤں",
+   "intent": "how_to_collect"
+  },
+  {
+   "text": "cash kahan se milega",
+   "intent": "how_to_collect",
+   "tag": "roman"
+  },
+  {
+   "text": "میری درخواست کیوں منظور نہیں ہوئی",
+   "intent": "why_decision"
+  },
+  {
+   "text": "inkar ki wajah batayen",
+   "intent": "why_decision",
+   "tag": "roman"
+  },
+  {
+   "text": "میری طرف سے کیا باقی ہے",
+   "intent": "what_is_missing"
+  },
+  {
+   "text": "ab aage kya karun",
+   "intent": "what_is_missing",
+   "tag": "roman"
+  },
+  {
+   "text": "یہ کام کتنے دنوں میں ہو جائے گا",
+   "intent": "how_long"
+  },
+  {
+   "text": "kitna intezar karna hoga",
+   "intent": "how_long",
+   "tag": "roman"
+  },
+  {
+   "text": "میں اس فیصلے سے مطمئن نہیں دوبارہ دیکھیں",
+   "intent": "appeal"
+  },
+  {
+   "text": "faisle ke khilaf appeal karni hai",
+   "intent": "appeal",
+   "tag": "roman"
+  },
+  {
+   "text": "میں اپنی درخواست ختم کروانا چاہتی ہوں",
+   "intent": "withdraw_claim"
+  },
+  {
+   "text": "apna case wapas lena hai",
+   "intent": "withdraw_claim",
+   "tag": "roman"
+  },
+  {
+   "text": "سرٹیفکیٹ کی فوٹو بھیجنی ہے",
+   "intent": "send_document"
+  },
+  {
+   "text": "tasveer upload karni hai",
+   "intent": "send_document",
+   "tag": "roman"
+  },
+  {
+   "text": "شناختی کارڈ کی میعاد گزر گئی ہے",
+   "intent": "cnic_problem"
+  },
+  {
+   "text": "id card gum ho gaya",
+   "intent": "cnic_problem",
+   "tag": "roman"
+  },
+  {
+   "text": "خاوند کا وفات نامہ نہیں بنوایا",
+   "intent": "no_death_certificate"
+  },
+  {
+   "text": "death certificate nahi bana",
+   "intent": "no_death_certificate",
+   "tag": "roman"
+  },
+  {
+   "text": "میرے والد کا نام غلط درج ہے",
+   "intent": "wrong_details"
+  },
+  {
+   "text": "naam ki spelling ghalat hai",
+   "intent": "wrong_details",
+   "tag": "roman"
+  },
+  {
+   "text": "میرے گھر ایک بچی پیدا ہوئی ہے",
+   "intent": "household_change"
+  },
+  {
+   "text": "beti ki shaadi ho gayi hai",
+   "intent": "household_change",
+   "tag": "roman"
+  },
+  {
+   "text": "کوئی اور حکومتی سکیم ہے میرے لیے",
+   "intent": "other_programmes"
+  },
+  {
+   "text": "aur kaunsi scheme hai",
+   "intent": "other_programmes",
+   "tag": "roman"
+  },
+  {
+   "text": "میں چل نہیں سکتی کوئی گھر آ جائے",
+   "intent": "helper_visit"
+  },
+  {
+   "text": "ghar pe kisi ko bhej dein",
+   "intent": "helper_visit",
+   "tag": "roman"
+  },
+  {
+   "text": "دفتر کس وقت تک کھلا رہتا ہے",
+   "intent": "office_info"
+  },
+  {
+   "text": "daftar ka pata kya hai",
+   "intent": "office_info",
+   "tag": "roman"
+  },
+  {
+   "text": "شوہر کے رشتہ دار مجھے دھمکا رہے ہیں",
+   "intent": "urgent_help"
+  },
+  {
+   "text": "bohat zaroori madad chahiye",
+   "intent": "urgent_help",
+   "tag": "roman"
+  },
+  {
+   "text": "بہت مہربانی اللہ حافظ",
+   "intent": "thanks_goodbye"
+  },
+  {
+   "text": "shukriya bas itna hi",
+   "intent": "thanks_goodbye",
+   "tag": "roman"
+  },
+  {
+   "text": "ذرا ٹھہر ٹھہر کر بولیں",
+   "intent": "speak_slowly"
+  },
+  {
+   "text": "aahista boliye",
+   "intent": "speak_slowly",
+   "tag": "roman"
+  },
+  {
+   "text": "میری گائے بیمار ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "آج کون سا دن ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "گیس کب آئے گی",
+   "intent": "unclear"
+  },
+  {
+   "text": "مجھے نیا سوٹ چاہیے",
+   "intent": "unclear"
+  },
+  {
+   "text": "بچے سکول گئے ہیں",
+   "intent": "unclear"
+  },
+  {
+   "text": "ٹی وی چلا دو",
+   "intent": "unclear"
+  },
+  {
+   "text": "kal barish hogi",
+   "intent": "unclear",
+   "tag": "roman"
+  },
+  {
+   "text": "chai pi lo",
+   "intent": "unclear",
+   "tag": "roman"
+  }
+ ]
+}

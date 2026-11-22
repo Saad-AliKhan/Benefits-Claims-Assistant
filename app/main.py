@@ -13,7 +13,7 @@ from fastapi.staticfiles import StaticFiles
 from app import ai_engines, audit
 from app.config import settings
 from app.db import get_db
-from app.routers import admin, agent as agent_routes, ai, audit as audit_routes, auth, claims, consents, mock, officer, pages, public_api, voice
+from app.routers import admin, agent as agent_routes, ai, collect, audit as audit_routes, auth, claims, consents, mock, officer, pages, public_api, voice
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -65,7 +65,7 @@ async def audit_every_action(request: Request, call_next):
     return response
 
 
-for r in (auth, pages, claims, agent_routes, consents, officer, admin, audit_routes, ai, voice, mock, public_api):
+for r in (auth, pages, claims, agent_routes, collect, consents, officer, admin, audit_routes, ai, voice, mock, public_api):
     app.include_router(r.router)
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 

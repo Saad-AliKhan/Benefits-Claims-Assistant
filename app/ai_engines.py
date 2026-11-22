@@ -79,6 +79,25 @@ def start_loading() -> None:
         threading.Thread(target=_load_ocr, name="load-ocr", daemon=True).start()
     if not settings.voice_mock and settings.voice_preload:
         threading.Thread(target=_load_voice, name="load-whisper", daemon=True).start()
+    threading.Thread(target=_load_meaning, name="load-meaning", daemon=True).start()
+
+
+def _load_meaning() -> None:
+    """The meaning model (optional): load it and its example vectors now, not on the first question."""
+    try:
+        from urdu_intent import meaning
+        if meaning.available():
+            meaning.scores("سلام")
+    except Exception:  # noqa: BLE001 - optional; status() shows the error
+        log.exception("meaning model failed to load")
+
+
+def _meaning_status() -> dict:
+    try:
+        from urdu_intent import meaning
+        return meaning.status()
+    except Exception as e:  # noqa: BLE001
+        return {"on": False, "error": str(e)}
 
 
 def status() -> dict:
@@ -89,7 +108,7 @@ def status() -> dict:
         "voice": {"mock": settings.voice_mock, "ready": settings.voice_mock or _state["voice_ready"],
                   "whisper_model": None if settings.voice_mock else settings.whisper_model,
                   "error": _state["voice_error"]},
-        "intent": {"ready": True},
+        "intent": {"ready": True, "meaning_model": _meaning_status()},
         "fallbacks": {"local_ocr": settings.local_ocr_fallback},
     }
 

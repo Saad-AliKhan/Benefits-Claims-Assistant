@@ -37,6 +37,11 @@ def assistant_page(request: Request):
     return _page(request, "assistant.html", "Assistant", body_class="citizen")
 
 
+@router.get("/record", response_class=HTMLResponse)
+def record_page(request: Request):
+    return _page(request, "record.html", "Voice recordings (testing)", body_class="citizen")
+
+
 @router.get("/officer", response_class=HTMLResponse)
 def officer_page(request: Request):
     return _page(request, "officer.html", "Officer queue", body_class="wide")

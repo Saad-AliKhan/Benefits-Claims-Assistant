@@ -27,7 +27,19 @@ JOINED = {
     "جائیگا": "جائے گا", "جائیگی": "جائے گی", "ملیگا": "ملے گا", "ملیگی": "ملے گی", "ملینگے": "ملیں گے",
     "کرینگے": "کریں گے", "ہونگے": "ہوں گے", "آئیگی": "آئے گی", "آئیگا": "آئے گا", "کیلئے": "کے لیے",
     "کیلیے": "کے لیے", "چاہئیے": "چاہیے", "چاہئے": "چاہیے",
+    # Noon ghunna (ں) dropped or written as a full noon by speech recognition: very common words only
+    # (and none that is a different real word: 'کہا' = said and 'نئی' = new are NOT changed).
+    "نہی": "نہیں", "نہین": "نہیں", "نئیں": "نہیں", "نیں": "نہیں", "نہیئں": "نہیں",
+    "ہان": "ہاں", "ہا": "ہاں", "مین": "میں", "می": "میں", "ہین": "ہیں", "ہون": "ہوں",
+    "کیون": "کیوں", "کیو": "کیوں", "کہان": "کہاں", "یہان": "یہاں", "وہان": "وہاں",
+    "کرون": "کروں", "جاؤن": "جاؤں", "لون": "لوں", "دون": "دوں", "بنواؤ": "بنواؤں", "بنواؤن": "بنواؤں",
+    "کریں": "کریں", "کرین": "کریں", "ملین": "ملیں", "آئین": "آئیں", "جائین": "جائیں",
 }
+
+
+# 'نہیں' (not) glued to a neighbour by speech recognition ('تکنہیں', 'نحیںملے') loses the negation that
+# separates "money not received" from "when will money come": always split it off.
+_NAHIN_GLUED = re.compile(r"(نہیں|نحیں|نھیں)(?=[؀-ۿ])|(?<=[؀-ۿ])(نہیں|نحیں|نھیں)")
 
 
 def normalize(text: str) -> str:
@@ -37,6 +49,7 @@ def normalize(text: str) -> str:
     t = t.translate(_CHAR_MAP)
     t = _DIACRITICS.sub("", t)
     t = _PUNCT.sub(" ", t)
+    t = _NAHIN_GLUED.sub(lambda m: " " + m.group(0) + " ", t)
     t = _SPACES.sub(" ", t).strip().lower()
     return " ".join(JOINED.get(w, w) for w in t.split())
 
@@ -89,9 +102,20 @@ def sound_key(text: str) -> str:
     """'How it sounds' key: normalised, alike-sounding letters merged, spaces and h-aspiration
     dropped, doubled letters collapsed. 'درخواست', 'درخاست' and 'در خواست' end up very close.
     Roman Urdu words (Latin letters) get roman_key(), so typed WhatsApp-style questions match too."""
-    words = [roman_key(w) if _LATIN.search(w) else w for w in normalize(text).split()]
+    words = [roman_key(w) if _LATIN.search(w) else _no_ghunna(w) for w in normalize(text).split()]
     k = " ".join(words).translate(_SOUND_MAP)
     return re.sub(r"(.)\1+", r"\1", k)
+
+
+# Noon ghunna (ں) is only a nasal sound on the vowel before it. Speech recognition often drops it
+# ('نہی', 'کیو', 'ہو') or writes a full noon ('نہین', 'ہون'). So a word-final ں, or a noon after a long
+# vowel at the end of a word, is ignored for matching: 'نہیں' = 'نہی' = 'نہین'. (Words that really end in
+# noon, like 'مکان', lose it on both sides, so they still match each other.)
+_GHUNNA = re.compile(r"(?<=[اویےیٰ])[ںن]$|ں$")
+
+
+def _no_ghunna(word: str) -> str:
+    return _GHUNNA.sub("", word) if len(word) > 2 else word.replace("ں", "")
 
 
 def edit_distance(a: str, b: str, limit: int = 99) -> int:

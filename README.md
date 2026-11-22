@@ -23,7 +23,13 @@ an unreadable photo → "please take it again", then "I am not sure, an officer 
 macOS / Linux: `./start.sh`. The first run installs packages and makes the demo data (a few minutes); the
 first real start also downloads the Whisper speech model (~500 MB, once). Then open <http://127.0.0.1:8080>.
 
-`start.bat mock` starts with instant fake OCR and voice answers (no models), for building screens.
+`start.bat mock` starts with instant fake OCR and voice answers (no models), for building screens. `start.bat fresh` wipes the demo data first (do this before presenting). `start.bat phone` also opens `phone.bat`. Options combine: **`start.bat fresh phone`** is the demo start.
+
+**On a phone, as an app (free):** with `start.bat` running, run **`phone.bat`** (needs `cloudflared` once:
+`winget install --id Cloudflare.cloudflared`). It prints a temporary `https://….trycloudflare.com` link. Open it on
+the phone, log in, and tap **📲 Install app** (Android Chrome) or Share → Add to Home Screen (iPhone). The app gets a
+home-screen icon, opens full screen on the assistant, and the mic and camera work (https). The link changes each
+time `phone.bat` starts, and works only while the laptop is on.
 Settings: copy `.env.example` to `.env`. <http://127.0.0.1:8080/health/ai> says whether OCR and Whisper are loaded.
 
 ### Demo accounts (password `demo1234`, also one tap on the login page)
@@ -65,7 +71,7 @@ each one's CNIC and death certificate are in `data/specimens/` (upload them in t
 | | Officer queue sorted by priority and confidence | `/officer`, `app/routers/officer.py` |
 | | Weak internet: small pages, no frameworks, saved progress, photos queued offline and sent later, cached app shell | `app/static/offline.js`, `sw.js` |
 | 5 Proof | Evaluation numbers (below), shown to the auditor and in the public API | `tools/evaluate_claims.py` |
-| | Tests: 129 (+ a jsdom run of the assistant screen) | `tests/` |
+| | Tests: 157 (+ a jsdom run of the assistant screen) | `tests/` |
 | | Public API with API key + Swagger | `/api/v1/...`, `/docs` |
 | | Bonus: **Helper Mode** | consents `helper_access`, helper's family picker |
 
@@ -114,8 +120,18 @@ phone browser ──JWT──► app (port 8080) ── role + consent checks on
 | | Engine | Accuracy | Tools |
 |---|---|---|---|
 | OCR | `ocr_core/`: RapidOCR (PP-OCRv4) + a trained smart-CNIC field detector (`ocr_core/models/cnic_fields.onnx`) | specimen docs 100% of fields; 17 real low-res CNICs 91% of fields, 0 wrong values unflagged; 7 death certificate photos (1 real, 6 sample layouts) 63 of 63 key fields, after tuning on those same photos | `tools/ocr/evaluate.py`, `evaluate_labelled.py`, `train_cnic_detector.py` (+ `.md`) |
-| Voice | Whisper `small` (faster-whisper, CPU) → `urdu_intent/` sound-alike correction + intent | 31 intents: 92% tuning (130 sentences) / 83% held-out (47), 0 wrong intents (misses become "please repeat") | `tools/voice/evaluate_intents.py` (+ utterance sets), `voice_cli.py` |
+| Voice | Whisper `small` (faster-whisper, CPU; `WHISPER_MODEL=turbo` for large-v3-turbo) → `urdu_intent/` (555 example questions, 512 keywords, 31 intents) sound-alike correction + keyword intent + **meaning model** (multilingual MiniLM, ONNX, CPU): rescues unsure answers, and vetoes weak ones it finds unrelated | 0 wrong intents on all three test sets: practice 93%, held-out 85%, held-out 2: first run **69% with 5 wrong**, 91% / 0 wrong after the fixes it led to (no longer untouched); speech-error stress test 89% right, 2 wrong of 516; noon ghunna (ں) dropped or as ن: no wrong intents | `tools/voice/evaluate_intents.py`, `stress_test.py`, `compare_asr.py`, `/record` |
 | Scam | TF-IDF + logistic regression (`app/ml_models/`) | see `/ai/scam-metrics` | `scripts/train_scam.py` |
+
+**Free models** (one time, ~2.2 GB, from Hugging Face): `powershell -ExecutionPolicy Bypass -File tools\fetch_models.ps1`
+puts the meaning model and Whisper small + large-v3-turbo in `models\` (git-ignored). Without the meaning model
+everything still works (keywords only). On the test machine Whisper small took ~0.6-0.9 s per second of speech,
+turbo ~1.6 s but spells Urdu clearly better; choose with real recordings (below).
+
+**Real voices** (the biggest improvement): volunteers open **`/record`** (any demo login, also on a phone via
+`phone.bat`), give a code (no names) and consent, and ask 35 situations in their own words. Recordings stay in
+`data/recordings/` (git-ignored). Then `python tools/voice/compare_asr.py` compares the Whisper models on them:
+right / unclear / WRONG through the same intent step, and seconds per second of speech.
 
 Add a Whisper mistake to `urdu_intent/sound_alikes.json`, a new way of asking to `urdu_intent/intents.json`,
 then run `python tools/voice/evaluate_intents.py` ("wrong intent" must stay 0).
@@ -123,7 +139,7 @@ then run `python tools/voice/evaluate_intents.py` ("wrong intent" must stay 0).
 ## Tests
 
 ```
-.venv\Scripts\python -m pytest              # all 129
+.venv\Scripts\python -m pytest              # all 157
 .venv\Scripts\python -m pytest tests --ignore=tests/ai   # the app only (10 s)
 ```
 

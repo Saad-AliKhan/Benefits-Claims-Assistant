@@ -171,3 +171,7 @@ html[lang="ur"] body { font-family: "Noto Naskh Arabic","Segoe UI",Tahoma,sans-s
 .sms { max-width: 30rem; width: 90%; border: 2px solid var(--ink); border-radius: 1rem; }
 .sms-row { border-bottom: 1px solid var(--line); padding: .4rem 0; }
 .sms-row p { margin: 0 0 .2rem; }
+
+.install { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); z-index: 50; font: inherit; font-size: 1.15rem;
+           font-weight: 700; padding: .8rem 1.4rem; border-radius: 2rem; border: 0; background: var(--ink); color: #fff;
+           box-shadow: 0 4px 14px rgba(0,0,0,.3); cursor: pointer; }

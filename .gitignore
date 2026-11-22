@@ -14,3 +14,6 @@ train_work/
 tests/local_samples/
 node_modules/
 private_samples/
+tools/bin/
+models/
+data/recordings/
