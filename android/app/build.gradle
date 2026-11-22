@@ -12,6 +12,14 @@ android {
         targetSdk 35
         versionCode 1
         versionName "0.1-prototype"
+        // The server the app opens by itself: android/server.txt (written by tools/setup_ngrok.ps1), or
+        // -PdefaultServer=https://... ; empty = the app asks once on first start.
+        def serverFile = rootProject.file("server.txt")
+        def server = project.findProperty("defaultServer") ?: (serverFile.exists() ? serverFile.text.trim() : "")
+        buildConfigField "String", "DEFAULT_SERVER", "\"${server}\""
+    }
+    buildFeatures {
+        buildConfig true
     }
     buildTypes {
         release {

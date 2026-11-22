@@ -15,7 +15,12 @@ assistant screen full screen. Plain Android framework, no libraries; Android 7 a
 
 The APK is signed with the standard debug key: fine for a demo, not for publishing.
 
-## Connect it to the laptop
+## Opens the right server by itself
+
+Run `tools\setup_ngrok.ps1` once (free fixed link). It writes `android/server.txt`; commit and push it, and every
+APK built after that opens `https://<your-domain>.ngrok-free.app` straight away: nothing to type or paste, ever.
+
+## Connect it to the laptop (without a built-in address)
 
 Run `demo.bat` on the laptop. On the phone, open its `https://….trycloudflare.com` link in Chrome and tap
 **📲 Open in app** (login page, or `/app`): the app opens with the server address filled in. Or type the

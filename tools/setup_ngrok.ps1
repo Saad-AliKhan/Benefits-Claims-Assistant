@@ -29,5 +29,9 @@ $lines = @()
 if (Test-Path $envFile) { $lines = Get-Content $envFile | Where-Object { $_ -notmatch '^NGROK_DOMAIN=' } }
 $lines += "NGROK_DOMAIN=$domain"
 Set-Content -Path $envFile -Value $lines -Encoding ASCII
+# The Android app opens this address by itself (built in from android\server.txt on the next GitHub build)
+Set-Content -Path "android\server.txt" -Value "https://$domain" -Encoding ASCII
 Write-Host ""
 Write-Host "Done. phone.bat / demo.bat will now always use:  https://$domain"
+Write-Host "The Android app will open it by itself: run  git add android\server.txt; git commit -m 'App server'; git push"
+Write-Host "and install the new APK from GitHub (Actions > Android APK)."

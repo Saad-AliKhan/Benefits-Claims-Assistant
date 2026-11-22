@@ -109,8 +109,10 @@ public class MainActivity extends Activity {
         return getSharedPreferences(PREFS, MODE_PRIVATE);
     }
 
+    /** The address set on this phone, else the one built into the app (android/server.txt), else none. */
     private String server() {
-        return prefs().getString(KEY_SERVER, null);
+        String saved = prefs().getString(KEY_SERVER, null);
+        return saved != null ? saved : cleanServer(BuildConfig.DEFAULT_SERVER);
     }
 
     /** "abc.trycloudflare.com" -> "https://abc.trycloudflare.com"; "192.168.1.5:8080" -> "http://192.168.1.5:8080". */
