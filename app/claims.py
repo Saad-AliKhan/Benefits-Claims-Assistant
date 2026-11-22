@@ -134,6 +134,13 @@ def _check_identity(cnic: str, account_name: str, photo: dict | None, cfg: dict,
     photo_ok = bool(photo and photo["action"] == "auto"
                     and mock.norm_cnic((photo.get("ocr") or {}).get("fields", {}).get("cnic")) == cnic)
     out["photo_confirms_cnic"] = photo_ok
+    photo_cnic = mock.norm_cnic(((photo or {}).get("ocr") or {}).get("fields", {}).get("cnic")) if photo else None
+    if photo_cnic and photo_cnic != cnic:
+        # The card in the photo is readable but belongs to someone else: never ignore that quietly.
+        out["photo_cnic_mismatch"] = True
+        return {**out, "action": "human", "code": "id_human", "confidence": 0.2,
+                "detail": f"The CNIC photo shows a different CNIC ({photo_cnic[:5]}-*******-{photo_cnic[-1]}) than the "
+                          "one on the account. A person must check whose card this is."}
     if rec is None:
         if photo_ok:
             return {**out, "action": "human", "code": "id_human", "confidence": 0.5,

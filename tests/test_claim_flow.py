@@ -211,3 +211,14 @@ def test_whisper_not_available_lets_the_person_type(env, monkeypatch):
     assert r.status_code == 503 and r.json()["detail"]["message_ur"]
     assert env.c.post("/voice/intent", headers=env.H(u), json={"text": "میری درخواست کا کیا بنا"}).json()["action"] == "lookup_claim_status"
     assert env.c.get("/health/ai").json()["voice"]["error"]
+
+
+def test_a_photo_of_someone_elses_card_goes_to_a_person(env, monkeypatch):
+    """The account is Rukhsana's, but the card photographed belongs to another CNIC: never ignored."""
+    fixture = json.loads(json.dumps(ai_engines._fixture("cnic", "clean")))
+    fixture["fields"]["cnic"]["value"] = env.scenario("S02")["claimant"]["cnic"]   # Nasreen's card
+    monkeypatch.setattr(ai_engines, "_fixture", lambda doc_type, scenario: fixture)
+    u, cid, view = claim(env, "S01", photo=jpg())
+    assert view["identity_ok"] == "human"
+    assert view["status"] == "escalated" and view["decision"]["outcome"] == "red"
+    assert not env.db.scalars(select(MockTransfer)).all()   # nothing paid

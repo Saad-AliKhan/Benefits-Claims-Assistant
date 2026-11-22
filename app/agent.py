@@ -396,6 +396,13 @@ class Agent:
         if doc.get("action") == "ask_more" or doc.get("retake"):
             return self.bad_photo("id_photo", "ask_id_photo", doc, "cnic")
         self.progress()
+        ident = (((case.data or {}).get("identity") or {}).get("result") or {})
+        if ident.get("photo_cnic_mismatch"):   # someone else's card: say so, a person will check
+            self.say_text("یہ کارڈ آپ کے اکاؤنٹ والے شناختی کارڈ سے مختلف ہے۔ ایک افسر اسے دیکھے گا۔",
+                          "This card is different from the CNIC on your account. An officer will check it.")
+            name = self.registry_name(case) or self.citizen.full_name
+            self.set(confirm_name=name)
+            return self.ask("confirm_name", "id_confirm", "yes_no", "yes_no", name=name)
         name = ((doc.get("ocr") or {}).get("fields") or {}).get("name") or self.registry_name(case)
         self.set(confirm_name=name)
         self.ask("confirm_name", "id_confirm", "yes_no", "yes_no", name=name)

@@ -161,3 +161,17 @@ def test_what_she_said_is_not_stored(env):
         assert "درخواست" not in str(row.details)
     s = env.db.scalar(select(AgentSession))
     assert s.user_id == t.u.id
+
+
+def test_someone_elses_card_is_noticed_in_the_conversation(env, monkeypatch):
+    import json as _json
+    from app import ai_engines
+    fixture = _json.loads(_json.dumps(ai_engines._fixture("cnic", "clean")))
+    fixture["fields"]["cnic"]["value"] = env.scenario("S02")["claimant"]["cnic"]
+    monkeypatch.setattr(ai_engines, "_fixture", lambda doc_type, scenario: fixture)
+    t = Talk(env)
+    t.say(choice="ur"); t.say(choice="how_to_apply"); t.say(choice="yes"); t.say(choice="yes")
+    t.say(photo="cnic.jpg")
+    assert "مختلف" in t.last["say"] and "Rukhsana" in t.last["say"]   # her own name, not the card's
+    t.say(choice="yes"); t.say(choice="no")
+    assert t.last["claim"]["status"] == "escalated"
