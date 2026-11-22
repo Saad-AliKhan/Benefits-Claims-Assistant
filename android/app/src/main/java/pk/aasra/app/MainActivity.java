@@ -147,7 +147,7 @@ public class MainActivity extends Activity {
         if (message != null) box.addView(text(message, 17, true, "#b91c1c"));
         box.addView(text("سرور کا پتہ · Server address", 18, true, "#1a1a1a"));
         final EditText field = new EditText(this);
-        field.setHint("something.trycloudflare.com");
+        field.setHint("your-name.ngrok-free.dev");
         field.setText(server() == null ? "" : server());
         field.setTextSize(20);
         field.setSingleLine(true);
