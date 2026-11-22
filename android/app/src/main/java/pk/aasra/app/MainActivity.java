@@ -182,7 +182,11 @@ public class MainActivity extends Activity {
             ws.setAllowFileAccess(false);
             ws.setAllowContentAccess(true);
             ws.setTextZoom(100);
-            ws.setUserAgentString(ws.getUserAgentString() + " AasraApp/0.1");
+            // Not a browser user agent: the free ngrok link shows browsers a warning page instead of the
+            // page's styles, scripts and pictures (the header below only covers the page itself). An app's
+            // own user agent passes straight through. The pages recognise the app by "AasraApp/".
+            ws.setUserAgentString("AasraApp/0.2 (Android " + android.os.Build.VERSION.RELEASE + "; "
+                    + android.os.Build.MODEL + ")");
             web.addJavascriptInterface(new Bridge(), "LMNative");
             web.setWebViewClient(new Client());
             web.setWebChromeClient(new Chrome());
@@ -276,7 +280,7 @@ public class MainActivity extends Activity {
 
         @JavascriptInterface
         public String version() {
-            return "0.1";
+            return "0.2";
         }
     }
 

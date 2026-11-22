@@ -1,4 +1,4 @@
-const CACHE = "lm-shell-v8"; // bump the number whenever you change a cached file
+const CACHE = "lm-shell-v9"; // bump the number whenever you change a cached file
 const SHELL = ["/citizen", "/assistant", "/static/assistant.js", "/static/style.css", "/static/api.js", "/static/i18n.js", "/static/offline.js",
                "/static/voice.js", "/static/citizen.js", "/static/manifest.json", "/static/icon.svg",
                "/static/icon-192.png", "/static/icon-512.png", "/static/apple-touch-icon.png"];
@@ -24,7 +24,10 @@ function networkFirst(req) {
     }, 4000);
     fetch(req).then((res) => {
       clearTimeout(timer);
-      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
+      // never keep a warning / error page (e.g. a tunnel's HTML) in place of a script, style or picture
+      const html = (res.headers.get("content-type") || "").includes("text/html");
+      const asset = new URL(req.url).pathname.startsWith("/static/");
+      if (res.ok && !(asset && html)) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
       if (!done) { done = true; resolve(res); }
     }).catch(async () => {
       clearTimeout(timer);
