@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Log in</h1>
+  <header class="brand">
+    <img src="/static/icon.svg" alt="" width="72" height="72">
+    <div>
+      <h1>آسرا <span>Aasra</span></h1>
+      <p lang="ur" dir="rtl">بیوہ خواتین کی امداد، آواز سے · آسان، محفوظ، مفت</p>
+      <p class="muted">Widow support, by voice. Simple, safe, free.</p>
+    </div>
+  </header>
+  <h2 class="login-h">Log in</h2>
   <form id="f" class="login" autocomplete="on">
     <label for="email">Email</label>
     <input id="email" type="email" required autofocus autocomplete="username">

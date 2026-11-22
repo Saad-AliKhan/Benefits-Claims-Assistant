@@ -1,5 +1,5 @@
 @echo off
-rem Last Mile Claims: the whole app (claims, OCR, Urdu voice) in one program.
+rem Aasra: the whole app (claims, OCR, Urdu voice) in one program.
 rem   start.bat        real OCR + Whisper (first start downloads the Whisper model, ~500 MB)
 rem   start.bat mock   instant fake OCR / voice answers (for building screens)
 rem   start.bat fresh  wipe the demo database and photos first (before recording / presenting the demo)
@@ -9,7 +9,7 @@ rem First run creates .venv and installs packages (internet needed, a few minute
 rem people, the demo accounts and some claims. Open http://127.0.0.1:8080  (demo password: demo1234)
 setlocal
 cd /d "%~dp0"
-title Last Mile Claims - http://127.0.0.1:8080
+title Aasra - http://127.0.0.1:8080
 
 if exist .env for /f "usebackq eol=# tokens=1,* delims==" %%a in (".env") do set "%%a=%%b"
 set "FRESH=" & set "PHONE="
@@ -54,7 +54,7 @@ echo  AI status: http://127.0.0.1:8080/health/ai
 echo  Close this window to stop.
 echo.
 start "" http://127.0.0.1:8080/login
-if defined PHONE start "Last Mile - phone link" cmd /c phone.bat
+if defined PHONE start "Aasra - phone link" cmd /c phone.bat
 %P% -m uvicorn app.main:app --host 127.0.0.1 --port 8080
 pause
 goto :eof

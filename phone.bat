@@ -5,7 +5,7 @@ rem  - Otherwise: Cloudflare quick tunnel, no account, but a NEW address every t
 rem Run start.bat first and leave it open (or use demo.bat). Close this window to stop sharing.
 setlocal
 cd /d "%~dp0"
-title Last Mile - phone link
+title Aasra - phone link
 if exist .env for /f "usebackq eol=# tokens=1,* delims==" %%a in (".env") do if /i "%%a"=="NGROK_DOMAIN" set "NGROK_DOMAIN=%%b"
 
 if defined NGROK_DOMAIN if exist tools\bin\ngrok.exe (

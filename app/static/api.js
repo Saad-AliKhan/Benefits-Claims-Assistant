@@ -112,10 +112,10 @@
     window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
   }
   /* The Android app (android/): it shows these same pages; the page knows by the user agent. */
-  LM.inApp = () => /LastMileApp\//.test(navigator.userAgent);
+  LM.inApp = () => /AasraApp\//.test(navigator.userAgent);
   LM.onAndroid = () => /Android/i.test(navigator.userAgent);
   LM.appLink = () => "intent://setup?server=" + encodeURIComponent(location.origin) +
-    "#Intent;scheme=lastmile;package=pk.lastmile.app;S.browser_fallback_url=" +
+    "#Intent;scheme=aasra;package=pk.aasra.app;S.browser_fallback_url=" +
     encodeURIComponent(location.origin + "/app") + ";end";
   window.addEventListener("DOMContentLoaded", () => {
     // In an Android browser (not in the app): offer the app; in the app: nothing to install.

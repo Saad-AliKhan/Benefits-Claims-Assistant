@@ -37,7 +37,7 @@ def assistant_page(request: Request):
     return _page(request, "assistant.html", "Assistant", body_class="citizen")
 
 
-APK = Path(__file__).resolve().parents[2] / "android" / "LastMile.apk"
+APK = Path(__file__).resolve().parents[2] / "android" / "Aasra.apk"
 
 
 @router.get("/app", response_class=HTMLResponse)
@@ -46,11 +46,11 @@ def android_app_page(request: Request):
     return _page(request, "app.html", "Android app", body_class="citizen", apk=APK.is_file())
 
 
-@router.get("/app/LastMile.apk")
+@router.get("/app/Aasra.apk")
 def android_apk():
     if not APK.is_file():
         return RedirectResponse("/app")
-    return FileResponse(APK, media_type="application/vnd.android.package-archive", filename="LastMile.apk")
+    return FileResponse(APK, media_type="application/vnd.android.package-archive", filename="Aasra.apk")
 
 
 @router.get("/record", response_class=HTMLResponse)

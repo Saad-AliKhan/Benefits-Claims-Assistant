@@ -35,8 +35,8 @@ MAX_TRIES = 2
 # ---------------------------------------------------------------- what the assistant says
 # key -> (Urdu, English). {placeholders} are filled in. Feminine Urdu by default; *_m variants for men.
 T = {
-    "ask_lang": ("السلام علیکم۔ آپ کس زبان میں بات کرنا چاہیں گی؟ اردو یا انگریزی؟",
-                 "Assalam o Alaikum. Which language would you like to talk in, Urdu or English?"),
+    "ask_lang": ("السلام علیکم۔ میں آسرا ہوں، آپ کی مدد کے لیے۔ آپ کس زبان میں بات کرنا چاہیں گی؟ اردو یا انگریزی؟",
+                 "Assalam o Alaikum. I am Aasra, here to help you. Which language would you like to talk in, Urdu or English?"),
     "lang_ok": ("ٹھیک ہے، ہم اردو میں بات کریں گے۔", "Fine, we will talk in English."),
     "lang_unsupported": ("معاف کیجیے، یہ زبان ابھی دستیاب نہیں۔ ہم اردو میں بات کرتے ہیں۔",
                          "Sorry, that language is not available yet. Let us talk in Urdu."),

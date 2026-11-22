@@ -1,4 +1,4 @@
-# Last Mile Android app (prototype)
+# Aasra Android app (prototype)
 
 The phone side of the assistant: microphone, camera, screen and speaker. The thinking (Whisper, OCR, claim
 rules, database) runs on the server (for the demo: the laptop running `demo.bat`), and the app shows its
@@ -8,8 +8,8 @@ assistant screen full screen. Plain Android framework, no libraries; Android 7 a
 
 1. Push to GitHub. The workflow `.github/workflows/android.yml` builds the app on GitHub's free machines
    (about 3-5 minutes). Or start it by hand: **Actions → Android APK → Run workflow**.
-2. Open the finished run → **Artifacts → LastMile-apk** → download and unzip: `LastMile-<n>.apk`.
-3. Either copy the APK to the phone, or save it as `android\LastMile.apk` in the project folder: then the
+2. Open the finished run → **Artifacts → Aasra-apk** → download and unzip: `Aasra-<n>.apk`.
+3. Either copy the APK to the phone, or save it as `android\Aasra.apk` in the project folder: then the
    phone can download it from `https://<your link>/app` while `demo.bat` runs.
 4. On the phone, open the APK and allow "install from this source" (it is not from the Play Store).
 
@@ -32,4 +32,4 @@ or ⚙️ in the app to change it.
 * Microphone and camera permissions asked by the app (works without browser https rules).
 * Photo picker with the phone camera or gallery (fallback when the live camera cannot be used).
 * "Connection lost, your work is saved" screen with Try again / Change server.
-* Back button, full screen, its own icon; `lastmile://setup?server=…` link to set the server.
+* Back button, full screen, its own icon; `aasra://setup?server=…` link to set the server.

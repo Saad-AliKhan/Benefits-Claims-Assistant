@@ -1,4 +1,9 @@
-# Last Mile Claims: AI-assisted benefits and claims (prototype)
+<p align="center"><img src="app/static/icon-192.png" width="96" alt="Aasra icon"></p>
+
+# Aasra (آسرا): voice-first widow support assistant (prototype)
+
+*Aasra* (آسرا) means "support, someone to lean on". It is an AI-assisted benefits and claims system for widows who
+cannot read or use apps: she talks in Urdu, the assistant checks her claim and explains the decision aloud.
 
 > **Prototype only. Every person, CNIC, document and payment here is fake.** The AI supports people's
 > decisions: OCR and voice are not proof of identity or of death, and a refusal is never automatic.

@@ -33,7 +33,8 @@ def send(db: Session, user: User | None, kind: str, case_id: int | None = None, 
     ur, en = TEXTS[kind]
     v = {"case": case_id or "", **values}
     msg = SmsMessage(user_id=user.id, case_id=case_id, phone=user.phone, kind=kind,
-                     text_ur=ur.format(**v) + " " + SAFETY[0], text_en=en.format(**v) + " " + SAFETY[1])
+                     text_ur="آسرا: " + ur.format(**v) + " " + SAFETY[0],
+                     text_en="Aasra: " + en.format(**v) + " " + SAFETY[1])
     db.add(msg)
     db.flush()
     audit.record(db, "sms.sent", actor_role=audit.ACTOR_SYSTEM, case_id=case_id,

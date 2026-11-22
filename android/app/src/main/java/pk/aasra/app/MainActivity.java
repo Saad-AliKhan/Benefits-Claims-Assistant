@@ -1,4 +1,4 @@
-package pk.lastmile.app;
+package pk.aasra.app;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -39,19 +39,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Last Mile (prototype): the widow-support assistant as an Android app.
+ * Aasra (آسرا, "support"; prototype): the widow-support assistant as an Android app.
  *
  * The app is the phone side: microphone, camera, screen, speaker. The thinking (Whisper speech
  * recognition, document OCR, the claim rules, the database) runs on the server - for the demo, the
  * laptop - and the app shows its assistant screen (/assistant) in a full-screen WebView, so everything
  * tested on the web works the same here.
  *
- * Server address: set once, either from a link (lastmile://setup?server=https://...; the web login page
+ * Server address: set once, either from a link (aasra://setup?server=https://...; the web login page
  * shows an "Open in app" button that sends it) or typed on the setup screen. It is kept on the phone.
  */
 public class MainActivity extends Activity {
 
-    private static final String PREFS = "lastmile";
+    private static final String PREFS = "aasra";
     private static final String KEY_SERVER = "server";
     private static final int REQ_MEDIA_PERMS = 10;
     private static final int REQ_CAMERA_FOR_FILE = 11;
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
 
     private boolean takeServerFromLink(Intent intent) {
         Uri data = intent == null ? null : intent.getData();
-        if (data == null || !"lastmile".equals(data.getScheme())) return false;
+        if (data == null || !"aasra".equals(data.getScheme())) return false;
         String s = cleanServer(data.getQueryParameter("server"));
         if (s == null) return false;
         prefs().edit().putString(KEY_SERVER, s).apply();
@@ -142,7 +142,7 @@ public class MainActivity extends Activity {
     private void showSetup(String message) {
         root.removeAllViews();
         LinearLayout box = column();
-        box.addView(text("Last Mile", 30, true, "#0b6b3a"));
+        box.addView(text("آسرا · Aasra", 32, true, "#0b6b3a"));
         box.addView(text("بیوہ امداد اسسٹنٹ · Widow support assistant (prototype)", 17, false, "#5b5b5b"));
         if (message != null) box.addView(text(message, 17, true, "#b91c1c"));
         box.addView(text("سرور کا پتہ · Server address", 18, true, "#1a1a1a"));
@@ -182,7 +182,7 @@ public class MainActivity extends Activity {
             ws.setAllowFileAccess(false);
             ws.setAllowContentAccess(true);
             ws.setTextZoom(100);
-            ws.setUserAgentString(ws.getUserAgentString() + " LastMileApp/0.1");
+            ws.setUserAgentString(ws.getUserAgentString() + " AasraApp/0.1");
             web.addJavascriptInterface(new Bridge(), "LMNative");
             web.setWebViewClient(new Client());
             web.setWebChromeClient(new Chrome());
@@ -321,7 +321,7 @@ public class MainActivity extends Activity {
         if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             try {
                 ContentValues v = new ContentValues();
-                v.put(MediaStore.Images.Media.DISPLAY_NAME, "lastmile_" + System.currentTimeMillis() + ".jpg");
+                v.put(MediaStore.Images.Media.DISPLAY_NAME, "aasra_" + System.currentTimeMillis() + ".jpg");
                 v.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
                 cameraOutput = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, v);
                 if (cameraOutput != null) {

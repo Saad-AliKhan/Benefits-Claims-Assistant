@@ -1,4 +1,4 @@
-"""Last Mile Claims: one web app (prototype; all data fake).
+"""Aasra (آسرا): one web app (prototype; all data fake).
 
     pages      /login  /citizen  /officer  /admin  /auditor
     API        /auth  /claims  /consents  /helper  /officer  /admin  /audit  /ai  /voice  /mock  /api/v1

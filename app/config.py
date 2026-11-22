@@ -7,7 +7,7 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    app_name: str = "Last Mile Claims"
+    app_name: str = "Aasra"
     prototype_label: str = "PROTOTYPE - all people, documents and payments are fake"
     database_url: str = "sqlite:///./lastmile.db"
 

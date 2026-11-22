@@ -1,6 +1,6 @@
 # Builds the Android app (android/) into an installable APK on GitHub's free build machines.
 # Every push that changes android/ builds it; or run it by hand: Actions > Android APK > Run workflow.
-# Download: open the finished run > Artifacts > LastMile-apk (a zip with the .apk inside).
+# Download: open the finished run > Artifacts > Aasra-apk (a zip with the .apk inside).
 name: Android APK
 
 on:
@@ -25,9 +25,9 @@ jobs:
         working-directory: android
         run: gradle --no-daemon assembleRelease
       - name: Name the file
-        run: cp android/app/build/outputs/apk/release/app-release.apk LastMile-${{ github.run_number }}.apk
+        run: cp android/app/build/outputs/apk/release/app-release.apk Aasra-${{ github.run_number }}.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: LastMile-apk
-          path: LastMile-*.apk
+          name: Aasra-apk
+          path: Aasra-*.apk
           retention-days: 30

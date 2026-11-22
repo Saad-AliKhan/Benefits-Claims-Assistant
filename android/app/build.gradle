@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace "pk.lastmile.app"
+    namespace "pk.aasra.app"
     compileSdk 35
 
     defaultConfig {
-        applicationId "pk.lastmile.app"
+        applicationId "pk.aasra.app"
         minSdk 24          // Android 7: most cheap phones still in use
         targetSdk 35
         versionCode 1

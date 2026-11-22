@@ -1,7 +1,7 @@
-const CACHE = "lm-shell-v7"; // bump the number whenever you change a cached file
+const CACHE = "lm-shell-v8"; // bump the number whenever you change a cached file
 const SHELL = ["/citizen", "/assistant", "/static/assistant.js", "/static/style.css", "/static/api.js", "/static/i18n.js", "/static/offline.js",
                "/static/voice.js", "/static/citizen.js", "/static/manifest.json", "/static/icon.svg",
-               "/static/icon-192.png", "/static/icon-512.png"];
+               "/static/icon-192.png", "/static/icon-512.png", "/static/apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE)
