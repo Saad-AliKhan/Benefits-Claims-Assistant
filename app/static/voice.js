@@ -57,7 +57,41 @@
     });
     rec.start();
     const timer = setTimeout(() => { if (rec.state !== "inactive") rec.stop(); }, maxMs || 15000);
-    return { stop: () => { clearTimeout(timer); if (rec.state !== "inactive") rec.stop(); }, done: done };
+    const quiet = LM.stopOnSilence(stream, () => { if (rec.state !== "inactive") rec.stop(); });
+    done.then(() => quiet.close());
+    return { stop: () => { clearTimeout(timer); quiet.close(); if (rec.state !== "inactive") rec.stop(); }, done: done };
+  };
+
+  /* Stops by itself: 3 s of silence after she has spoken, or 8 s with nothing said at all. The level that counts
+     as "speaking" follows the room: it is set a little above the background noise heard in the first half second. */
+  LM.SILENCE_MS = 3000;
+  LM.NOTHING_SAID_MS = 8000;
+  LM.stopOnSilence = function (stream, onQuiet) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return { close: () => {} };
+    let ctx, closed = false, raf = 0;
+    try { ctx = new AC(); } catch (e) { return { close: () => {} }; }
+    const an = ctx.createAnalyser(); an.fftSize = 1024;
+    ctx.createMediaStreamSource(stream).connect(an);
+    const buf = new Float32Array(an.fftSize);
+    const t0 = performance.now(); let floor = 0, n = 0, spoke = false, lastLoud = t0;
+    const tick = () => {
+      if (closed) return;
+      an.getFloatTimeDomainData(buf);
+      let sum = 0; for (let i = 0; i < buf.length; i++) sum += buf[i] * buf[i];
+      const rms = Math.sqrt(sum / buf.length), now = performance.now();
+      if (now - t0 < 500) { floor += rms; n++; }                        // learn the room's background level
+      else {
+        const bg = n ? floor / n : 0.005, speaking = rms > Math.max(0.015, bg * 2.5);
+        if (speaking) { spoke = true; lastLoud = now; }
+        if ((spoke && now - lastLoud > LM.SILENCE_MS) || (!spoke && now - t0 > LM.NOTHING_SAID_MS)) { close(); onQuiet(); return; }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    const close = () => { if (closed) return; closed = true; cancelAnimationFrame(raf); try { ctx.close(); } catch (e) { /* ignore */ } };
+    if (ctx.state === "suspended" && ctx.resume) ctx.resume();
+    raf = requestAnimationFrame(tick);
+    return { close: close };
   };
 
   LM.understandAudio = function (blob) {

@@ -108,7 +108,7 @@
   async function talk() {
     if (S.rec) { S.rec.stop(); return; }
     if (!LM.canRecord()) { fallbackListen(); return; }
-    try { S.rec = await LM.startRecording(12000); }
+    try { S.rec = await LM.startRecording(25000); }
     catch (e) { bubble("bot err", w("nomic")); S.typing = true; renderAct(); return; }
     renderAct();
     const blob = await S.rec.done;
