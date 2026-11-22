@@ -173,7 +173,7 @@
     if (turn.expect === "photo") {
       const box = el("div", { class: "photo-box" });
       const pick = el("label", { class: "big ghost" }, el("span", { class: "ico", text: "🖼️" }), w("pick"),
-        el("input", { type: "file", accept: "image/*", capture: "environment", class: "sr-only",
+        el("input", { type: "file", accept: "image/*", class: "sr-only",
                       onchange: (e) => photo(e.target.files[0]) }));
       a.append(box, pick);
       startCam(box, turn.photo_hint || "cnic").then((ok) => {

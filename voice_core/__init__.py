@@ -73,6 +73,20 @@ def decode(data: bytes) -> np.ndarray:
     return audio
 
 
+def highpass(audio: np.ndarray, cutoff: float = 100.0) -> np.ndarray:
+    """First-order high-pass filter: speech lives above ~100 Hz, fans and traffic rumble below it."""
+    if len(audio) < 2:
+        return audio
+    rc = 1.0 / (2 * np.pi * cutoff)
+    a = rc / (rc + 1.0 / 16000)
+    out = np.empty_like(audio, dtype=np.float32)
+    out[0] = audio[0]
+    prev_x, prev_y = float(audio[0]), float(audio[0])
+    for i in range(1, len(audio)):
+        x = float(audio[i]); prev_y = a * (prev_y + x - prev_x); prev_x = x; out[i] = prev_y
+    return out
+
+
 def transcribe(audio: np.ndarray, model: str | None = None, language: str = "ur") -> dict:
     """quality: ok | silent (nothing said) | noisy (sound, but no clear speech: ask for a quieter place)."""
     seconds = len(audio) / 16000
@@ -80,6 +94,8 @@ def transcribe(audio: np.ndarray, model: str | None = None, language: str = "ur"
     if peak < 1e-4:
         return {"text": "", "seconds_audio": round(seconds, 1), "seconds_taken": 0.0, "quality": "silent"}
     rms = float(np.sqrt(np.mean(np.square(audio))))
+    audio = highpass(audio)                             # fan hum and traffic rumble (< ~100 Hz) out
+    peak = float(np.abs(audio).max()) or 1.0
     audio = (audio / peak * 0.9).astype(np.float32)   # quiet phone recordings -> normal level
     t0 = time.time()
     with _lock:

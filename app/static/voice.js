@@ -42,7 +42,9 @@
 
   /* Returns { stop(), done } where done resolves to the recorded Blob (or null). Stops by itself after maxMs. */
   LM.startRecording = async function (maxMs) {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: {
+      noiseSuppression: true, echoCancellation: true, autoGainControl: true, channelCount: 1 } })
+      .catch(() => navigator.mediaDevices.getUserMedia({ audio: true }));
     const type = TYPES.find((t) => MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t)) || "";
     const rec = new MediaRecorder(stream, type ? { mimeType: type } : undefined);
     const chunks = [];
