@@ -1,0 +1,159 @@
+"""Urdu intent detection for the claims voice assistant. Pure Python, no extra packages.
+
+    from urdu_intent import detect_intent
+    r = detect_intent("میری درخاست کا کیا بنا")
+    r["intent"]            -> "application_status"
+    r["confidence"]        -> 0.8
+    r["text_corrected"]    -> "میری درخواست کا کیا بنا"
+    r["corrections"]       -> [{"original": "درخاست", "corrected": "درخواست", ...}]
+
+How a sentence is scored, per intent:
+* keywords: weighted words and phrases, matched by *sound* (so a one-letter mishearing still counts);
+* similarity: character n-grams of the sentence vs. every example question of the intent;
+* the two are combined; the best intent wins only if it is clearly ahead. Otherwise the answer is
+  "unclear" with the candidates, and the app should ask again or hand over to a person.
+
+The result only names what the person is asking. It never answers claim-specific questions:
+`action` tells the main application what to do, after its own login, consent and audit checks.
+"""
+from __future__ import annotations
+
+import json
+import math
+import re
+from collections import Counter
+from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
+
+from .correct import correct
+from .normalize import edit_distance, normalize, sound_key
+
+HERE = Path(__file__).resolve().parent
+__version__ = "1.0.0"
+__all__ = ["detect_intent", "MIN_SCORE", "MIN_MARGIN", "intents"]
+
+# Decision thresholds (tuned on evaluate_intents.py; change there, re-run, then here)
+MIN_SCORE = 0.40    # below this nothing matches well enough -> "unclear"
+MIN_MARGIN = 0.08   # best must beat the runner-up by this much -> otherwise "unclear" (ambiguous)
+W_KEYWORDS, W_SIMILARITY = 0.55, 0.45
+
+
+@lru_cache(maxsize=1)
+def intents() -> dict:
+    return json.loads((HERE / "intents.json").read_text(encoding="utf-8"))["intents"]
+
+
+def _ngrams(key: str) -> Counter:
+    k = f"#{key}#"
+    return Counter(k[i:i + n] for n in (2, 3, 4) for i in range(len(k) - n + 1))
+
+
+@dataclass(frozen=True)
+class _Model:
+    idf: dict
+    examples: dict          # intent -> list of (vector, norm)
+    keywords: dict          # intent -> list of (keyword, sound keys of its words, weight, unused)
+
+
+@lru_cache(maxsize=1)
+def _model() -> _Model:
+    specs = intents()
+    docs = {name: [_ngrams(sound_key(correct(ex).text)) for ex in spec["examples"]] for name, spec in specs.items()}
+    df = Counter()
+    n_docs = 0
+    for vecs in docs.values():
+        for v in vecs:
+            df.update(v.keys())
+            n_docs += 1
+    idf = {g: math.log((1 + n_docs) / (1 + c)) + 1 for g, c in df.items()}
+    examples = {}
+    for name, vecs in docs.items():
+        weighted = []
+        for v in vecs:
+            w = {g: c * idf[g] for g, c in v.items()}
+            weighted.append((w, math.sqrt(sum(x * x for x in w.values()))))
+        examples[name] = weighted
+    keywords = {}
+    for name, spec in specs.items():
+        kws = []
+        for kw, weight in spec["keywords"].items():
+            parts = tuple(sound_key(w) for w in normalize(kw).split())
+            kws.append((kw, parts, float(weight), 0))
+        keywords[name] = kws
+    return _Model(idf, examples, keywords)
+
+
+def _similarity(model: _Model, key: str, intent: str) -> float:
+    v = _ngrams(key)
+    w = {g: c * model.idf.get(g, 1.0) for g, c in v.items()}
+    norm = math.sqrt(sum(x * x for x in w.values())) or 1.0
+    best = 0.0
+    for ex, ex_norm in model.examples[intent]:
+        dot = sum(val * ex.get(g, 0.0) for g, val in w.items())
+        best = max(best, dot / (norm * ex_norm))
+    return best
+
+
+def _numbers(text: str) -> list[str]:
+    """Digit sequences said aloud (an application number, a CNIC). CNICs are formatted 5-7-1."""
+    found = []
+    for m in re.findall(r"\d[\d\s-]{3,}\d", normalize(text)):
+        d = re.sub(r"\D", "", m)
+        found.append(f"{d[:5]}-{d[5:12]}-{d[12]}" if len(d) == 13 else d)
+    return found
+
+
+def detect_intent(text: str) -> dict:
+    """Classify one transcribed sentence. Never raises on odd input; empty text -> 'unclear'."""
+    fixed = correct(text or "")
+    key = sound_key(fixed.text)
+    base = {"text_raw": text, "text_corrected": fixed.text,
+            "corrections": [c.__dict__ for c in fixed.corrections], "numbers": _numbers(fixed.text)}
+    if len(key) < 2:
+        return {**base, "intent": "unclear", "reason": "no_speech", "confidence": 0.0, "alternatives": [],
+                "matched_keywords": []}
+
+    model = _model()
+    # Keywords are compared with whole words or runs of 2-4 words (so 'کیس' does not match inside
+    # 'کیسا', and 'نئی درخواست' does not match across 'گئے درخواست'). Longer keywords may differ by
+    # one sound. A keyword may also sit inside a single word ('اہل' in 'اہلیت', 'کیابنا').
+    words = [sound_key(w) for w in fixed.text.split()]
+    spans = {"".join(words[i:j]) for i in range(len(words)) for j in range(i + 1, min(len(words), i + 4) + 1)}
+
+    def close(a: str, b: str) -> bool:
+        allowed = 0 if len(b) < 5 else 1
+        return a == b or (allowed > 0 and abs(len(a) - len(b)) <= allowed and edit_distance(a, b, allowed) <= allowed)
+
+    def hit(parts: tuple, _unused: int) -> bool:
+        joined = "".join(parts)
+        if joined in spans:                                   # exact, also when written joined/split
+            return True
+        if len(parts) == 1 and len(joined) >= 4 and any(joined in w for w in words):
+            return True                                       # inside one word: 'اہل' in 'اہلیت'
+        n = len(parts)                                        # word by word, each may be one sound off
+        return any(all(close(words[i + k], parts[k]) for k in range(n)) for i in range(len(words) - n + 1))
+
+    scores, hits = {}, {}
+    for name in intents():
+        matched = [(kw, w) for kw, kkey, w, edits in model.keywords[name] if hit(kkey, edits)]
+        kw_score = 1 - math.exp(-sum(w for _, w in matched) / 3)
+        sim = _similarity(model, key, name)
+        scores[name] = W_KEYWORDS * kw_score + W_SIMILARITY * sim
+        hits[name] = [kw for kw, _ in matched]
+
+    ranked = sorted(scores.items(), key=lambda kv: -kv[1])
+    (best, top), (_, second) = ranked[0], ranked[1]
+    alternatives = [{"intent": n, "score": round(s, 3)} for n, s in ranked[:3]]
+    if top < MIN_SCORE:
+        return {**base, "intent": "unclear", "reason": "no_good_match", "confidence": round(top, 3),
+                "alternatives": alternatives, "matched_keywords": hits[best]}
+    if top - second < MIN_MARGIN:
+        return {**base, "intent": "unclear", "reason": "ambiguous", "confidence": round(top, 3),
+                "alternatives": alternatives, "matched_keywords": hits[best]}
+    spec = intents()[best]
+    # confidence: how high the score is, discounted when the runner-up is close
+    confidence = min(0.99, top * (0.6 + 0.4 * min(1.0, (top - second) / 0.3)) / 0.8)
+    return {**base, "intent": best, "confidence": round(confidence, 3), "label_ur": spec["label_ur"],
+            "label_en": spec["label_en"], "action": spec["action"], "needs_backend": spec["needs_backend"],
+            "alternatives": alternatives, "matched_keywords": hits[best]}

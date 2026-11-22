@@ -1,0 +1,440 @@
+[
+ {
+  "id": "S01",
+  "label": "clean claim",
+  "email": "rukhsana@demo.pk",
+  "claimant": {
+   "name": "Rukhsana Bibi",
+   "cnic": "35202-7654321-2",
+   "phone": "0300-7654321"
+  },
+  "deceased_cnic": "35202-1234567-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine widow, all records agree"
+  }
+ },
+ {
+  "id": "S02",
+  "label": "clean claim",
+  "email": "nasreen@demo.pk",
+  "claimant": {
+   "name": "Nasreen Akhtar",
+   "cnic": "36102-3000002-2",
+   "phone": "0300-3000002"
+  },
+  "deceased_cnic": "36102-4000002-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine widow, all records agree"
+  }
+ },
+ {
+  "id": "S03",
+  "label": "clean claim",
+  "email": "shazia@demo.pk",
+  "claimant": {
+   "name": "Shazia Parveen",
+   "cnic": "36103-3000003-2",
+   "phone": "0300-3000003"
+  },
+  "deceased_cnic": "36103-4000003-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine widow, all records agree"
+  }
+ },
+ {
+  "id": "S04",
+  "label": "clean claim",
+  "email": "bushra@demo.pk",
+  "claimant": {
+   "name": "Bushra Iqbal",
+   "cnic": "36104-3000004-2",
+   "phone": "0300-3000004"
+  },
+  "deceased_cnic": "36104-4000004-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine widow, all records agree"
+  }
+ },
+ {
+  "id": "S05",
+  "label": "clean claim",
+  "email": "sadia@demo.pk",
+  "claimant": {
+   "name": "Sadia Hussain",
+   "cnic": "36105-3000005-2",
+   "phone": "0300-3000005"
+  },
+  "deceased_cnic": "36105-4000005-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine widow, all records agree"
+  }
+ },
+ {
+  "id": "S06",
+  "label": "Muhammad / Mohammad and Fatima / Fatimah spellings",
+  "email": "fatima@demo.pk",
+  "claimant": {
+   "name": "Fatima Bibi",
+   "cnic": "35201-3000060-4",
+   "phone": "0300-3000060"
+  },
+  "deceased_cnic": "35201-4000060-3",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; only the spelling differs"
+  }
+ },
+ {
+  "id": "S07",
+  "label": "two people with the same name",
+  "email": "ayesha@demo.pk",
+  "claimant": {
+   "name": "Ayesha Khan",
+   "cnic": "37405-3000070-6",
+   "phone": "0300-3000070"
+  },
+  "deceased_cnic": "37405-4000070-5",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; another Ayesha Khan exists"
+  }
+ },
+ {
+  "id": "S08",
+  "label": "widower claims",
+  "email": "sajjad@demo.pk",
+  "claimant": {
+   "name": "Sajjad Hussain",
+   "cnic": "35202-4000080-1",
+   "phone": "0300-4000080"
+  },
+  "deceased_cnic": "35202-3000080-2",
+  "relation": "Husband",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine widower"
+  }
+ },
+ {
+  "id": "S09",
+  "label": "registry record missing fields",
+  "email": "saima@demo.pk",
+  "claimant": {
+   "name": "Saima Rashid",
+   "cnic": "34101-3000090-8",
+   "phone": "0300-3000090"
+  },
+  "deceased_cnic": "34101-4000090-7",
+  "relation": "Wife",
+  "message": null,
+  "expected": "yellow",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; the registry lacks her date of birth and husband's name"
+  }
+ },
+ {
+  "id": "S10",
+  "label": "death not in the records yet",
+  "email": "zubaida@demo.pk",
+  "claimant": {
+   "name": "Zubaida Ghafoor",
+   "cnic": "33100-3000100-0",
+   "phone": "0300-3000100"
+  },
+  "deceased_cnic": "33100-4000100-9",
+  "relation": "Wife",
+  "message": null,
+  "expected": "yellow",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; the death was not yet entered in the records"
+  },
+  "certificate": {
+   "tracking_id": "84100400010099",
+   "entry_days": 6,
+   "died": "2026-10-12"
+  }
+ },
+ {
+  "id": "S11",
+  "label": "death registered 3 years late",
+  "email": "naseem@demo.pk",
+  "claimant": {
+   "name": "Naseem Abbas",
+   "cnic": "38403-3000110-4",
+   "phone": "0300-3000110"
+  },
+  "deceased_cnic": "38403-4000110-3",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; late registration needs a person to check"
+  }
+ },
+ {
+  "id": "S12",
+  "label": "amount above the automatic limit",
+  "email": "rubina@demo.pk",
+  "claimant": {
+   "name": "Rubina Arshad",
+   "cnic": "35404-3000120-6",
+   "phone": "0300-3000120"
+  },
+  "deceased_cnic": "35404-4000120-5",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; 4 children make the amount large"
+  }
+ },
+ {
+  "id": "S13",
+  "label": "bank account blocked",
+  "email": "samina@demo.pk",
+  "claimant": {
+   "name": "Samina Naveed",
+   "cnic": "35102-3000130-8",
+   "phone": "0300-3000130"
+  },
+  "deceased_cnic": "35102-4000130-7",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; payment fails, a person must fix the account"
+  }
+ },
+ {
+  "id": "S14",
+  "label": "attaches a scam message she received",
+  "email": "shabana@demo.pk",
+  "claimant": {
+   "name": "Shabana Amjad",
+   "cnic": "35202-3000140-0",
+   "phone": "0300-3000140"
+  },
+  "deceased_cnic": "35202-4000140-9",
+  "relation": "Wife",
+  "message": "آپ کی امدادی رقم روک دی گئی ہے۔ اسے جاری کرنے کے لیے فوراً اپنا شناختی کارڈ نمبر اور پن کوڈ اس نمبر پر بھیجیں 03001234567",
+  "expected": "red",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; the message is a scam aimed at her"
+  }
+ },
+ {
+  "id": "S15",
+  "label": "name typed differently from the registry",
+  "email": "kausar@demo.pk",
+  "claimant": {
+   "name": "Kosar Parveen",
+   "cnic": "36302-3000150-2",
+   "phone": "0300-3000150"
+  },
+  "deceased_cnic": "36302-4000150-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; 'Kosar' vs 'Kausar'"
+  }
+ },
+ {
+  "id": "S16",
+  "label": "claims a death recorded for another family",
+  "email": "nargis@demo.pk",
+  "claimant": {
+   "name": "Nargis Bibi",
+   "cnic": "35301-3000162-6",
+   "phone": "0300-4000161"
+  },
+  "deceased_cnic": "35301-4000160-3",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": false,
+   "why": "she is not on the death record"
+  }
+ },
+ {
+  "id": "S17",
+  "label": "husband is alive in the registry",
+  "email": "tahira@demo.pk",
+  "claimant": {
+   "name": "Tahira Waseem",
+   "cnic": "35202-3000170-8",
+   "phone": "0300-3000170"
+  },
+  "deceased_cnic": "35202-4000170-7",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": false,
+   "why": "the husband is alive"
+  }
+ },
+ {
+  "id": "S18",
+  "label": "already paid this year",
+  "email": "razia@demo.pk",
+  "claimant": {
+   "name": "Razia Liaquat",
+   "cnic": "34603-3000180-0",
+   "phone": "0300-3000180"
+  },
+  "deceased_cnic": "34603-4000180-9",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": false,
+   "why": "the programme already paid her"
+  }
+ },
+ {
+  "id": "S19",
+  "label": "income above the limit",
+  "email": "mehwish@demo.pk",
+  "claimant": {
+   "name": "Mehwish Faisal",
+   "cnic": "35202-3000190-2",
+   "phone": "0300-3000190"
+  },
+  "deceased_cnic": "35202-4000190-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": false,
+   "why": "household income PKR 120,000 a month"
+  }
+ },
+ {
+  "id": "S20",
+  "label": "claimant's CNIC belongs to a dead person",
+  "email": "gulshan@demo.pk",
+  "claimant": {
+   "name": "Gulshan Sarfraz",
+   "cnic": "35202-3000200-4",
+   "phone": "0300-3000200"
+  },
+  "deceased_cnic": "35202-4000200-3",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": false,
+   "why": "the claimant herself is recorded as dead"
+  }
+ },
+ {
+  "id": "S21",
+  "label": "brother claims a spouse benefit",
+  "email": "nadeem@demo.pk",
+  "claimant": {
+   "name": "Nadeem Ahmed",
+   "cnic": "35102-4000211-7",
+   "phone": "0300-4000211"
+  },
+  "deceased_cnic": "35102-4000210-5",
+  "relation": "Brother",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": false,
+   "why": "brothers are not eligible for widow support"
+  }
+ },
+ {
+  "id": "S22",
+  "label": "CNIC not in the registry",
+  "email": "sana@demo.pk",
+  "claimant": {
+   "name": "Sana Malik",
+   "cnic": "35202-9999999-0",
+   "phone": "0301-9999999"
+  },
+  "deceased_cnic": "35202-4000220-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "yellow",
+  "truth": {
+   "should_pay": false,
+   "why": "the CNIC does not exist"
+  }
+ },
+ {
+  "id": "S23",
+  "label": "second claim for a death already paid",
+  "email": "kulsoom@demo.pk",
+  "claimant": {
+   "name": "Kulsoom Aslam",
+   "cnic": "35202-3000230-6",
+   "phone": "0300-3000230"
+  },
+  "deceased_cnic": "35202-1234567-1",
+  "relation": "Wife",
+  "message": null,
+  "expected": "red",
+  "truth": {
+   "should_pay": false,
+   "why": "Muhammad Aslam's widow was already paid (S01)"
+  },
+  "after": "S01"
+ },
+ {
+  "id": "S24",
+  "label": "bank account in her son's name",
+  "email": "nusrat@demo.pk",
+  "claimant": {
+   "name": "Nusrat Parveen",
+   "cnic": "35202-3000240-6",
+   "phone": "0300-3000240"
+  },
+  "deceased_cnic": "35202-4000240-5",
+  "relation": "Wife",
+  "message": null,
+  "expected": "green",
+  "truth": {
+   "should_pay": true,
+   "why": "genuine; the account must be in her own name"
+  }
+ }
+]

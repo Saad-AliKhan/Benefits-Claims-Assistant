@@ -1,0 +1,16 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+*.db
+*.db-wal
+*.db-shm
+uploads/
+tts_cache/
+train_work/
+# real documents are personal data: never commit them
+tests/local_samples/
+node_modules/
+private_samples/

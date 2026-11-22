@@ -1,0 +1,146 @@
+{
+ "35202-7654321-2": {
+  "account_id": "MOCKBANK-7654321",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Rukhsana Bibi"
+ },
+ "36102-3000002-2": {
+  "account_id": "MOCKBANK-3000002",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Nasreen Akhtar"
+ },
+ "36103-3000003-2": {
+  "account_id": "MOCKBANK-3000003",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Shazia Parveen"
+ },
+ "36104-3000004-2": {
+  "account_id": "MOCKBANK-3000004",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Bushra Iqbal"
+ },
+ "36105-3000005-2": {
+  "account_id": "MOCKBANK-3000005",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Sadia Hussain"
+ },
+ "35201-3000060-4": {
+  "account_id": "MOCKBANK-3000060",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Fatimah Bibi"
+ },
+ "37405-3000070-6": {
+  "account_id": "MOCKBANK-3000070",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Ayesha Khan"
+ },
+ "35202-4000080-1": {
+  "account_id": "MOCKBANK-4000080",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Sajjad Hussain"
+ },
+ "34101-3000090-8": {
+  "account_id": "MOCKBANK-3000090",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Saima Rashid"
+ },
+ "33100-3000100-0": {
+  "account_id": "MOCKBANK-3000100",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Zubaida Ghafoor"
+ },
+ "38403-3000110-4": {
+  "account_id": "MOCKBANK-3000110",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Naseem Abbas"
+ },
+ "35404-3000120-6": {
+  "account_id": "MOCKBANK-3000120",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Rubina Arshad"
+ },
+ "35102-3000130-8": {
+  "account_id": "MOCKBANK-3000130",
+  "provider": "MockBank",
+  "status": "blocked",
+  "holder_name": "Samina Naveed"
+ },
+ "35202-3000140-0": {
+  "account_id": "MOCKBANK-3000140",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Shabana Amjad"
+ },
+ "36302-3000150-2": {
+  "account_id": "MOCKBANK-3000150",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Kausar Perveen"
+ },
+ "35301-3000162-6": {
+  "account_id": "MOCKBANK-3000162",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Nargis Bibi"
+ },
+ "35202-3000170-8": {
+  "account_id": "MOCKBANK-3000170",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Tahira Waseem"
+ },
+ "34603-3000180-0": {
+  "account_id": "MOCKBANK-3000180",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Razia Liaquat"
+ },
+ "35202-3000190-2": {
+  "account_id": "MOCKBANK-3000190",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Mehwish Faisal"
+ },
+ "35202-3000200-4": {
+  "account_id": "MOCKBANK-3000200",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Gulshan Sarfraz"
+ },
+ "35102-4000211-7": {
+  "account_id": "MOCKBANK-4000211",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Nadeem Ahmed"
+ },
+ "35202-9999999-0": {
+  "account_id": "MOCKBANK-9999999",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Sana Malik"
+ },
+ "35202-3000230-6": {
+  "account_id": "MOCKBANK-3000230",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Kulsoom Aslam"
+ },
+ "35202-3000240-6": {
+  "account_id": "MOCKBANK-3000240",
+  "provider": "MockBank",
+  "status": "active",
+  "holder_name": "Ali Riaz"
+ }
+}

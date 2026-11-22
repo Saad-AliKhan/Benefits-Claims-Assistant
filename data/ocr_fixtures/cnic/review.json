@@ -1,0 +1,102 @@
+{
+  "request_id": "(replaced per request)",
+  "doc_type": "cnic",
+  "ocr_version": "1.0.0",
+  "engine": "mock",
+  "mock": true,
+  "quality": {
+    "ok": true,
+    "sharpness": 310.5,
+    "glare_fraction": 0.0,
+    "warnings": [],
+    "input_size": [
+      1080,
+      1920
+    ],
+    "document_cropped": true,
+    "rotated_degrees": 0,
+    "anchor_score": 7.5
+  },
+  "fields": {
+    "card.type": {
+      "value": "old_green",
+      "confidence": 0.9,
+      "needs_review": false,
+      "method": "label_count"
+    },
+    "cnic": {
+      "value": "35202-7654321-2",
+      "confidence": 0.76,
+      "needs_review": true,
+      "method": "reread_vote",
+      "raw": "35202-765432I-Z"
+    },
+    "name": {
+      "value": null,
+      "confidence": 0.0,
+      "needs_review": false,
+      "method": "urdu_only_on_card",
+      "note": "printed only in Urdu on this card; take it from the identity lookup"
+    },
+    "father_or_husband_name": {
+      "value": null,
+      "confidence": 0.0,
+      "needs_review": false,
+      "method": "urdu_only_on_card",
+      "note": "printed only in Urdu on this card; take it from the identity lookup"
+    },
+    "father_or_husband.relation": {
+      "value": null,
+      "confidence": 0.0,
+      "needs_review": false,
+      "method": "urdu_only_on_card"
+    },
+    "gender": {
+      "value": "Female",
+      "confidence": 0.76,
+      "needs_review": true,
+      "method": "derived_from_cnic",
+      "note": "from the last digit of the CNIC (odd = male, even = female)"
+    },
+    "country_of_stay": {
+      "value": null,
+      "confidence": 0.0,
+      "needs_review": false,
+      "method": "not_on_card"
+    },
+    "date_of_birth": {
+      "value": "1962-05-20",
+      "confidence": 0.73,
+      "needs_review": true,
+      "method": "reread_vote",
+      "raw": "May 2O, l962"
+    },
+    "date_of_issue": {
+      "value": null,
+      "confidence": 0.0,
+      "needs_review": false,
+      "method": "not_on_card"
+    },
+    "date_of_expiry": {
+      "value": null,
+      "confidence": 0.0,
+      "needs_review": false,
+      "method": "not_on_card"
+    }
+  },
+  "flags": [
+    {
+      "code": "URDU_ONLY_FIELDS",
+      "severity": "info",
+      "detail": "old green card: name and father/husband name are printed only in Urdu; confirm them against the identity record"
+    }
+  ],
+  "needs_review_fields": [
+    "cnic",
+    "gender",
+    "date_of_birth"
+  ],
+  "overall_confidence": 0.73,
+  "review_threshold": 0.85,
+  "processing_ms": 4200
+}

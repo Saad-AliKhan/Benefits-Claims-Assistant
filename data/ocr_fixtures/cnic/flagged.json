@@ -1,0 +1,93 @@
+{
+  "request_id": "(replaced per request)",
+  "doc_type": "cnic",
+  "ocr_version": "1.0.0",
+  "engine": "mock",
+  "mock": true,
+  "quality": {
+    "ok": true,
+    "sharpness": 310.5,
+    "glare_fraction": 0.0,
+    "warnings": [],
+    "input_size": [
+      1080,
+      1920
+    ],
+    "document_cropped": true,
+    "rotated_degrees": 0,
+    "anchor_score": 7.5
+  },
+  "fields": {
+    "card.type": {
+      "value": "smart",
+      "confidence": 0.9,
+      "needs_review": false,
+      "method": "label_count"
+    },
+    "cnic": {
+      "value": "35202-7654321-2",
+      "confidence": 0.97,
+      "needs_review": false,
+      "method": "reread_vote"
+    },
+    "name": {
+      "value": "Rukhsana Bibi",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "father_or_husband_name": {
+      "value": "Muhammad Aslam",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "father_or_husband.relation": {
+      "value": "Husband",
+      "confidence": 0.9,
+      "needs_review": false,
+      "method": "label"
+    },
+    "gender": {
+      "value": "Female",
+      "confidence": 0.97,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "country_of_stay": {
+      "value": "Pakistan",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "date_of_birth": {
+      "value": "1962-05-20",
+      "confidence": 0.96,
+      "needs_review": false,
+      "method": "reread_vote"
+    },
+    "date_of_issue": {
+      "value": "2014-01-15",
+      "confidence": 0.96,
+      "needs_review": false,
+      "method": "reread_vote"
+    },
+    "date_of_expiry": {
+      "value": "2024-01-15",
+      "confidence": 0.96,
+      "needs_review": false,
+      "method": "reread_vote"
+    }
+  },
+  "flags": [
+    {
+      "code": "CARD_EXPIRED",
+      "severity": "warning",
+      "detail": "card expired on 2024-01-15"
+    }
+  ],
+  "needs_review_fields": [],
+  "overall_confidence": 0.96,
+  "review_threshold": 0.85,
+  "processing_ms": 4200
+}

@@ -1,0 +1,220 @@
+{
+  "request_id": "(replaced per request)",
+  "doc_type": "death_certificate",
+  "ocr_version": "1.0.0",
+  "engine": "mock",
+  "mock": true,
+  "quality": {
+    "ok": true,
+    "sharpness": 310.5,
+    "glare_fraction": 0.0,
+    "warnings": [],
+    "input_size": [
+      1080,
+      1920
+    ],
+    "document_cropped": true,
+    "rotated_degrees": 0,
+    "anchor_score": 7.5
+  },
+  "fields": {
+    "certificate.tracking_id": {
+      "value": "91100012345678",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "certificate.crms_no": {
+      "value": "D100000001",
+      "confidence": 0.9,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "deceased.name": {
+      "value": "Muhammad Aslm",
+      "confidence": 0.82,
+      "needs_review": true,
+      "method": "ocr",
+      "raw": "Muhammad Aslm",
+      "note": "contains a name not in the names list"
+    },
+    "deceased.cnic": {
+      "value": "35202-1234567-1",
+      "confidence": 0.995,
+      "needs_review": false,
+      "method": "ocr+urdu_side_agree"
+    },
+    "deceased.nationality": {
+      "value": "Pakistani",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "deceased.date_of_birth": {
+      "value": "1958-03-12",
+      "confidence": 0.99,
+      "needs_review": false,
+      "method": "ocr+urdu_side_agree"
+    },
+    "deceased.gender": {
+      "value": "Male",
+      "confidence": 0.98,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "deceased.religion": {
+      "value": "Islam",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "deceased.date_of_death": {
+      "value": "2026-08-02",
+      "confidence": 0.99,
+      "needs_review": false,
+      "method": "ocr+urdu_side_agree"
+    },
+    "deceased.date_of_burial": {
+      "value": "2026-08-02",
+      "confidence": 0.99,
+      "needs_review": false,
+      "method": "ocr+urdu_side_agree"
+    },
+    "deceased.place_of_death": {
+      "value": "HOSPITAL",
+      "confidence": 0.97,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "deceased.reason_of_death": {
+      "value": "Natural",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "deceased.nature_of_death": {
+      "value": "Normal",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "deceased.burial_place": {
+      "value": "Miani Sahib",
+      "confidence": 0.93,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "father.name": {
+      "value": "Ghulam Rasool",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "father.cnic": {
+      "value": null,
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "blank"
+    },
+    "mother.name": {
+      "value": "Zubaida Bibi",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "mother.cnic": {
+      "value": null,
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "blank"
+    },
+    "spouse.relation": {
+      "value": "Wife",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "section_heading"
+    },
+    "spouse.name": {
+      "value": "Rukhsana Bibi",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "spouse.cnic": {
+      "value": "35202-7654321-2",
+      "confidence": 0.995,
+      "needs_review": false,
+      "method": "ocr+urdu_side_agree"
+    },
+    "address.full": {
+      "value": "House No. 12, Street 4, Samanabad, Lahore",
+      "confidence": 0.9,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "address.tehsil": {
+      "value": "Lahore City",
+      "confidence": 0.94,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "address.district": {
+      "value": "Lahore",
+      "confidence": 0.94,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "applicant.name": {
+      "value": "Rukhsana Bibi",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "applicant.cnic": {
+      "value": "35202-7654321-2",
+      "confidence": 0.71,
+      "needs_review": true,
+      "method": "reread_vote",
+      "raw": "35202-7654321-2 | 35202-7654324-2",
+      "note": "the two printed copies disagree: 35202-7654321-2 vs 35202-7654324-2"
+    },
+    "applicant.relation": {
+      "value": "Wife",
+      "confidence": 0.95,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "certificate.entry_date": {
+      "value": "2026-08-10",
+      "confidence": 0.99,
+      "needs_review": false,
+      "method": "ocr+urdu_side_agree"
+    },
+    "certificate.issue_date": {
+      "value": "2026-08-10",
+      "confidence": 0.99,
+      "needs_review": false,
+      "method": "ocr+urdu_side_agree"
+    },
+    "certificate.entry_status": {
+      "value": "Normal",
+      "confidence": 0.97,
+      "needs_review": false,
+      "method": "ocr"
+    },
+    "certificate.qr_url": {
+      "value": "https://crms.nadra.gov.pk/verify?TrackingID=MOCK-NOT-A-REAL-ID",
+      "confidence": 0.99,
+      "needs_review": false,
+      "method": "qr"
+    }
+  },
+  "flags": [],
+  "needs_review_fields": [
+    "deceased.name",
+    "applicant.cnic"
+  ],
+  "overall_confidence": 0.71,
+  "review_threshold": 0.85,
+  "processing_ms": 4200
+}

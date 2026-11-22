@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <header class="o-top">
+    <h1>Auditor <span class="muted">(read-only)</span></h1>
+    <span class="o-user"><span id="who"></span> <button id="out" type="button" class="link">Log out</button></span>
+  </header>
+  <nav class="tabs" role="tablist">
+    <button type="button" class="chip on" data-tab="eval">Evaluation</button>
+    <button type="button" class="chip" data-tab="dec">Decisions (full trace)</button>
+    <button type="button" class="chip" data-tab="log">Audit log</button>
+    <button type="button" class="chip" data-tab="cons">Consent records</button>
+  </nav>
+  <section id="eval" class="tab"></section>
+  <section id="dec" class="tab" hidden></section>
+  <section id="log" class="tab" hidden>
+    <form id="log-form" class="inline">
+      <input id="f-action" placeholder="action starts with, e.g. consent. or claim.">
+      <select id="f-role"><option value="">any actor</option><option>citizen</option><option>helper</option><option>officer</option>
+        <option>admin</option><option>auditor</option><option>ai</option><option>system</option><option>anonymous</option><option>api_key</option></select>
+      <input id="f-case" type="number" min="1" placeholder="claim #">
+      <button class="btn">Filter</button>
+    </form>
+    <div id="log-list"></div>
+  </section>
+  <section id="cons" class="tab" hidden></section>
+  <div id="toast" role="status" hidden></div>
+{% endblock %}
+{% block scripts %}
+  <script src="/static/api.js"></script>
+  <script src="/static/auditor.js"></script>
+{% endblock %}

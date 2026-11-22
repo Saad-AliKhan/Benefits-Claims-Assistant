@@ -1,0 +1,10 @@
+{
+  "request_id": "(replaced per request)",
+  "detail": {
+    "code": "retake",
+    "reason": "cnic_number_unreadable",
+    "message_en": "The CNIC number is not clear. Take the photo closer, in good light.",
+    "message_ur": "شناختی کارڈ نمبر واضح نہیں۔ اچھی روشنی میں قریب سے تصویر لیں۔",
+    "detail": "the CNIC number could not be read; retake the photo closer"
+  }
+}

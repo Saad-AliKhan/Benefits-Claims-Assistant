@@ -1,0 +1,170 @@
+{
+ "35202-7654321-2": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "36102-3000002-2": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "36103-3000003-2": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "36104-3000004-2": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "36105-3000005-2": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35201-3000060-4": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "37405-3000070-6": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35202-4000080-1": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "34101-3000090-8": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "33100-3000100-0": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "38403-3000110-4": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35404-3000120-6": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 4,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35102-3000130-8": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35202-3000140-0": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "36302-3000150-2": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35301-3000162-6": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35202-3000170-8": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "34603-3000180-0": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": true,
+  "last_paid_on": "2026-03-01"
+ },
+ "35202-3000190-2": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 120000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35202-3000200-4": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35102-4000211-7": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35202-9999999-0": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35202-3000230-6": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ },
+ "35202-3000240-6": {
+  "programme": "Widow support (mock)",
+  "monthly_income": 18000,
+  "dependants": 0,
+  "already_paid": false,
+  "last_paid_on": null
+ }
+}

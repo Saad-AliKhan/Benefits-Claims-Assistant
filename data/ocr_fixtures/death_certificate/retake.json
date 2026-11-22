@@ -1,0 +1,10 @@
+{
+  "request_id": "(replaced per request)",
+  "detail": {
+    "code": "retake",
+    "reason": "blurry",
+    "message_en": "The photo is blurry. Hold the phone still and try again.",
+    "message_ur": "تصویر دھندلی ہے۔ فون کو ساکت رکھ کر دوبارہ تصویر لیں۔",
+    "detail": "sharpness 12 is below 25"
+  }
+}

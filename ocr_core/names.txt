@@ -1,0 +1,51 @@
+# Common Pakistani given names and family names, lower case, any order.
+# Used only to fix one-letter print misreads (Tahlra -> Tahira). Add your own names freely.
+aaliyah aamir aamna abbas abbasi abdul abdullah abid abrar adeel adil adnan afia afshan afzal agha ahmad
+ahmed ahsan aisha aiza akbar akhtar akram alam ali alia alina alishba aliya amaan amber amina amir amna
+anam anas aneela anees anjum ansari anum aqsa areeba areesha arif arsalan arshad asad asghar ashraf asif
+asim asma aslam ataullah atif ayaan ayesha ayan azam azhar aziz baig bakhsh baloch basit batool bibi
+bilal bilquis bushra butt chaudhry dawood dua ejaz eman erum faisal faiza fakhar faraz farhan farhat
+fariha farooq farooqui farrukh farzana fatima fawad fawzia fazal fouzia ghazala ghulam gul gulzar
+habib hafsa haider hamid hamza haris haroon hasan hashmi hassan hina hira huma humaira hussain iftikhar
+imran inaya iqbal iqra irfan irum ishaq ismail jabeen jahan jamal jameel jamil jannat javed javeria kamal
+kamran kanwal kashif kausar khadija khalid khan khurram kinza kiran laiba laila lubna madiha maha mahnoor
+mahmood majid malik manahil maqsood maria mariam marium maryam masood mehak mehwish memon mirza misbah
+moiz mubashir mughal muhammad mohammad mohammed muhammed mumtaz munir murtaza mustafa muzammil nabeel nadeem
+nadia naeem nafisa nasir naveed nawaz nayab nazia nida noman noor noreen nosheen omar osama owais parveen
+qadri qamar qasim qureshi rabia rafiq rahim rahman raheel rameez rana rashid rauf raza rehan rehana rizwan
+rubina rukhsana rumaisa saad saba sabir sadaf sadia saeed safia sahar saima sajid sajjad salma salman
+sameer samina sana sania sarah sarwar sehrish shabana shabbir shafiq shah shahbaz shahid shahzad shaikh
+shakeel shamim shazia sheikh shoaib sidra siddiqui sohail subhan sultan sumaira sumbul syed tabassum tahir
+talha tanveer tariq tayyab tehreem uzair uzma waheed wajid waqar waqas wasim yasir yasmin yousuf younus
+zafar zahid zahra zain zainab zaman zara zeeshan zehra zia zoha zohaib zubair zulfiqar
+usman ghani omer pathan kaleem rizvi naqvi khanzada rehman karim kareem hussaini saleem salim waseem yusuf ayaz
+tahira naseem nasim saimra basheer bashir rasheed rashida bano begum aneesa tashfeen nasreen nasreena
+shaheen shahida zubaida zubeda razia rasheeda hameeda hamida khalida majida sajida nusrat ishrat iffat
+kalsoom kulsoom sughra kubra ameer ameen amin aleem azeem hakeem haleem kaleemullah naeemullah
+sadiq siddique rafique zakir zakia zaheer zaheeda nazir nazeer bashira mubeen mobeen yaqoob yaqub
+ilyas idrees idris inayat inamullah ijaz israr ishfaq ishtiaq mushtaq mukhtar mehmood mahmud
+qaiser qaisar jahangir jehangir sikandar shamshad irshad dilshad naseer naseeruddin
+shams shamsa nargis nighat riffat sarwat tasneem tanzeela shagufta shaista samreen nasira
+fiaz fayyaz riaz riaz rafi rafia safdar sarfraz sarfaraz ghafoor ghaffar sattar jabbar
+qadir qadeer latif lateef majeed hameed rasool rasul bakhtawar allah ditta wasaya nawab
+awan rajput arain jatt gujjar kiyani kayani janjua bhatti cheema chatha gondal warraich
+dar lone mir wani bhat kazmi bukhari gilani jafri zaidi shirazi alvi qazi chishti
+amjad amjid qudoos quddus qayyum qayum ghafar razzaq razaq wahab wahhab
+nadir
+suhail zahoor manzoor mansoor masroor maqbool mehboob mahboob mehtab aftab mahtab
+anwar akhter shaukat liaqat liaquat sadaqat hidayat rafaqat basharat
+asrar afaq aqeel aqil fahad fahd faizan furqan imtiaz intizar
+javaid junaid khurshid mujahid mujeeb munawar muneer murad
+nisar obaid parvez pervez rehmat
+shafqat shakir sharif sikander taimoor taimur tanvir
+tauseef tufail umar umer yaseen yasin younas yunus
+aasia asia asifa azra bilqees fakhra farah farida fozia
+hajra hafeeza humera iram jamila khursheed munazza nabila naheed
+najma perveen qudsia raheela rakhshanda
+robina saadia sobia
+surayya tasleem yasmeen zahida zarina zeenat
+mohd md syeda khatoon sahib uddin ud din ul ullah
+khalil khaleel siddiq jan zada sher hayat muhtaj hazrat ibne
+tawseef talib said rahmat
+pervaiz babar bakht badshah shahzada gohar gulab khattak yousafzai
+afridi shinwari mohmand marwat bangash orakzai durrani tareen kakar achakzai mengal bugti marri

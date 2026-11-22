@@ -1,0 +1,598 @@
+{
+ "_about": "Test questions NOT used as examples in intents.json, so the score is honest. 'asr' marks sentences written the way speech recognition tends to mangle them (wrong letters, joined/split words, English words). 'unclear' means the assistant should NOT pick an intent. Add your real Whisper transcripts here with the intent the speaker meant.",
+ "tests": [
+  {
+   "text": "میری درخواست کا کیا ہوا ابھی تک",
+   "intent": "application_status"
+  },
+  {
+   "text": "میری درخواست منظور ہو گئی کیا",
+   "intent": "application_status"
+  },
+  {
+   "text": "مجھے بتائیں میرا کیس کہاں پہنچا",
+   "intent": "application_status"
+  },
+  {
+   "text": "کافی دن ہو گئے درخواست کا کچھ پتہ نہیں چلا",
+   "intent": "application_status"
+  },
+  {
+   "text": "میری درخواست مسترد کیوں ہوئی",
+   "intent": "why_decision"
+  },
+  {
+   "text": "کلیم کی صورتحال کیا ہے",
+   "intent": "application_status"
+  },
+  {
+   "text": "میری درخاست کا کیا بنا",
+   "intent": "application_status",
+   "asr": true
+  },
+  {
+   "text": "میری در خواست کا کیابنا",
+   "intent": "application_status",
+   "asr": true
+  },
+  {
+   "text": "میری application کا status کیا ہے",
+   "intent": "application_status",
+   "asr": true
+  },
+  {
+   "text": "میری درخوست منزور ہوئی",
+   "intent": "application_status",
+   "asr": true
+  },
+  {
+   "text": "سورت حال کیا ہے میری فائل کی",
+   "intent": "application_status",
+   "asr": true
+  },
+  {
+   "text": "مجھے کیا کیا جمع کروانا ہوگا",
+   "intent": "required_documents"
+  },
+  {
+   "text": "کون سی دستاویزات ساتھ لانی ہیں",
+   "intent": "required_documents"
+  },
+  {
+   "text": "کیا شناختی کارڈ کی کاپی لگے گی",
+   "intent": "required_documents"
+  },
+  {
+   "text": "وفات کا سرٹیفکیٹ کہاں سے بنواؤں اور کیا یہ ضروری ہے",
+   "intent": "no_death_certificate"
+  },
+  {
+   "text": "کاغذات کی فہرست بتا دیں",
+   "intent": "required_documents"
+  },
+  {
+   "text": "کون سے کاغزات چاہئیں",
+   "intent": "required_documents",
+   "asr": true
+  },
+  {
+   "text": "documents کون سے چاہیے",
+   "intent": "required_documents",
+   "asr": true
+  },
+  {
+   "text": "کونسے دستاویذات درکار ہیں",
+   "intent": "required_documents",
+   "asr": true
+  },
+  {
+   "text": "سرٹیفیکیٹ کی ضرورت ہے",
+   "intent": "required_documents",
+   "asr": true
+  },
+  {
+   "text": "کیا مجھے یہ امداد ملے گی",
+   "intent": "eligibility"
+  },
+  {
+   "text": "کیا بیوہ خواتین اہل ہیں",
+   "intent": "eligibility"
+  },
+  {
+   "text": "میرے شوہر فوت ہو گئے ہیں کیا میں حقدار ہوں",
+   "intent": "eligibility"
+  },
+  {
+   "text": "اس پروگرام کی شرائط کیا ہیں",
+   "intent": "eligibility"
+  },
+  {
+   "text": "کون لوگ یہ رقم لے سکتے ہیں",
+   "intent": "eligibility"
+  },
+  {
+   "text": "کیا میں اھل ہوں",
+   "intent": "eligibility",
+   "asr": true
+  },
+  {
+   "text": "میں eligible ہوں یا نہیں",
+   "intent": "eligibility",
+   "asr": true
+  },
+  {
+   "text": "کیا میں اس امداد کی حکدار ہوں",
+   "intent": "eligibility",
+   "asr": true
+  },
+  {
+   "text": "میری بات کسی افسر سے کروا دیں",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "مشین سے نہیں انسان سے بات کرنی ہے",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "کسی ذمہ دار سے رابطہ کروائیں",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "آپ کا نمبر کیا ہے میں فون کرنا چاہتا ہوں",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "مجھے آفسر سے ملنا ہے",
+   "intent": "talk_to_officer",
+   "asr": true
+  },
+  {
+   "text": "officer سے بات کرائیں",
+   "intent": "talk_to_officer",
+   "asr": true
+  },
+  {
+   "text": "ہیلپلائن نمبر بتائیں",
+   "intent": "talk_to_officer",
+   "asr": true
+  },
+  {
+   "text": "پیسے ابھی تک نہیں ملے",
+   "intent": "payment_not_received"
+  },
+  {
+   "text": "رقم کس تاریخ کو آئے گی",
+   "intent": "payment_status"
+  },
+  {
+   "text": "مجھے کتنے پیسے ملیں گے",
+   "intent": "payment_amount"
+  },
+  {
+   "text": "اگلی قسط کب ہے",
+   "intent": "payment_status"
+  },
+  {
+   "text": "ادائیگی میرے بینک میں ہو گی یا کیش ملے گا",
+   "intent": "how_to_collect"
+  },
+  {
+   "text": "رکم کب ملے گی",
+   "intent": "payment_status",
+   "asr": true
+  },
+  {
+   "text": "payment کب ہو گی",
+   "intent": "payment_status",
+   "asr": true
+  },
+  {
+   "text": "ادایگی ہوگئی کیا",
+   "intent": "payment_status",
+   "asr": true
+  },
+  {
+   "text": "میں درخواست جمع کروانا چاہتی ہوں",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "اس امداد کے لیے کیسے رجسٹر ہوں",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "درخواست دینے کا طریقہ بتائیں",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "فارم کیسے بھروں",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "apply کیسے کروں",
+   "intent": "how_to_apply",
+   "asr": true
+  },
+  {
+   "text": "نئی درخاست دینی ہے",
+   "intent": "how_to_apply",
+   "asr": true
+  },
+  {
+   "text": "میں اپنی رضامندی ختم کرنا چاہتا ہوں",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "میری ذاتی معلومات کون استعمال کر رہا ہے",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "میرا ڈیٹا ڈیلیٹ کر دیں",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "اجازت واپس کیسے لوں",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "رزا مندی واپس لینی ہے",
+   "intent": "consent_privacy",
+   "asr": true
+  },
+  {
+   "text": "ایک آدمی نے کال کر کے میرا پن مانگا",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "مجھے انعام کا جھوٹا میسج آیا ہے",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "کوئی خود کو افسر بتا کر پیسے مانگ رہا ہے",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "یہ کال مشکوک لگ رہی تھی",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "میرے ساتھ دوکہ ہوا",
+   "intent": "report_fraud",
+   "asr": true
+  },
+  {
+   "text": "fraud کال آئی تھی",
+   "intent": "report_fraud",
+   "asr": true
+  },
+  {
+   "text": "میں آپ کے دفتر کی شکایت کرنا چاہتی ہوں",
+   "intent": "complaint"
+  },
+  {
+   "text": "مجھے کسی کے خلاف شکایت لکھوانی ہے",
+   "intent": "complaint"
+  },
+  {
+   "text": "شکائت کہاں درج ہو گی",
+   "intent": "complaint",
+   "asr": true
+  },
+  {
+   "text": "میرا موبائل نمبر بدل گیا ہے",
+   "intent": "update_details"
+  },
+  {
+   "text": "اکاؤنٹ نمبر تبدیل کروانا ہے",
+   "intent": "update_details"
+  },
+  {
+   "text": "پتہ غلط لکھا گیا ہے اسے ٹھیک کریں",
+   "intent": "wrong_details"
+  },
+  {
+   "text": "اسلام علیکم",
+   "intent": "greeting",
+   "asr": true
+  },
+  {
+   "text": "آپ کا بہت بہت شکریہ",
+   "intent": "thanks_goodbye"
+  },
+  {
+   "text": "ٹھیک ہے اللہ حافظ",
+   "intent": "thanks_goodbye"
+  },
+  {
+   "text": "ذرا دوبارہ بولیں",
+   "intent": "repeat"
+  },
+  {
+   "text": "مجھے سمجھ نہیں آئی",
+   "intent": "repeat"
+  },
+  {
+   "text": "ایک بار پھر سے بتا دیں",
+   "intent": "repeat"
+  },
+  {
+   "text": "آج موسم کیسا ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "کرکٹ میچ کون جیتا",
+   "intent": "unclear"
+  },
+  {
+   "text": "مجھے بھوک لگی ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "یہ گانا کس کا ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "بچوں کا اسکول کب کھلے گا",
+   "intent": "unclear"
+  },
+  {
+   "text": "ہیلو ہیلو آواز آ رہی ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "ام ام ہاں",
+   "intent": "unclear"
+  },
+  {
+   "text": "",
+   "intent": "unclear"
+  },
+  {
+   "text": "لاہور کا راستہ بتائیں",
+   "intent": "unclear"
+  },
+  {
+   "text": "میرا نام احمد ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "کل کتنی رقم ملے گی",
+   "intent": "payment_amount",
+   "tag": "clean"
+  },
+  {
+   "text": "mujhe kitna paisa milega",
+   "intent": "payment_amount",
+   "tag": "roman"
+  },
+  {
+   "text": "پیسے کا میسج آ گیا مگر اکاؤنٹ خالی ہے نہیں آئے",
+   "intent": "payment_not_received",
+   "tag": "clean"
+  },
+  {
+   "text": "abhi tak paise nahi mile",
+   "intent": "payment_not_received",
+   "tag": "roman"
+  },
+  {
+   "text": "رقم نکلوانے کہاں جاؤں",
+   "intent": "how_to_collect",
+   "tag": "clean"
+  },
+  {
+   "text": "paise kahan se lun",
+   "intent": "how_to_collect",
+   "tag": "roman"
+  },
+  {
+   "text": "میرا کیس کیوں رکا ہے",
+   "intent": "why_decision",
+   "tag": "clean"
+  },
+  {
+   "text": "mera claim kyun ruka hua hai",
+   "intent": "why_decision",
+   "tag": "roman"
+  },
+  {
+   "text": "اب اور کیا بھیجنا ہوگا",
+   "intent": "what_is_missing",
+   "tag": "clean"
+  },
+  {
+   "text": "mujhe ab kya karna hai",
+   "intent": "what_is_missing",
+   "tag": "roman"
+  },
+  {
+   "text": "کتنے دن اور لگیں گے",
+   "intent": "how_long",
+   "tag": "clean"
+  },
+  {
+   "text": "kitne din aur lagenge",
+   "intent": "how_long",
+   "tag": "roman"
+  },
+  {
+   "text": "میں فیصلے کے خلاف اپیل کروں گی",
+   "intent": "appeal",
+   "tag": "clean"
+  },
+  {
+   "text": "ye faisla ghalat hai",
+   "intent": "appeal",
+   "tag": "roman"
+  },
+  {
+   "text": "میری درخواست منسوخ کر دیں",
+   "intent": "withdraw_claim",
+   "tag": "clean"
+  },
+  {
+   "text": "mera claim cancel kar do",
+   "intent": "withdraw_claim",
+   "tag": "roman"
+  },
+  {
+   "text": "میں کارڈ کی تصویر بھیج رہی ہوں",
+   "intent": "send_document",
+   "tag": "clean"
+  },
+  {
+   "text": "photo bhejni hai card ki",
+   "intent": "send_document",
+   "tag": "roman"
+  },
+  {
+   "text": "کارڈ کی میعاد ختم ہو گئی",
+   "intent": "cnic_problem",
+   "tag": "clean"
+  },
+  {
+   "text": "mera shanakhti card gum ho gaya",
+   "intent": "cnic_problem",
+   "tag": "roman"
+  },
+  {
+   "text": "وفات کا اندراج کہاں ہو گا",
+   "intent": "no_death_certificate",
+   "tag": "clean"
+  },
+  {
+   "text": "mere paas death certificate nahi",
+   "intent": "no_death_certificate",
+   "tag": "roman"
+  },
+  {
+   "text": "میرا نام غلط لکھا گیا ہے",
+   "intent": "wrong_details",
+   "tag": "clean"
+  },
+  {
+   "text": "naam ghalat hai mera",
+   "intent": "wrong_details",
+   "tag": "roman"
+  },
+  {
+   "text": "میرے بچے ہیں ان کا بتانا ہے",
+   "intent": "household_change",
+   "tag": "clean"
+  },
+  {
+   "text": "ghar mein koi kamane wala nahi",
+   "intent": "household_change",
+   "tag": "roman"
+  },
+  {
+   "text": "کیا مجھے پنشن بھی مل سکتی ہے",
+   "intent": "other_programmes",
+   "tag": "clean"
+  },
+  {
+   "text": "koi aur scheme hai kya",
+   "intent": "other_programmes",
+   "tag": "roman"
+  },
+  {
+   "text": "کوئی گھر آ کر فارم بھر دے",
+   "intent": "helper_visit",
+   "tag": "clean"
+  },
+  {
+   "text": "main parh nahi sakti koi madad kare",
+   "intent": "helper_visit",
+   "tag": "roman"
+  },
+  {
+   "text": "دفتر کب کھلتا ہے",
+   "intent": "office_info",
+   "tag": "clean"
+  },
+  {
+   "text": "aap ka daftar kahan hai",
+   "intent": "office_info",
+   "tag": "roman"
+  },
+  {
+   "text": "مجھے دھمکی دی جا رہی ہے",
+   "intent": "urgent_help",
+   "tag": "clean"
+  },
+  {
+   "text": "ghar mein khane ko kuch nahi hai",
+   "intent": "urgent_help",
+   "tag": "roman"
+  },
+  {
+   "text": "شکریہ اللہ حافظ",
+   "intent": "thanks_goodbye",
+   "tag": "clean"
+  },
+  {
+   "text": "bohat shukriya",
+   "intent": "thanks_goodbye",
+   "tag": "roman"
+  },
+  {
+   "text": "ذرا آہستہ بولیں",
+   "intent": "speak_slowly",
+   "tag": "clean"
+  },
+  {
+   "text": "thora ahista bolo",
+   "intent": "speak_slowly",
+   "tag": "roman"
+  },
+  {
+   "text": "ایک ایجنٹ پیسے مانگ رہا ہے",
+   "intent": "report_fraud",
+   "tag": "clean"
+  },
+  {
+   "text": "koi rishwat mang raha hai",
+   "intent": "report_fraud",
+   "tag": "roman"
+  },
+  {
+   "text": "paise kab aayenge",
+   "intent": "payment_status",
+   "tag": "roman"
+  },
+  {
+   "text": "meri darkhwast ka kya hua",
+   "intent": "application_status",
+   "tag": "roman"
+  },
+  {
+   "text": "mujhe sarkari madad chahiye mere shohar faut ho gaye",
+   "intent": "how_to_apply",
+   "tag": "roman"
+  },
+  {
+   "text": "kisi afsar se baat karwa dein",
+   "intent": "talk_to_officer",
+   "tag": "roman"
+  },
+  {
+   "text": "kya main is ki haqdar hoon",
+   "intent": "eligibility",
+   "tag": "roman"
+  },
+  {
+   "text": "kaun se documents chahiye",
+   "intent": "required_documents",
+   "tag": "roman"
+  },
+  {
+   "text": "aaj mausam kaisa hai",
+   "intent": "unclear",
+   "tag": "roman"
+  },
+  {
+   "text": "cricket match kaun jeeta",
+   "intent": "unclear",
+   "tag": "roman"
+  }
+ ]
+}

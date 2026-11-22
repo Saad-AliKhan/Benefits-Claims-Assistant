@@ -1,0 +1,887 @@
+{
+  "_about": "Intents the voice assistant recognises. 'examples' are typical ways people ask; 'keywords' are words or phrases that point strongly to the intent (weight 1 = hint, 3 = decisive). 'action' tells the main application what to do; the voice component never answers claim-specific questions itself. Add examples and keywords freely; run evaluate_intents.py after every change. Roman Urdu examples and keywords are matched by urdu_intent.normalize.roman_key.",
+  "intents": {
+    "application_status": {
+      "label_en": "Status of my application",
+      "label_ur": "درخواست کی صورتحال",
+      "action": "lookup_claim_status",
+      "needs_backend": true,
+      "examples": [
+        "میری درخواست کا کیا بنا",
+        "میری درخواست کہاں تک پہنچی",
+        "میرے کیس کا کیا ہوا",
+        "درخواست منظور ہوئی یا نہیں",
+        "میری درخواست کی صورتحال بتائیں",
+        "میرا کلیم کس مرحلے پر ہے",
+        "کیا میری درخواست منظور ہو گئی ہے",
+        "درخواست کا اسٹیٹس بتائیں",
+        "میری درخواست رد تو نہیں ہوئی",
+        "میری فائل کہاں ہے",
+        "meri darkhwast ka kya bana",
+        "mera case kahan tak pohancha",
+        "claim ka status kya hai",
+        "application manzoor hui ya nahi"
+      ],
+      "keywords": {
+        "صورتحال": 2.5,
+        "اسٹیٹس": 2.5,
+        "کیا بنا": 2.5,
+        "کیا ہوا": 1.5,
+        "منظور": 1.5,
+        "مرحلے": 2,
+        "کہاں تک": 2,
+        "پہنچی": 1.5,
+        "رد": 1.5,
+        "مسترد": 2,
+        "درخواست": 1,
+        "کیس": 1,
+        "کلیم": 1,
+        "فائل": 1,
+        "darkhwast": 1,
+        "kya bana": 2.5,
+        "status": 2.5,
+        "manzoor": 1.5,
+        "pohancha": 1.5
+      }
+    },
+    "required_documents": {
+      "label_en": "Which documents are required",
+      "label_ur": "درکار کاغذات",
+      "action": "show_required_documents",
+      "needs_backend": false,
+      "examples": [
+        "کون سے کاغذات درکار ہیں",
+        "مجھے کون سی دستاویزات جمع کروانی ہیں",
+        "کیا کیا کاغذات لانے ہیں",
+        "درخواست کے لیے کیا کیا چاہیے",
+        "کون سے ڈاکومنٹس چاہئیں",
+        "کیا وفات کا سرٹیفکیٹ ضروری ہے",
+        "شناختی کارڈ کی کاپی چاہیے یا نہیں",
+        "ساتھ کیا لے کر آنا ہے",
+        "kaun se kaghzat chahiye",
+        "kya kya documents lane hain",
+        "kaghaz kaun se lagenge"
+      ],
+      "keywords": {
+        "کاغذات": 3,
+        "کاغذ": 2,
+        "دستاویزات": 3,
+        "دستاویز": 2.5,
+        "ڈاکومنٹس": 3,
+        "ڈاکومنٹ": 2.5,
+        "درکار": 2,
+        "جمع کروانی": 1,
+        "لانے": 1,
+        "لے کر آنا": 1.5,
+        "سرٹیفکیٹ": 1.5,
+        "کاپی": 1.5,
+        "ضروری": 1,
+        "چاہیے": 0.5,
+        "فہرست": 1.5,
+        "لسٹ": 1.5,
+        "kaghzat": 3,
+        "kaghaz": 2,
+        "documents": 3,
+        "kagzat": 3
+      }
+    },
+    "eligibility": {
+      "label_en": "Am I eligible",
+      "label_ur": "اہلیت",
+      "action": "explain_eligibility",
+      "needs_backend": true,
+      "examples": [
+        "میں اس امداد کے لیے اہل ہوں",
+        "کیا میں اہل ہوں",
+        "مجھے یہ امداد مل سکتی ہے",
+        "امداد کے لیے کون اہل ہے",
+        "کیا بیوہ کو یہ رقم ملتی ہے",
+        "اہلیت کی شرائط کیا ہیں",
+        "کیا میں اس کا حقدار ہوں",
+        "کس کو یہ پیسے ملتے ہیں",
+        "kya main ahl hoon",
+        "kya mujhe yeh madad mil sakti hai",
+        "kaun haqdar hai"
+      ],
+      "keywords": {
+        "اہل": 3,
+        "اہلیت": 3,
+        "حقدار": 3,
+        "مستحق": 3,
+        "شرائط": 2.5,
+        "شرط": 2,
+        "مل سکتی": 1.5,
+        "مل سکتا": 1.5,
+        "کون اہل": 2,
+        "امداد": 1,
+        "بیوہ": 1,
+        "لے سکتے": 1.5,
+        "مل سکتے": 1.5,
+        "ملے گی": 0.5,
+        "ahl": 3,
+        "haqdar": 3,
+        "mustahiq": 3,
+        "mil sakti": 1.5,
+        "eligible": 3
+      }
+    },
+    "talk_to_officer": {
+      "label_en": "Talk to an officer",
+      "label_ur": "افسر سے بات",
+      "action": "handoff_to_officer",
+      "needs_backend": true,
+      "examples": [
+        "مجھے افسر سے بات کرنی ہے",
+        "کسی افسر سے بات کروائیں",
+        "میں کسی انسان سے بات کرنا چاہتا ہوں",
+        "مجھے عملے سے رابطہ کرنا ہے",
+        "ہیلپ لائن کا نمبر کیا ہے",
+        "کسی نمائندے سے بات کرا دیں",
+        "میں خود دفتر آ کر ملنا چاہتی ہوں",
+        "afsar se baat karni hai",
+        "kisi insan se baat karwa dein",
+        "helpline number kya hai"
+      ],
+      "keywords": {
+        "افسر": 3,
+        "آفیسر": 3,
+        "انسان": 2,
+        "عملے": 2.5,
+        "عملہ": 2.5,
+        "نمائندے": 2.5,
+        "رابطہ": 2,
+        "ہیلپ لائن": 3,
+        "بات کرنی": 1.5,
+        "بات کرنا": 1.5,
+        "بات کرا": 1.5,
+        "بات کروائیں": 1.5,
+        "دفتر": 1.5,
+        "ذمہ دار": 2,
+        "afsar": 3,
+        "officer": 3,
+        "insan": 2,
+        "helpline": 3,
+        "baat karni": 1.5
+      }
+    },
+    "payment_status": {
+      "label_en": "When / how much will I be paid",
+      "label_ur": "ادائیگی",
+      "action": "lookup_payment",
+      "needs_backend": true,
+      "examples": [
+        "مجھے پیسے کب ملیں گے",
+        "رقم کب آئے گی",
+        "ادائیگی ہو گئی ہے یا نہیں",
+        "قسط کب جاری ہو گی",
+        "paise kab milenge",
+        "raqam kab aayegi",
+        "payment ho gayi ya nahi",
+        "qist kab aayegi"
+      ],
+      "keywords": {
+        "پیسے": 2,
+        "رقم": 2,
+        "ادائیگی": 3,
+        "قسط": 2.5,
+        "اکاؤنٹ": 1.5,
+        "جاری": 1,
+        "پیمنٹ": 3,
+        "paise": 2,
+        "raqam": 2,
+        "payment": 3,
+        "qist": 2.5
+      }
+    },
+    "how_to_apply": {
+      "label_en": "How do I apply",
+      "label_ur": "درخواست کیسے دیں",
+      "action": "start_application",
+      "needs_backend": false,
+      "examples": [
+        "درخواست کیسے دوں",
+        "نئی درخواست کیسے جمع کرواؤں",
+        "امداد کے لیے اپلائی کیسے کریں",
+        "مجھے درخواست دینی ہے",
+        "فارم کہاں سے ملے گا",
+        "رجسٹریشن کیسے ہو گی",
+        "مجھے سرکاری پیسے چاہیے میرے شوہر فوت ہو گئے ہیں",
+        "میں بیوہ ہوں مجھے امداد چاہیے",
+        "mujhe sarkari paise chahiye",
+        "mere shohar faut ho gaye hain madad chahiye",
+        "apply karna hai",
+        "darkhwast deni hai"
+      ],
+      "keywords": {
+        "اپلائی": 3,
+        "نئی درخواست": 3,
+        "درخواست دینی": 3,
+        "درخواست دوں": 3,
+        "درخواست کیسے": 2.5,
+        "رجسٹریشن": 2.5,
+        "رجسٹر": 2,
+        "فارم": 2,
+        "کیسے": 1,
+        "سرکاری پیسے": 3,
+        "امداد چاہیے": 3,
+        "مدد چاہیے": 2,
+        "فوت ہو گئے": 2,
+        "sarkari paise": 3,
+        "madad chahiye": 2.5,
+        "faut ho gaye": 2,
+        "apply": 3,
+        "darkhwast deni": 3
+      }
+    },
+    "consent_privacy": {
+      "label_en": "My consent / my data",
+      "label_ur": "اجازت اور معلومات",
+      "action": "open_consent_page",
+      "needs_backend": true,
+      "examples": [
+        "میں اپنی اجازت واپس لینا چاہتا ہوں",
+        "میرا ڈیٹا کون دیکھ سکتا ہے",
+        "رضامندی واپس لینی ہے",
+        "میری معلومات کس کے پاس ہیں",
+        "میں نے کس چیز کی اجازت دی تھی",
+        "meri ijazat wapas le lo",
+        "mera data kaun dekhta hai"
+      ],
+      "keywords": {
+        "رضامندی": 3,
+        "اجازت": 2.5,
+        "ڈیٹا": 2.5,
+        "معلومات": 1.5,
+        "واپس لینی": 1.5,
+        "واپس لینا": 1.5,
+        "پرائیویسی": 3,
+        "ijazat": 2.5,
+        "data": 2.5
+      }
+    },
+    "report_fraud": {
+      "label_en": "Report a scam / suspicious call",
+      "label_ur": "دھوکہ دہی کی اطلاع",
+      "action": "report_fraud",
+      "needs_backend": true,
+      "examples": [
+        "کسی نے فون کر کے پیسے مانگے",
+        "کوئی میرے نام پر پیسے مانگ رہا ہے",
+        "مجھے ایک مشکوک کال آئی",
+        "مجھ سے کسی نے پن کوڈ مانگا",
+        "یہ میسج جعلی لگ رہا ہے",
+        "میرے ساتھ فراڈ ہوا ہے",
+        "ایجنٹ کہتا ہے پہلے پیسے دو تو رقم نکلوا دوں گا",
+        "کوئی رشوت مانگ رہا ہے",
+        "fraud call aayi thi",
+        "kisi ne pin manga",
+        "koi paise mang raha hai",
+        "agent kehta hai pehle paise do"
+      ],
+      "keywords": {
+        "دھوکہ": 3,
+        "دھوکا": 3,
+        "فراڈ": 3,
+        "مشکوک": 3,
+        "جعلی": 3,
+        "پن کوڈ": 2.5,
+        "پن": 1,
+        "مانگے": 1.5,
+        "مانگ رہا": 1.5,
+        "مانگا": 1.5,
+        "کال آئی": 1,
+        "میسج": 1,
+        "جھوٹا": 2.5,
+        "جھوٹی": 2.5,
+        "انعام": 2,
+        "رشوت": 3,
+        "ایجنٹ": 2.5,
+        "پیسے مانگ": 2,
+        "پہلے پیسے": 3,
+        "rishwat": 3,
+        "agent": 2.5,
+        "fraud": 3,
+        "pin manga": 3,
+        "paise mang": 2.5,
+        "pehle paise": 3,
+        "dhoka": 3
+      }
+    },
+    "complaint": {
+      "label_en": "Make a complaint",
+      "label_ur": "شکایت",
+      "action": "file_complaint",
+      "needs_backend": true,
+      "examples": [
+        "مجھے شکایت درج کروانی ہے",
+        "میں شکایت کرنا چاہتا ہوں",
+        "میرا کام نہیں ہو رہا شکایت کہاں کروں",
+        "عملے کا رویہ ٹھیک نہیں تھا",
+        "shikayat karni hai",
+        "complaint darj karwani hai"
+      ],
+      "keywords": {
+        "شکایت": 3,
+        "درج": 1,
+        "رویہ": 2,
+        "shikayat": 3,
+        "complaint": 3
+      }
+    },
+    "update_details": {
+      "label_en": "Change my phone number / bank account",
+      "label_ur": "معلومات میں تبدیلی",
+      "action": "update_contact_details",
+      "needs_backend": true,
+      "examples": [
+        "میرا فون نمبر بدلنا ہے",
+        "بینک اکاؤنٹ تبدیل کرنا ہے",
+        "میرا پتہ تبدیل ہو گیا ہے",
+        "نیا موبائل نمبر لگوانا ہے",
+        "mera number badal gaya",
+        "account change karna hai"
+      ],
+      "keywords": {
+        "تبدیل": 2.5,
+        "بدلنا": 2.5,
+        "تبدیلی": 2.5,
+        "فون نمبر": 1.5,
+        "موبائل نمبر": 1.5,
+        "پتہ": 1,
+        "بینک": 1,
+        "بدل": 2,
+        "badal": 2,
+        "number badal": 3,
+        "change": 2
+      }
+    },
+    "greeting": {
+      "label_en": "Greeting / thanks",
+      "label_ur": "سلام و شکریہ",
+      "action": "greet",
+      "needs_backend": false,
+      "examples": [
+        "السلام علیکم",
+        "آپ سے مل کر اچھا لگا",
+        "assalam o alaikum",
+        "salam"
+      ],
+      "keywords": {
+        "السلام": 3,
+        "علیکم": 2,
+        "مل کر اچھا": 2,
+        "salam": 3,
+        "alaikum": 2,
+        "aoa": 3
+      }
+    },
+    "repeat": {
+      "label_en": "Please repeat",
+      "label_ur": "دوبارہ بتائیں",
+      "action": "repeat_last",
+      "needs_backend": false,
+      "examples": [
+        "دوبارہ بتائیں",
+        "سمجھ نہیں آیا",
+        "پھر سے بولیں",
+        "dobara batayein",
+        "samajh nahi aaya",
+        "phir se bolein"
+      ],
+      "keywords": {
+        "دوبارہ": 2.5,
+        "سمجھ نہیں": 3,
+        "پھر سے": 2,
+        "dobara": 2.5,
+        "samajh nahi": 3,
+        "phir se": 2
+      }
+    },
+    "payment_amount": {
+      "label_en": "How much will I get",
+      "label_ur": "رقم کتنی ہے",
+      "action": "lookup_amount",
+      "needs_backend": true,
+      "examples": [
+        "امداد کی رقم کتنی ہے",
+        "مجھے کتنی رقم ملے گی",
+        "کتنے روپے ملیں گے",
+        "میرے حصے میں کتنے پیسے آئیں گے",
+        "رقم کتنی بنتی ہے",
+        "kitne paise milenge",
+        "raqam kitni hai",
+        "mujhe kitni raqam milegi",
+        "kitne rupay milain ge"
+      ],
+      "keywords": {
+        "کتنی": 2.5,
+        "کتنے": 2.5,
+        "کتنی رقم": 3,
+        "کتنے پیسے": 3,
+        "کتنے روپے": 3,
+        "روپے": 1,
+        "kitne": 2.5,
+        "kitni": 2.5,
+        "kitne paise": 3,
+        "rupay": 1
+      }
+    },
+    "payment_not_received": {
+      "label_en": "Money not received",
+      "label_ur": "پیسے نہیں ملے",
+      "action": "payment_problem",
+      "needs_backend": true,
+      "examples": [
+        "میرے اکاؤنٹ میں پیسے نہیں آئے",
+        "میسج آیا تھا لیکن پیسے نہیں ملے",
+        "رقم اکاؤنٹ میں نہیں پہنچی",
+        "بینک والے کہتے ہیں پیسے نہیں آئے",
+        "paise nahi aaye",
+        "account mein paise nahi aaye",
+        "sms aaya par paise nahi mile",
+        "raqam nahi pohanchi"
+      ],
+      "keywords": {
+        "نہیں آئے": 3,
+        "نہیں ملے": 3,
+        "نہیں پہنچی": 3,
+        "nahi aaye": 3,
+        "nahi mile": 3,
+        "nahi pohanchi": 3,
+        "اکاؤنٹ": 1,
+        "account": 1
+      }
+    },
+    "how_to_collect": {
+      "label_en": "Where do I collect the money",
+      "label_ur": "رقم کہاں سے لوں",
+      "action": "explain_collection",
+      "needs_backend": false,
+      "examples": [
+        "پیسے کہاں سے نکلواؤں",
+        "رقم کہاں سے ملے گی",
+        "پیسے لینے کہاں جانا ہے",
+        "کیش کیسے ملے گا",
+        "بینک سے کیسے نکالوں",
+        "paise kahan se nikalwaun",
+        "raqam kahan se milegi",
+        "paise lene kahan jana hai",
+        "cash kaise milega"
+      ],
+      "keywords": {
+        "کہاں سے": 2.5,
+        "نکلواؤں": 3,
+        "نکالوں": 3,
+        "نکلوانے": 3,
+        "کیش": 2.5,
+        "لینے کہاں": 2,
+        "kahan se": 2.5,
+        "nikalwaun": 3,
+        "nikalna": 2.5,
+        "cash": 2.5
+      }
+    },
+    "why_decision": {
+      "label_en": "Why this decision",
+      "label_ur": "فیصلے کی وجہ",
+      "action": "explain_decision",
+      "needs_backend": true,
+      "examples": [
+        "میری درخواست کیوں رکی ہوئی ہے",
+        "میرا کلیم کیوں منظور نہیں ہوا",
+        "فیصلے کی وجہ بتائیں",
+        "میری درخواست مسترد کیوں ہوئی",
+        "meri darkhwast kyun ruki hai",
+        "claim kyun reject hua",
+        "wajah batayein"
+      ],
+      "keywords": {
+        "کیوں": 3,
+        "وجہ": 3,
+        "kyun": 3,
+        "kyon": 3,
+        "wajah": 3,
+        "رکی": 1.5,
+        "ruki": 1.5,
+        "reject": 1.5
+      }
+    },
+    "what_is_missing": {
+      "label_en": "What else is needed",
+      "label_ur": "اور کیا چاہیے",
+      "action": "show_missing",
+      "needs_backend": true,
+      "examples": [
+        "اور کیا بھیجنا ہے",
+        "آپ نے مجھ سے کیا مانگا ہے",
+        "میری درخواست میں کیا کمی ہے",
+        "اب مجھے کیا کرنا ہے",
+        "aur kya bhejna hai",
+        "ab mujhe kya karna hai",
+        "kya kami hai"
+      ],
+      "keywords": {
+        "کمی": 3,
+        "کیا بھیجنا": 3,
+        "کیا کرنا ہے": 2.5,
+        "کیا مانگا": 2.5,
+        "kami": 3,
+        "kya bhejna": 3,
+        "kya karna": 2.5
+      }
+    },
+    "how_long": {
+      "label_en": "How long will it take",
+      "label_ur": "کتنا وقت لگے گا",
+      "action": "explain_timeline",
+      "needs_backend": true,
+      "examples": [
+        "کتنے دن لگیں گے",
+        "کتنا وقت لگے گا",
+        "فیصلہ کب تک ہو گا",
+        "کب تک انتظار کروں",
+        "اور کتنی دیر لگے گی",
+        "kitne din lagenge",
+        "kitna waqt lagega",
+        "kab tak intezar karun",
+        "kitni der lagegi"
+      ],
+      "keywords": {
+        "دن": 2.5,
+        "وقت": 2.5,
+        "دیر": 2.5,
+        "کب تک": 2.5,
+        "انتظار": 2.5,
+        "لگیں گے": 1.5,
+        "din": 2.5,
+        "waqt": 2.5,
+        "der": 2.5,
+        "kab tak": 2.5,
+        "intezar": 2.5,
+        "lagenge": 1.5
+      }
+    },
+    "appeal": {
+      "label_en": "Disagree / ask for a review",
+      "label_ur": "فیصلے پر نظرثانی",
+      "action": "request_review",
+      "needs_backend": true,
+      "examples": [
+        "میں اس فیصلے سے متفق نہیں",
+        "فیصلہ غلط ہے دوبارہ دیکھیں",
+        "میں اپیل کرنا چاہتی ہوں",
+        "میرے کیس پر نظرثانی کریں",
+        "main is faislay se mutafiq nahi",
+        "faisla ghalat hai",
+        "appeal karni hai"
+      ],
+      "keywords": {
+        "اپیل": 3,
+        "متفق": 3,
+        "فیصلہ غلط": 3,
+        "نظرثانی": 3,
+        "appeal": 3,
+        "mutafiq": 3,
+        "faisla ghalat": 3
+      }
+    },
+    "withdraw_claim": {
+      "label_en": "Withdraw my claim",
+      "label_ur": "درخواست واپس",
+      "action": "withdraw_claim",
+      "needs_backend": true,
+      "examples": [
+        "میں درخواست واپس لینا چاہتی ہوں",
+        "میرا کلیم ختم کر دیں",
+        "درخواست منسوخ کر دیں",
+        "darkhwast wapas leni hai",
+        "claim cancel kar dein"
+      ],
+      "keywords": {
+        "منسوخ": 3,
+        "درخواست واپس": 3,
+        "کلیم ختم": 3,
+        "cancel": 3,
+        "darkhwast wapas": 3
+      }
+    },
+    "send_document": {
+      "label_en": "I want to send a document",
+      "label_ur": "تصویر بھیجنی ہے",
+      "action": "send_document",
+      "needs_backend": false,
+      "examples": [
+        "میں شناختی کارڈ کی تصویر بھیجنا چاہتی ہوں",
+        "سرٹیفکیٹ کی تصویر کیسے بھیجوں",
+        "تصویر بھیجنی ہے",
+        "tasveer bhejni hai",
+        "card ki photo bhejni hai",
+        "certificate kaise bhejun"
+      ],
+      "keywords": {
+        "تصویر": 3,
+        "بھیجنی": 2,
+        "بھیجوں": 2,
+        "بھیجنا": 1,
+        "tasveer": 3,
+        "photo": 3,
+        "bhejni": 2,
+        "bhejun": 2
+      }
+    },
+    "cnic_problem": {
+      "label_en": "ID card lost or expired",
+      "label_ur": "شناختی کارڈ کا مسئلہ",
+      "action": "cnic_help",
+      "needs_backend": false,
+      "examples": [
+        "میرا شناختی کارڈ گم ہو گیا ہے",
+        "شناختی کارڈ کی میعاد ختم ہو گئی ہے",
+        "نیا شناختی کارڈ کیسے بنواؤں",
+        "میرے کارڈ پر ابھی بھی والد کا نام ہے",
+        "mera card gum ho gaya",
+        "card expire ho gaya hai",
+        "id card kho gaya"
+      ],
+      "keywords": {
+        "گم": 3,
+        "میعاد": 3,
+        "نیا شناختی": 3,
+        "پرانا": 2,
+        "gum": 3,
+        "expire": 3,
+        "kho gaya": 3,
+        "naya card": 3
+      }
+    },
+    "no_death_certificate": {
+      "label_en": "No death certificate",
+      "label_ur": "وفات کا سرٹیفکیٹ نہیں",
+      "action": "death_registration_help",
+      "needs_backend": false,
+      "examples": [
+        "میرے پاس وفات کا سرٹیفکیٹ نہیں ہے",
+        "شوہر کی وفات کا اندراج نہیں ہوا",
+        "ڈیتھ سرٹیفکیٹ کہاں سے بنواؤں",
+        "یونین کونسل میں وفات درج کروانی ہے",
+        "death certificate nahi hai",
+        "wafat ka certificate nahi bana",
+        "union council mein darj karwana hai"
+      ],
+      "keywords": {
+        "سرٹیفکیٹ نہیں": 3,
+        "اندراج": 3,
+        "یونین کونسل": 3,
+        "کہاں سے بنواؤں": 2.5,
+        "certificate nahi": 3,
+        "union council": 3
+      }
+    },
+    "wrong_details": {
+      "label_en": "My details are written wrong",
+      "label_ur": "معلومات غلط ہیں",
+      "action": "request_correction",
+      "needs_backend": true,
+      "examples": [
+        "میرا نام غلط لکھا ہے",
+        "شناختی کارڈ نمبر غلط درج ہو گیا",
+        "میرے شوہر کا نام غلط ہے",
+        "تاریخ پیدائش غلط ہے",
+        "mera naam ghalat likha hai",
+        "naam ki spelling ghalat hai"
+      ],
+      "keywords": {
+        "غلط لکھا": 3,
+        "غلط ہے": 2,
+        "نام غلط": 3,
+        "غلط درج": 2.5,
+        "ghalat": 2.5,
+        "galat": 2.5,
+        "spelling": 2.5
+      }
+    },
+    "household_change": {
+      "label_en": "My household changed",
+      "label_ur": "گھر کی صورتحال بدل گئی",
+      "action": "update_household",
+      "needs_backend": true,
+      "examples": [
+        "میرے بچے زیادہ ہیں",
+        "میری آمدنی کم ہو گئی ہے",
+        "گھر میں کمانے والا کوئی نہیں",
+        "میرے ساتھ بچے بھی رہتے ہیں",
+        "mere bachay zyada hain",
+        "meri aamdani kam ho gayi",
+        "ghar mein kamane wala koi nahi"
+      ],
+      "keywords": {
+        "بچے": 2.5,
+        "بچوں": 2,
+        "آمدنی": 3,
+        "کمانے": 3,
+        "bachay": 2.5,
+        "bachon": 2,
+        "aamdani": 3,
+        "kamane": 3
+      }
+    },
+    "other_programmes": {
+      "label_en": "Other help I can get",
+      "label_ur": "دوسری امداد",
+      "action": "other_programmes",
+      "needs_backend": false,
+      "examples": [
+        "کوئی اور امداد بھی ملتی ہے",
+        "بی آئی ایس پی کا کیا ہے",
+        "پنشن کیسے ملے گی",
+        "احساس پروگرام میں نام کیسے آئے گا",
+        "koi aur madad milti hai",
+        "bisp ka kya hai",
+        "pension kaise milegi",
+        "بیوہ پنشن کیسے ملے گی",
+        "کیا مجھے کفالت بھی مل سکتی ہے",
+        "koi aur scheme bhi hai"
+      ],
+      "keywords": {
+        "کوئی اور": 3,
+        "بی آئی ایس پی": 3,
+        "پنشن": 3,
+        "احساس": 3,
+        "کفالت": 3,
+        "koi aur": 3,
+        "bisp": 3,
+        "pension": 3,
+        "ehsaas": 3,
+        "kafaalat": 3,
+        "scheme": 1.5,
+        "سکیم": 1.5
+      }
+    },
+    "helper_visit": {
+      "label_en": "Someone to help me at home",
+      "label_ur": "گھر آ کر مدد",
+      "action": "request_helper_visit",
+      "needs_backend": true,
+      "examples": [
+        "کوئی گھر آ کر میری مدد کر دے",
+        "میں پڑھ نہیں سکتی کوئی آ کر فارم بھر دے",
+        "مدد کے لیے کسی کو بھیج دیں",
+        "لیڈی ہیلتھ ورکر کو بھیج دیں",
+        "koi ghar aa kar madad kar de",
+        "main parh nahi sakti",
+        "kisi ko bhej dein",
+        "koi ghar aa jaye"
+      ],
+      "keywords": {
+        "گھر آ کر": 3,
+        "پڑھ نہیں": 3,
+        "بھیج دیں": 2,
+        "ہیلتھ ورکر": 3,
+        "ghar aa kar": 3,
+        "parh nahi": 3,
+        "bhej dein": 2
+      }
+    },
+    "office_info": {
+      "label_en": "Office address and hours",
+      "label_ur": "دفتر کہاں ہے",
+      "action": "office_info",
+      "needs_backend": false,
+      "examples": [
+        "دفتر کہاں ہے",
+        "آپ کا دفتر کب کھلتا ہے",
+        "دفتر کا پتہ بتائیں",
+        "قریبی مرکز کون سا ہے",
+        "daftar kahan hai",
+        "office kab khulta hai",
+        "daftar ka pata batayein"
+      ],
+      "keywords": {
+        "دفتر کہاں": 3,
+        "کھلتا": 3,
+        "مرکز": 2.5,
+        "دفتر کا پتہ": 3,
+        "daftar": 2,
+        "khulta": 3,
+        "office": 2
+      }
+    },
+    "urgent_help": {
+      "label_en": "Urgent help / danger",
+      "label_ur": "فوری مدد",
+      "action": "urgent_help",
+      "needs_backend": true,
+      "examples": [
+        "میرے گھر میں کھانے کو کچھ نہیں",
+        "مجھے دھمکیاں مل رہی ہیں",
+        "میری جان کو خطرہ ہے",
+        "سسرال والے مجھے گھر سے نکال رہے ہیں",
+        "بچہ بہت بیمار ہے فوری مدد چاہیے",
+        "ghar mein khane ko kuch nahi",
+        "mujhe dhamkiyan mil rahi hain",
+        "meri jaan ko khatra hai",
+        "foran madad chahiye"
+      ],
+      "keywords": {
+        "دھمکی": 3,
+        "دھمکیاں": 3,
+        "خطرہ": 3,
+        "کھانے کو": 3,
+        "فوری": 2,
+        "بیمار": 2.5,
+        "نکال رہے": 3,
+        "dhamki": 3,
+        "dhamkiyan": 3,
+        "khatra": 3,
+        "khane ko": 3,
+        "foran": 2,
+        "bemar": 2.5
+      }
+    },
+    "thanks_goodbye": {
+      "label_en": "Thanks / goodbye",
+      "label_ur": "شکریہ، خدا حافظ",
+      "action": "goodbye",
+      "needs_backend": false,
+      "examples": [
+        "شکریہ",
+        "بہت شکریہ",
+        "خدا حافظ",
+        "اللہ حافظ",
+        "بس اور کچھ نہیں",
+        "shukriya",
+        "allah hafiz",
+        "bas aur kuch nahi"
+      ],
+      "keywords": {
+        "شکریہ": 3,
+        "حافظ": 3,
+        "اور کچھ نہیں": 3,
+        "shukriya": 3,
+        "hafiz": 3,
+        "kuch nahi": 2
+      }
+    },
+    "speak_slowly": {
+      "label_en": "Please speak slowly",
+      "label_ur": "آہستہ بولیں",
+      "action": "repeat_slowly",
+      "needs_backend": false,
+      "examples": [
+        "آہستہ بولیں",
+        "تھوڑا آہستہ بتائیں",
+        "جلدی جلدی نہ بولیں",
+        "ahista bolein",
+        "dheere bolo"
+      ],
+      "keywords": {
+        "آہستہ": 3,
+        "دھیرے": 3,
+        "جلدی جلدی": 2.5,
+        "ahista": 3,
+        "aahista": 3,
+        "dheere": 3
+      }
+    }
+  }
+}

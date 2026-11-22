@@ -1,0 +1,26 @@
+{
+  "threshold_used": 0.8,
+  "held_out_templates": {
+    "n": 168,
+    "n_genuine": 84,
+    "n_scam": 84,
+    "false_alarm_rate": 0.0,
+    "false_alarms": 0,
+    "scam_called_safe_rate": 0.0,
+    "scam_called_safe": 0,
+    "sent_to_human_rate": 0.0714,
+    "accuracy_if_forced": 1.0
+  },
+  "fresh_handwritten_messages": {
+    "n": 13,
+    "n_genuine": 7,
+    "n_scam": 6,
+    "false_alarm_rate": 0.0,
+    "false_alarms": 0,
+    "scam_called_safe_rate": 0.0,
+    "scam_called_safe": 0,
+    "sent_to_human_rate": 0.3077,
+    "accuracy_if_forced": 1.0
+  },
+  "notes": "All data is mock/synthetic. 'held_out_templates' = wordings never seen in training. 'fresh_handwritten_messages' = a small separate set. Both sets are small, so treat the numbers as rough, not as real-world accuracy."
+}

@@ -1,0 +1,212 @@
+{
+ "_about": "Held-out check: written before tuning and never used to adjust keywords or thresholds. Run: python evaluate_intents.py --file test_heldout.json",
+ "tests": [
+  {
+   "text": "میری امداد والی درخواست کا کچھ بتائیں",
+   "intent": "application_status"
+  },
+  {
+   "text": "پچھلے مہینے درخواست دی تھی اب کیا صورتحال ہے",
+   "intent": "application_status"
+  },
+  {
+   "text": "میرا کیس منظور ہوا یا ابھی رکا ہوا ہے",
+   "intent": "application_status"
+  },
+  {
+   "text": "میری درخواست کا سٹیٹس بتا دیجیے",
+   "intent": "application_status",
+   "asr": true
+  },
+  {
+   "text": "درخاست کہاں تک پہنچی ہے",
+   "intent": "application_status",
+   "asr": true
+  },
+  {
+   "text": "مجھے کون کون سے کاغذ دینے ہوں گے",
+   "intent": "required_documents"
+  },
+  {
+   "text": "کیا موت کا سرٹیفکیٹ بھی چاہیے",
+   "intent": "required_documents"
+  },
+  {
+   "text": "ڈاکومنٹس کی لسٹ بھیج دیں",
+   "intent": "required_documents"
+  },
+  {
+   "text": "کاغزات کونسے لگیں گے",
+   "intent": "required_documents",
+   "asr": true
+  },
+  {
+   "text": "کیا میں اس سکیم میں آتی ہوں",
+   "intent": "eligibility"
+  },
+  {
+   "text": "میرے والد کی وفات ہوئی ہے کیا مجھے امداد مل سکتی ہے",
+   "intent": "eligibility"
+  },
+  {
+   "text": "اہلیت کا معیار کیا ہے",
+   "intent": "eligibility"
+  },
+  {
+   "text": "کیا میں اہیل ہوں اس کے لیے",
+   "intent": "eligibility",
+   "asr": true
+  },
+  {
+   "text": "مجھے کسی آفیسر سے بات کرنی ہے فوری",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "کیا میں کسی بندے سے بات کر سکتا ہوں",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "افصر صاحب سے ملوا دیں",
+   "intent": "talk_to_officer",
+   "asr": true
+  },
+  {
+   "text": "میرے پیسے کب تک آ جائیں گے",
+   "intent": "payment_status"
+  },
+  {
+   "text": "ادائیگی کیوں رکی ہوئی ہے",
+   "intent": "why_decision"
+  },
+  {
+   "text": "رقم کتنی ملے گی مجھے",
+   "intent": "payment_amount"
+  },
+  {
+   "text": "پیمنٹ ابھی تک نہیں آئی",
+   "intent": "payment_not_received",
+   "asr": true
+  },
+  {
+   "text": "نیا فارم کیسے جمع ہو گا",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "مجھے امداد کے لیے اپلائی کرنا ہے",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "میری معلومات کسی کو نہ دیں",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "میں نے جو اجازت دی تھی وہ ختم کر دیں",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "کسی نے مجھے لاٹری کا جھوٹا پیغام بھیجا",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "ایک نمبر سے کال آئی اور او ٹی پی مانگا",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "دفتر والوں نے بدتمیزی کی میں شکایت کروں گی",
+   "intent": "complaint"
+  },
+  {
+   "text": "میرا بینک اکاؤنٹ بدل گیا ہے",
+   "intent": "update_details"
+  },
+  {
+   "text": "السلام علیکم جی",
+   "intent": "greeting"
+  },
+  {
+   "text": "آواز صاف نہیں آئی دوبارہ کہیں",
+   "intent": "repeat"
+  },
+  {
+   "text": "بجلی کا بل کتنا آیا ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "مجھے نیند آ رہی ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "یہ کون سا شہر ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "چائے بن گئی ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "kitni raqam milay gi",
+   "intent": "payment_amount",
+   "tag": "roman"
+  },
+  {
+   "text": "account mein raqam nahi aayi",
+   "intent": "payment_not_received",
+   "tag": "roman"
+  },
+  {
+   "text": "cash kahan se milega",
+   "intent": "how_to_collect",
+   "tag": "roman"
+  },
+  {
+   "text": "مجھے وجہ بتائیں فیصلہ کیوں ہوا",
+   "intent": "why_decision",
+   "tag": "clean"
+  },
+  {
+   "text": "kab tak faisla hoga",
+   "intent": "how_long",
+   "tag": "roman"
+  },
+  {
+   "text": "mujhe appeal karni hai",
+   "intent": "appeal",
+   "tag": "roman"
+  },
+  {
+   "text": "id card kho gaya hai",
+   "intent": "cnic_problem",
+   "tag": "roman"
+  },
+  {
+   "text": "union council se certificate nahi mila",
+   "intent": "no_death_certificate",
+   "tag": "roman"
+  },
+  {
+   "text": "koi ghar aa jaye madad ke liye",
+   "intent": "helper_visit",
+   "tag": "roman"
+  },
+  {
+   "text": "meri jaan ko khatra hai",
+   "intent": "urgent_help",
+   "tag": "roman"
+  },
+  {
+   "text": "office kab khulta hai",
+   "intent": "office_info",
+   "tag": "roman"
+  },
+  {
+   "text": "theek hai shukriya",
+   "intent": "thanks_goodbye",
+   "tag": "roman"
+  },
+  {
+   "text": "bijli kab aayegi",
+   "intent": "unclear",
+   "tag": "roman"
+  }
+ ]
+}

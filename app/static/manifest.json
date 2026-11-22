@@ -1,0 +1,10 @@
+{
+  "name": "Last Mile (Prototype)",
+  "short_name": "Last Mile",
+  "start_url": "/citizen",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b6b3a",
+  "icons": [{ "src": "/static/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

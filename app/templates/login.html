@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Log in</h1>
+  <form id="f" class="login" autocomplete="on">
+    <label for="email">Email</label>
+    <input id="email" type="email" required autofocus autocomplete="username">
+    <label for="pw">Password</label>
+    <input id="pw" type="password" required autocomplete="current-password">
+    <button class="btn primary" type="submit">Log in</button>
+    <p id="err" class="err" role="alert" hidden></p>
+  </form>
+  <section class="demo">
+    <h2>Demo accounts <span class="muted">(password <code>demo1234</code>)</span></h2>
+    <p class="muted">Each role sees a different page. Tap one to fill the form.</p>
+    <div class="demo-list">
+      <button type="button" class="chip" data-e="rukhsana@demo.pk">Citizen: Rukhsana (clean claim)</button>
+      <button type="button" class="chip" data-e="saima@demo.pk">Citizen: Saima (asked for proof)</button>
+      <button type="button" class="chip" data-e="zubaida@demo.pk">Citizen: Zubaida (no death record)</button>
+      <button type="button" class="chip" data-e="kulsoom@demo.pk">Citizen: Kulsoom (2nd claim, same death)</button>
+      <button type="button" class="chip" data-e="helper@demo.pk">Helper</button>
+      <button type="button" class="chip" data-e="officer@demo.pk">Officer</button>
+      <button type="button" class="chip" data-e="admin@demo.pk">Admin</button>
+      <button type="button" class="chip" data-e="auditor@demo.pk">Auditor</button>
+    </div>
+  </section>
+{% endblock %}
+{% block scripts %}
+  <script src="/static/api.js"></script>
+  <script src="/static/login.js"></script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+  <header class="o-top">
+    <h1>Admin</h1>
+    <span class="o-user"><span id="who"></span> <button id="out" type="button" class="link">Log out</button></span>
+  </header>
+  <nav class="tabs" role="tablist">
+    <button type="button" class="chip on" data-tab="rules">Decision rules</button>
+    <button type="button" class="chip" data-tab="keys">API keys</button>
+    <button type="button" class="chip" data-tab="users">Users</button>
+  </nav>
+  <section id="rules" class="tab">
+    <p class="muted">Changing a rule saves a <b>new version</b>; the very next decision uses it and records the version
+      number. Old versions are never edited.</p>
+    <form id="rule-form" class="rules"></form>
+    <h2>History</h2>
+    <div id="history"></div>
+  </section>
+  <section id="keys" class="tab" hidden>
+    <p class="muted">Keys for the public API (<code>/api/v1</code>, see <a href="/docs">/docs</a>). A key is shown once.</p>
+    <form id="key-form" class="inline"><input id="key-name" placeholder="Partner name" required minlength="3">
+      <button class="btn primary">Create key</button></form>
+    <p id="new-key" class="flash" hidden></p>
+    <div id="key-list"></div>
+  </section>
+  <section id="users" class="tab" hidden><div id="user-list"></div></section>
+  <div id="toast" role="status" hidden></div>
+{% endblock %}
+{% block scripts %}
+  <script src="/static/api.js"></script>
+  <script src="/static/admin.js"></script>
+{% endblock %}

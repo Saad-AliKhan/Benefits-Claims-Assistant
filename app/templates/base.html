@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b6b3a">
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="icon" href="/static/icon.svg">
+  <title>{{ title }} - Last Mile</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="{{ body_class | default('') }}">
+  <div class="banner">{{ label }}</div>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

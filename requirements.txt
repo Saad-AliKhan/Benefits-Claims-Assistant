@@ -1,0 +1,32 @@
+# One environment for the whole app, Python 3.12 (3.11 also works; the OCR engine has no 3.13 build yet)
+# web app
+fastapi==0.165.0
+uvicorn==0.54.0
+python-multipart==0.0.34
+SQLAlchemy==2.1.9
+alembic==1.20.1
+pydantic==2.14.4
+pydantic-settings==2.16.3
+python-dotenv==1.2.4
+Jinja2==3.1.6
+httpx==0.28.1
+PyJWT==2.10.1
+bcrypt==4.3.0
+# AI: decisions, name match, scam classifier (the saved model needs this exact scikit-learn)
+scikit-learn==1.9.1
+joblib==1.6.0
+RapidFuzz==3.14.6
+# AI: documents (OCR engine + this app's photo checks; Tesseract is only the fallback reader)
+rapidocr_onnxruntime==1.4.4
+onnxruntime==1.32.0
+opencv-python==5.1.0.95
+numpy==2.4.6
+pillow==13.0.0
+pytesseract==0.3.13
+qrcode==8.2
+# AI: voice (Urdu speech in: Whisper on this machine; speech out: gTTS, needs internet)
+faster-whisper==1.2.1
+av==18.1.0
+gTTS==2.5.4
+# tests
+pytest==9.2.0

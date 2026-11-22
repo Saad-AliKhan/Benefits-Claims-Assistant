@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <header class="cz-top">
+    <span id="who"></span>
+    <span class="cz-tools">
+      <button id="sms-btn" type="button" class="link" aria-label="SMS messages" title="SMS">📩</button>
+      <a id="claim-btn" class="link" href="/citizen" aria-label="My claim (buttons)" title="My claim">📋</a>
+      <button id="new-btn" type="button" class="link" aria-label="Start again" title="Start again">🔄</button>
+      <button id="out-btn" type="button" class="link" aria-label="Log out" title="Log out">🚪</button>
+    </span>
+  </header>
+  <p id="weak" class="weak" role="status" hidden></p>
+  <div id="log" class="chat" aria-live="polite"></div>
+  <div id="act" class="act"></div>
+  <dialog id="sms" class="sms"><h2>📩 SMS</h2><div id="sms-list"></div>
+    <form method="dialog"><button class="btn">✓ OK</button></form></dialog>
+  <noscript><p>Please turn on JavaScript. / براہ کرم جاوا اسکرپٹ آن کریں۔</p></noscript>
+{% endblock %}
+{% block scripts %}
+  <script src="/static/api.js"></script>
+  <script src="/static/offline.js"></script>
+  <script src="/static/voice.js"></script>
+  <script src="/static/assistant.js"></script>
+{% endblock %}

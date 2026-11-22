@@ -1,0 +1,272 @@
+{
+ "0300-1234567": {
+  "cnic": "35202-1234567-1",
+  "name": "Muhammad Aslam",
+  "operator": "Jazz (mock)"
+ },
+ "0300-7654321": {
+  "cnic": "35202-7654321-2",
+  "name": "Rukhsana Bibi",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000002": {
+  "cnic": "36102-4000002-1",
+  "name": "Tariq Mahmood",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000002": {
+  "cnic": "36102-3000002-2",
+  "name": "Nasreen Akhtar",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000003": {
+  "cnic": "36103-4000003-1",
+  "name": "Imran Ali",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000003": {
+  "cnic": "36103-3000003-2",
+  "name": "Shazia Parveen",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000004": {
+  "cnic": "36104-4000004-1",
+  "name": "Khalid Iqbal",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000004": {
+  "cnic": "36104-3000004-2",
+  "name": "Bushra Iqbal",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000005": {
+  "cnic": "36105-4000005-1",
+  "name": "Zahid Hussain",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000005": {
+  "cnic": "36105-3000005-2",
+  "name": "Sadia Hussain",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000060": {
+  "cnic": "35201-4000060-3",
+  "name": "Mohammad Yousaf",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000060": {
+  "cnic": "35201-3000060-4",
+  "name": "Fatimah Bibi",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000070": {
+  "cnic": "37405-4000070-5",
+  "name": "Asif Khan",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000070": {
+  "cnic": "37405-3000070-6",
+  "name": "Ayesha Khan",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000071": {
+  "cnic": "37405-3000071-8",
+  "name": "Ayesha Khan",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000080": {
+  "cnic": "35202-3000080-2",
+  "name": "Kausar Begum",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000080": {
+  "cnic": "35202-4000080-1",
+  "name": "Sajjad Hussain",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000090": {
+  "cnic": "34101-4000090-7",
+  "name": "Rashid Mehmood",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000090": {
+  "cnic": "34101-3000090-8",
+  "name": "Saima Rashid",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000100": {
+  "cnic": "33100-4000100-9",
+  "name": "Abdul Ghafoor",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000100": {
+  "cnic": "33100-3000100-0",
+  "name": "Zubaida Ghafoor",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000110": {
+  "cnic": "38403-4000110-3",
+  "name": "Ghulam Abbas",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000110": {
+  "cnic": "38403-3000110-4",
+  "name": "Naseem Abbas",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000120": {
+  "cnic": "35404-4000120-5",
+  "name": "Arshad Mahmood",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000120": {
+  "cnic": "35404-3000120-6",
+  "name": "Rubina Arshad",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000130": {
+  "cnic": "35102-4000130-7",
+  "name": "Naveed Akram",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000130": {
+  "cnic": "35102-3000130-8",
+  "name": "Samina Naveed",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000140": {
+  "cnic": "35202-4000140-9",
+  "name": "Amjad Farooq",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000140": {
+  "cnic": "35202-3000140-0",
+  "name": "Shabana Amjad",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000150": {
+  "cnic": "36302-4000150-1",
+  "name": "Javed Iqbal",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000150": {
+  "cnic": "36302-3000150-2",
+  "name": "Kausar Perveen",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000160": {
+  "cnic": "35301-4000160-3",
+  "name": "Mushtaq Ahmed",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000160": {
+  "cnic": "35301-3000160-4",
+  "name": "Parveen Akhtar",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000161": {
+  "cnic": "35301-4000161-5",
+  "name": "Bilal Mushtaq",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000162": {
+  "cnic": "35301-3000162-6",
+  "name": "Nargis Bibi",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000170": {
+  "cnic": "35202-4000170-7",
+  "name": "Waseem Akram",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000170": {
+  "cnic": "35202-3000170-8",
+  "name": "Tahira Waseem",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000180": {
+  "cnic": "34603-4000180-9",
+  "name": "Liaquat Ali",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000180": {
+  "cnic": "34603-3000180-0",
+  "name": "Razia Liaquat",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000190": {
+  "cnic": "35202-4000190-1",
+  "name": "Faisal Qureshi",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000190": {
+  "cnic": "35202-3000190-2",
+  "name": "Mehwish Faisal",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000200": {
+  "cnic": "35202-4000200-3",
+  "name": "Sarfraz Khan",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000200": {
+  "cnic": "35202-3000200-4",
+  "name": "Gulshan Sarfraz",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000210": {
+  "cnic": "35102-4000210-5",
+  "name": "Tanveer Ahmed",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000211": {
+  "cnic": "35102-4000211-7",
+  "name": "Nadeem Ahmed",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000220": {
+  "cnic": "35202-4000220-1",
+  "name": "Kamran Malik",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000230": {
+  "cnic": "35202-3000230-6",
+  "name": "Kulsoom Aslam",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000240": {
+  "cnic": "35202-4000240-5",
+  "name": "Riaz Ahmed",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000240": {
+  "cnic": "35202-3000240-6",
+  "name": "Nusrat Parveen",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000061": {
+  "cnic": "35201-4000061-5",
+  "name": "Muhammad Yousuf",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000031": {
+  "cnic": "36103-3000031-4",
+  "name": "Shazia Perveen",
+  "operator": "Jazz (mock)"
+ },
+ "0300-3000011": {
+  "cnic": "35202-3000011-0",
+  "name": "Rukhsana Bibi",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000012": {
+  "cnic": "35202-4000012-1",
+  "name": "Mohammad Aslam",
+  "operator": "Jazz (mock)"
+ },
+ "0300-4000072": {
+  "cnic": "37405-4000072-9",
+  "name": "Muhammed Asif Khan",
+  "operator": "Jazz (mock)"
+ }
+}
