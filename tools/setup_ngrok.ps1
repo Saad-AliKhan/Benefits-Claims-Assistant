@@ -22,7 +22,7 @@ Write-Host "2. Copy your authtoken from https://dashboard.ngrok.com/get-started/
 $token = Read-Host "Paste the authtoken here"
 & $exe config add-authtoken $token.Trim()
 Write-Host ""
-Write-Host "3. Open https://dashboard.ngrok.com/domains : your free domain looks like  something.ngrok-free.app"
+Write-Host "3. Open https://dashboard.ngrok.com/domains : your free domain looks like  something.ngrok-free.app (or .ngrok-free.dev)"
 $domain = (Read-Host "Type that domain (without https://)").Trim() -replace '^https?://', '' -replace '/.*$', ''
 $envFile = ".env"
 $lines = @()

@@ -31,7 +31,7 @@ first real start also downloads the Whisper speech model (~500 MB, once). Then o
 `start.bat mock` starts with instant fake OCR and voice answers (no models), for building screens. `start.bat fresh` wipes the demo data first (do this before presenting). `start.bat phone` also opens `phone.bat`. Options combine: **`start.bat fresh phone`** is the demo start.
 
 **A fixed phone link (free, one time):** `powershell -ExecutionPolicy Bypass -File tools\setup_ngrok.ps1` (free ngrok
-account: paste its authtoken and your free `….ngrok-free.app` domain). From then on `phone.bat` / `demo.bat` always use
+account: paste its authtoken and your free `….ngrok-free.app` / `.ngrok-free.dev` domain). From then on `phone.bat` / `demo.bat` always use
 that same https address, so the phone and the Android app keep working without a new link. ngrok's free plan: 1 GB
 and 20,000 requests a month; browsers see a one-time warning page (the app skips it). Without it, `phone.bat` falls
 back to a Cloudflare link that changes each time.
