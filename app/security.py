@@ -25,9 +25,10 @@ def verify_password(password: str, password_hash: str) -> bool:
         return False
 
 
-def create_access_token(user_id: int, role: str) -> str:
+def create_access_token(user_id: int, role: str, version: int = 0) -> str:
+    """version: the user's token_version; changing a password raises it, so older tokens stop working."""
     expires = datetime.now(timezone.utc) + timedelta(minutes=settings.access_token_minutes)
-    payload = {"sub": str(user_id), "role": role, "exp": expires}
+    payload = {"sub": str(user_id), "role": role, "ver": version, "exp": expires}
     return jwt.encode(payload, settings.secret_key, algorithm=ALGORITHM)
 
 

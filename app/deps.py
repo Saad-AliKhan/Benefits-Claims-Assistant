@@ -23,7 +23,7 @@ def get_optional_user(token: str | None = Depends(oauth2), db: Session = Depends
     if payload is None:
         return None
     user = db.get(User, int(payload.get("sub", 0)))
-    if user is None or not user.is_active:
+    if user is None or not user.is_active or int(payload.get("ver", 0)) != (user.token_version or 0):
         return None
     return user
 

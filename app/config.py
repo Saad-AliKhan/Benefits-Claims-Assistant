@@ -11,9 +11,16 @@ class Settings(BaseSettings):
     prototype_label: str = "PROTOTYPE - all people, documents and payments are fake"
     database_url: str = "sqlite:///./lastmile.db"
 
+    # --- live or demo
+    demo_mode: bool = True          # true: one-tap demo accounts on the login page and fake claims; false: live
+    sms_mode: str = "screen"        # screen: one-time codes are shown on screen (no SMS gateway yet) | gateway
+
     # --- login (JWT)
     secret_key: str = "change-me-before-deploying"
     access_token_minutes: int = 8 * 60
+    max_failed_logins: int = 5      # then the account is locked for lockout_minutes
+    lockout_minutes: int = 15
+    code_minutes: int = 10          # a one-time SMS code is valid this long
 
     # --- AI engines (run inside this app; see app/ai_engines.py)
     ocr_mock: bool = False          # true: instant fake OCR answers from data/ocr_fixtures (for building screens)

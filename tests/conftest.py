@@ -40,7 +40,7 @@ def env(monkeypatch, tmp_path):
     e = Env()
     e.db, e.c = db, client
     e.user = lambda email, role="citizen", name=None, cnic=None: claim_runner.ensure_user(db, email, name or email, role, cnic)
-    e.H = lambda u, acting=None: {"Authorization": "Bearer " + create_access_token(u.id, u.role),
+    e.H = lambda u, acting=None: {"Authorization": "Bearer " + create_access_token(u.id, u.role, u.token_version or 0),
                                   **({"X-Acting-For": str(acting)} if acting else {})}
     e.scenario = lambda sid: next(s for s in claim_runner.scenarios() if s["id"] == sid)
     e.officer = e.user("officer@demo.pk", "officer")

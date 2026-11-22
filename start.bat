@@ -37,6 +37,10 @@ if not exist .venv\Scripts\python.exe (
   .venv\Scripts\python.exe -m pip install -r requirements.txt || goto :fail
 )
 set "P=.venv\Scripts\python.exe"
+if /i "%DEMO_MODE%"=="false" if defined FRESH (
+  echo LIVE mode: "fresh" is ignored, real data is never wiped.
+  set "FRESH="
+)
 if defined FRESH (
   echo Wiping the demo database and uploaded photos...
   del /q lastmile.db lastmile.db-wal lastmile.db-shm 2>nul
@@ -45,7 +49,12 @@ if defined FRESH (
 %P% -m alembic upgrade head || goto :fail
 if not exist data\scenarios.json %P% -m scripts.make_fake_people || goto :fail
 if not exist data\specimens\S01_cnic.jpg %P% -m tools.specimen_documents
-%P% -m scripts.seed --demo-claims || goto :fail
+if /i "%DEMO_MODE%"=="false" (
+  rem LIVE: no fake people or claims; the first start asks for the first admin account
+  %P% -m scripts.create_admin --if-none || goto :fail
+) else (
+  %P% -m scripts.seed --demo-claims || goto :fail
+)
 
 echo.
 echo  App:       http://127.0.0.1:8080          (demo accounts on the login page, password demo1234)

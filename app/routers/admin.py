@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app import rules
+from app import accounts, rules
 from app.apikeys import create_key, revoke_key
 from app.db import get_db
 from app.deps import require_role
@@ -110,7 +110,58 @@ def revoke(key_id: int, admin: User = Depends(ADMIN), db: Session = Depends(get_
     return record
 
 
+def _user(u: User) -> dict:
+    return {"id": u.id, "name": u.full_name, "email": u.email, "phone": u.phone, "role": u.role, "active": u.is_active,
+            "must_change_password": bool(u.must_change_password), "last_login_at": u.last_login_at,
+            "created_at": u.created_at, "locked": bool(u.locked_until and accounts._aware(u.locked_until) > accounts.now())}
+
+
 @router.get("/users")
-def users(admin: User = Depends(require_role("admin", "auditor")), db: Session = Depends(get_db)):
-    return [{"id": u.id, "name": u.full_name, "email": u.email, "role": u.role, "active": u.is_active}
-            for u in db.scalars(select(User).order_by(User.role, User.id))]
+def users(role: str | None = None, q: str | None = None, admin: User = Depends(require_role("admin", "auditor")),
+          db: Session = Depends(get_db)):
+    """Accounts, staff first. Filter by role or by name / email / mobile."""
+    stmt = select(User).order_by((User.role == "citizen"), User.role, User.full_name)
+    if role:
+        stmt = stmt.where(User.role == role)
+    if q:
+        like = f"%{q.strip().lower()}%"
+        stmt = stmt.where((User.full_name.ilike(like)) | (User.email.ilike(like)) | (User.phone.ilike(like)))
+    return [_user(u) for u in db.scalars(stmt.limit(500))]
+
+
+class StaffIn(BaseModel):
+    full_name: str = Field(min_length=3, max_length=200)
+    email: str = Field(min_length=5, max_length=255)
+    role: str
+    phone: str | None = None
+
+
+@router.post("/users", status_code=201)
+def create_user(body: StaffIn, admin: User = Depends(ADMIN), db: Session = Depends(get_db)):
+    """A staff account with a temporary password (shown once; they must change it at the first login)."""
+    user, temp = accounts.create_staff(db, admin, body.full_name, body.email, body.role, body.phone)
+    return {**_user(user), "temporary_password": temp}
+
+
+def _target(db: Session, user_id: int) -> User:
+    u = db.get(User, user_id)
+    if u is None:
+        raise HTTPException(404, "No such account")
+    return u
+
+
+@router.post("/users/{user_id}/reset-password")
+def reset_password(user_id: int, admin: User = Depends(ADMIN), db: Session = Depends(get_db)):
+    temp = accounts.reset_staff_password(db, admin, _target(db, user_id))
+    return {"temporary_password": temp}
+
+
+class ActiveIn(BaseModel):
+    active: bool
+
+
+@router.post("/users/{user_id}/active")
+def set_active(user_id: int, body: ActiveIn, admin: User = Depends(ADMIN), db: Session = Depends(get_db)):
+    u = _target(db, user_id)
+    accounts.set_active(db, admin, u, body.active)
+    return _user(u)

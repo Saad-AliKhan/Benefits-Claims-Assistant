@@ -26,13 +26,34 @@ class User(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str] = mapped_column(String(255), unique=True, index=True)
+    email: Mapped[str | None] = mapped_column(String(255), unique=True, index=True)  # staff; citizens use phone
     full_name: Mapped[str] = mapped_column(String(200))
     cnic: Mapped[str | None] = mapped_column(String(15), index=True)  # fake numbers only
-    phone: Mapped[str | None] = mapped_column(String(20))  # where SMS updates go (mock)
+    phone: Mapped[str | None] = mapped_column(String(20), index=True)  # login (citizens) + SMS updates
     role: Mapped[str] = mapped_column(String(20), ForeignKey("roles.name"))
     password_hash: Mapped[str] = mapped_column(String(255))
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    # --- live accounts
+    must_change_password: Mapped[bool] = mapped_column(Boolean, default=False)  # staff: temporary password
+    failed_logins: Mapped[int] = mapped_column(Integer, default=0)
+    locked_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    token_version: Mapped[int] = mapped_column(Integer, default=0)  # +1 = every earlier login token stops working
+
+
+class OneTimeCode(Base):
+    """A code sent by SMS to prove someone holds a phone: signing up, or resetting a forgotten PIN."""
+    __tablename__ = "one_time_codes"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    phone: Mapped[str] = mapped_column(String(20), index=True)
+    purpose: Mapped[str] = mapped_column(String(20))            # signup | pin_reset
+    code_hash: Mapped[str] = mapped_column(String(255))
+    payload: Mapped[dict] = mapped_column(JSON, default=dict)   # signup: name + CNIC
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    used: Mapped[bool] = mapped_column(Boolean, default=False)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
