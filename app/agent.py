@@ -137,27 +137,78 @@ NO = {"نہیں", "نا", "نہ", "جی نہیں", "نہیں جی", "غلط", "n
 LANGS = {"ur": ("اردو", "urdu", "urdoo", "ordu"), "en": ("انگریزی", "انگلش", "english", "angrezi", "inglish")}
 OTHER_LANGS = ("سندھی", "پنجابی", "پشتو", "سرائیکی", "بلوچی", "sindhi", "punjabi", "pashto", "saraiki", "balochi")
 # English mode: the intent engine is trained on Urdu and Roman Urdu, so English gets a small keyword list.
-EN_KEYWORDS = [
-    ("urgent_help", ("urgent", "emergency", "danger", "no food", "hospital")),
-    ("report_fraud", ("fraud", "scam", "bribe", "asked me for money", "agent")),
-    ("talk_to_officer", ("officer", "person", "human", "call me")),
-    ("payment_not_received", ("not received", "didn't get", "did not get", "not arrived")),
-    ("payment_amount", ("how much", "amount")),
+EN_KEYWORDS = [   # checked in this order: specific phrases first
+    ("urgent_help", ("urgent", "emergency", "danger", "threat", "no food", "hospital")),
+    ("report_fraud", ("fraud", "scam", "bribe", "otp", "pin", "asked me for money", "agent")),
+    ("payment_not_received", ("not received", "not receive", "didn't receive", "did not get", "didn't get",
+                              "not arrived", "not reached", "no money came", "account is empty")),
+    ("no_death_certificate", ("death certificate", "death was never", "not registered")),
+    ("cnic_problem", ("id card", "identity card", "cnic", "card is lost", "card expired", "lost my card")),
+    ("wrong_details", ("wrong", "mistake", "spelled", "spelling")),
+    ("update_details", ("number changed", "new number", "phone number", "new account", "change my bank", "moved")),
+    ("consent_privacy", ("my data", "information", "privacy", "permission", "my details")),
+    ("withdraw_claim", ("withdraw", "cancel", "close my case")),
+    ("appeal", ("appeal", "review", "not agree", "disagree")),
+    ("complaint", ("complain", "rude", "not happy")),
+    ("speak_slowly", ("slow", "too fast")),
+    ("repeat", ("again", "repeat", "didn't hear", "did not hear", "what did you say")),
+    ("send_document", ("photo", "picture", "upload")),
+    ("household_change", ("married", "baby", "born", "started working")),
+    ("other_programmes", ("other program", "other help", "scheme", "bisp", "ration")),
+    ("helper_visit", ("visit", "come home", "my house", "my home", "cannot read", "can't read")),
+    ("talk_to_officer", ("officer", "real person", "human", "call me", "talk to someone")),   # before office_info: 'officer' contains 'office'
+    ("office_info", ("office", "timings", "address")),
+    ("how_to_collect", ("collect", "cash", "atm", "take out")),
+    ("payment_amount", ("how much", "amount", "how many rupees")),
+    ("how_long", ("how long", "how many days", "wait")),
     ("payment_status", ("money", "payment", "paid")),
     ("why_decision", ("why",)),
-    ("what_is_missing", ("missing", "what else")),
-    ("how_long", ("how long", "when")),
+    ("what_is_missing", ("missing", "what else", "what should i do")),
     ("required_documents", ("document", "papers")),
-    ("withdraw_claim", ("withdraw", "cancel")),
-    ("appeal", ("appeal", "review")),
-    ("complaint", ("complain",)),
-    ("helper_visit", ("visit", "helper", "come home")),
-    ("application_status", ("status", "my claim", "my application")),
-    ("eligibility", ("eligible", "can i get")),
-    ("how_to_apply", ("apply", "died", "passed away", "widow", "death", "help")),
-    ("thanks_goodbye", ("thank", "bye")),
-    ("repeat", ("again", "repeat")),
+    ("eligibility", ("eligible", "qualify", "can i get")),
+    ("application_status", ("status", "my claim", "my application", "approved")),
+    ("how_to_apply", ("apply", "died", "passed away", "widow", "register", "help")),
+    ("thanks_goodbye", ("thank", "bye", "allah hafiz")),
+    ("greeting", ("hello", "assalam", "salam", "good morning")),
 ]
+
+def english_intent(text: str) -> dict:
+    r = _english_intent(text)
+    if r["intent"] != "unclear":
+        from urdu_intent import intents
+        spec = intents()[r["intent"]]
+        r.update(action=spec["action"], label_ur=spec["label_ur"], label_en=spec["label_en"],
+                 needs_backend=spec["needs_backend"], confidence=0.8)
+    else:
+        r.setdefault("confidence", 0.0)
+    return {"text_corrected": text, "corrections": [], "numbers": [], "matched_keywords": [], **r}
+
+
+def _english_intent(text: str) -> dict:
+    """English mode. The meaning model understands English directly (it is multilingual; intents.json has
+    English example questions); English keywords back it up. When the two disagree clearly: "unclear"."""
+    from urdu_intent import meaning
+    t = _norm(text)
+    kw = next((i for i, words in EN_KEYWORDS if any(w in t for w in words)), None)
+    sims = meaning.scores(text)
+    unclear = {"intent": "unclear", "action": None, "alternatives": []}
+    if not sims:                                   # no meaning model: keywords only
+        return {"intent": kw, "action": None, "alternatives": []} if kw else unclear
+    ranked = sorted(sims.items(), key=lambda kv: -kv[1])
+    (top, top_s), (_, second_s) = ranked[0], ranked[1]
+    alts = [{"intent": n, "score": round(v, 3)} for n, v in ranked[:2]]
+    if kw and kw != top:
+        if sims.get(kw, 0.0) >= top_s - EN_AGREE:  # close enough: the specific English word wins
+            return {"intent": kw, "action": None, "alternatives": alts, "method": "keywords"}
+        return {**unclear, "alternatives": alts}
+    if top_s >= EN_MIN and top_s - second_s >= EN_MARGIN:
+        return {"intent": top, "action": None, "alternatives": alts, "method": "meaning"}
+    if kw == top and top_s >= EN_MIN_AGREEING:
+        return {"intent": top, "action": None, "alternatives": alts, "method": "both"}
+    return {**unclear, "alternatives": alts}
+
+
+EN_MIN, EN_MARGIN, EN_MIN_AGREEING, EN_AGREE = 0.60, 0.06, 0.45, 0.15
 
 HANDOFF_INTENTS = {"talk_to_officer": "handoff", "complaint": "complaint", "appeal": "appeal",
                    "payment_not_received": "payment_problem", "wrong_details": "correction",
@@ -316,13 +367,9 @@ class Agent:
             spec = intents().get(choice)
             return {"intent": choice, "action": spec["action"] if spec else None, "alternatives": []}
         from urdu_intent import detect_intent
-        r = detect_intent(text or "")
-        if r["intent"] == "unclear" and self.s.lang == "en" and text and re.search(r"[a-zA-Z]", text):
-            t = _norm(text)
-            for intent, words in EN_KEYWORDS:
-                if any(w in t for w in words):
-                    return {"intent": intent, "action": None, "alternatives": []}
-        return r
+        if self.s.lang == "en" and text and re.search(r"[a-zA-Z]", text):
+            return english_intent(text)
+        return detect_intent(text or "")
 
     # ---- states
     def on_lang(self, text=None, choice=None, photo=None):
@@ -795,7 +842,10 @@ def reply(db: Session, user: User, citizen: User, text: str | None = None, choic
         return t
     voice = None
     if audio:
-        call = ai_engines.understand_audio(audio, audio_name or "q.webm", None, mock_transcript=mock_transcript)
+        # Whisper listens in the language she chose (Urdu until she has chosen: 'English' is heard fine in Urdu mode)
+        lang = s.lang if s.state != "lang" and s.lang in ("ur", "en") else "ur"
+        call = ai_engines.understand_audio(audio, audio_name or "q.webm", None, mock_transcript=mock_transcript,
+                                           language=lang)
         if call["status"] == ai_engines.RECORD_AGAIN:
             voice = {"audio_quality": "silent", "transcript": ""}
         elif call["status"] != ai_engines.OK:

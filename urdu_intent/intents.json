@@ -1,5 +1,5 @@
 {
-  "_about": "Intents the voice assistant recognises. 'examples' are typical ways people ask; 'keywords' are words or phrases that point strongly to the intent (weight 1 = hint, 3 = decisive). 'action' tells the main application what to do; the voice component never answers claim-specific questions itself. Add examples and keywords freely; run evaluate_intents.py after every change. Roman Urdu examples and keywords are matched by urdu_intent.normalize.roman_key.",
+  "_about": "Intents the voice assistant recognises. 'examples' are typical ways people ask; 'keywords' are words or phrases that point strongly to the intent (weight 1 = hint, 3 = decisive). 'action' tells the main application what to do; the voice component never answers claim-specific questions itself. Add examples and keywords freely; run evaluate_intents.py after every change. Roman Urdu examples and keywords are matched by urdu_intent.normalize.roman_key. 'examples_en' are English ways of asking, used only by the meaning model (English mode).",
   "intents": {
     "application_status": {
       "label_en": "Status of my application",
@@ -62,7 +62,12 @@
         "pass": 1.5,
         "approve": 1.5,
         "file ka kya": 2.5
-      }
+      },
+      "examples_en": [
+        "Has my application been approved yet?",
+        "What happened to my claim?",
+        "Where is my case now?"
+      ]
     },
     "required_documents": {
       "label_en": "Which documents are required",
@@ -118,7 +123,12 @@
         "ثبوت": 2,
         "لگانا": 1,
         "saath lana": 1.5
-      }
+      },
+      "examples_en": [
+        "What papers should I bring?",
+        "Tell me the list of documents",
+        "What do I have to submit with the form?"
+      ]
     },
     "eligibility": {
       "label_en": "Am I eligible",
@@ -177,7 +187,12 @@
         "کو بھی ملتا": 2.5,
         "طلاق": 2,
         "مطلقہ": 2
-      }
+      },
+      "examples_en": [
+        "Can I get this support?",
+        "Who can receive this money?",
+        "Do I qualify for the widow payment?"
+      ]
     },
     "talk_to_officer": {
       "label_en": "Talk to an officer",
@@ -237,7 +252,12 @@
         "insaan": 2.5,
         "baat karwa": 2.5,
         "call kar": 2
-      }
+      },
+      "examples_en": [
+        "Let me speak to a real person",
+        "Please connect me to someone from the office",
+        "Can an officer call me?"
+      ]
     },
     "payment_status": {
       "label_en": "When / how much will I be paid",
@@ -287,7 +307,12 @@
         "رقم آ گئی": 3,
         "paise aa gaye": 3,
         "امدادی رقم": 2
-      }
+      },
+      "examples_en": [
+        "Has the money been sent?",
+        "When is the payment coming?",
+        "Is my payment released?"
+      ]
     },
     "how_to_apply": {
       "label_en": "How do I apply",
@@ -345,7 +370,12 @@
         "form": 1.5,
         "registration": 2.5,
         "inteqal": 2
-      }
+      },
+      "examples_en": [
+        "I want to apply for help",
+        "How do I register for this programme?",
+        "My husband died, what should I do?"
+      ]
     },
     "consent_privacy": {
       "label_en": "My consent / my data",
@@ -385,7 +415,12 @@
         "data": 2.5,
         "محفوظ": 2,
         "maloomat": 2
-      }
+      },
+      "examples_en": [
+        "Is my data safe?",
+        "Who can look at my details?",
+        "I want to take back my permission"
+      ]
     },
     "report_fraud": {
       "label_en": "Report a scam / suspicious call",
@@ -454,7 +489,12 @@
         "او ٹی پی": 3,
         "نام ڈلوا": 2.5,
         "ڈلوا دوں": 2.5
-      }
+      },
+      "examples_en": [
+        "A man wants money to get my claim approved",
+        "Someone called and asked for my OTP",
+        "Is this message a scam?"
+      ]
     },
     "complaint": {
       "label_en": "Make a complaint",
@@ -491,7 +531,12 @@
         "چکر": 1.5,
         "tameezi": 2.5,
         "complain": 3
-      }
+      },
+      "examples_en": [
+        "The staff were rude to me",
+        "Nobody is listening to me",
+        "I am not happy with the service"
+      ]
     },
     "update_details": {
       "label_en": "Change my phone number / bank account",
@@ -535,7 +580,12 @@
         "نیا اکاؤنٹ": 3,
         "naya account": 3,
         "khulwaya": 2
-      }
+      },
+      "examples_en": [
+        "I have a new mobile number",
+        "Please change my bank account",
+        "I moved to a new address"
+      ]
     },
     "greeting": {
       "label_en": "Greeting / thanks",
@@ -561,7 +611,12 @@
         "alaikum": 2,
         "aoa": 3,
         "آداب": 3
-      }
+      },
+      "examples_en": [
+        "Hello",
+        "Assalam o alaikum",
+        "Good morning"
+      ]
     },
     "repeat": {
       "label_en": "Please repeat",
@@ -597,7 +652,12 @@
         "کیا کہا": 2.5,
         "ایک دفعہ اور": 2.5,
         "kya kaha": 2.5
-      }
+      },
+      "examples_en": [
+        "I did not hear you",
+        "Can you repeat that?",
+        "What did you say?"
+      ]
     },
     "payment_amount": {
       "label_en": "How much will I get",
@@ -638,7 +698,12 @@
         "کتنا ملے": 3,
         "kitna milega": 3,
         "amount": 2.5
-      }
+      },
+      "examples_en": [
+        "What is the amount?",
+        "How many rupees will I get?",
+        "Is it twenty five thousand?"
+      ]
     },
     "payment_not_received": {
       "label_en": "Money not received",
@@ -680,7 +745,12 @@
         "کہیں اور": 2,
         "nahi pohanche": 3,
         "nahi mili": 2
-      }
+      },
+      "examples_en": [
+        "The money has not reached my account",
+        "I got the message but no money came",
+        "My account is still empty"
+      ]
     },
     "how_to_collect": {
       "label_en": "Where do I collect the money",
@@ -728,7 +798,12 @@
         "atm": 2.5,
         "nikalun": 3,
         "bank jana": 2.5
-      }
+      },
+      "examples_en": [
+        "How do I take out the money?",
+        "Do I have to go to the bank?",
+        "Can I get it from an ATM?"
+      ]
     },
     "why_decision": {
       "label_en": "Why this decision",
@@ -768,7 +843,12 @@
         "انکار": 2.5,
         "بنیاد": 2,
         "mana kiya": 2.5
-      }
+      },
+      "examples_en": [
+        "Why did you say no?",
+        "What is the reason for the decision?",
+        "Why was it sent to an officer?"
+      ]
     },
     "what_is_missing": {
       "label_en": "What else is needed",
@@ -807,7 +887,12 @@
         "reh gaya": 2.5,
         "ab kya": 2,
         "aage kya": 2.5
-      }
+      },
+      "examples_en": [
+        "Is anything still missing?",
+        "What should I do now?",
+        "Which paper is left?"
+      ]
     },
     "how_long": {
       "label_en": "How long will it take",
@@ -850,7 +935,12 @@
         "کب تک جواب": 2.5,
         "kitne din": 3,
         "time lagega": 3
-      }
+      },
+      "examples_en": [
+        "How many days does it take?",
+        "When will the decision come?",
+        "How much longer do I wait?"
+      ]
     },
     "appeal": {
       "label_en": "Disagree / ask for a review",
@@ -893,7 +983,12 @@
         "نظر ثانی": 3,
         "dobara dekhein": 2.5,
         "faisle ke khilaf": 3
-      }
+      },
+      "examples_en": [
+        "I do not agree with this decision",
+        "Please review my case again",
+        "The decision is wrong, check again"
+      ]
     },
     "withdraw_claim": {
       "label_en": "Withdraw my claim",
@@ -929,7 +1024,12 @@
         "ختم کروانا": 3,
         "wapas lena": 2.5,
         "wapas leni": 2.5
-      }
+      },
+      "examples_en": [
+        "Close my case please",
+        "I no longer want this application",
+        "Withdraw my claim"
+      ]
     },
     "send_document": {
       "label_en": "I want to send a document",
@@ -966,7 +1066,12 @@
         "فوٹو": 2.5,
         "اپلوڈ": 3,
         "upload": 3
-      }
+      },
+      "examples_en": [
+        "Can I upload my card?",
+        "I want to send a picture of the certificate",
+        "Let me send another photo"
+      ]
     },
     "cnic_problem": {
       "label_en": "ID card lost or expired",
@@ -1007,7 +1112,12 @@
         "نیا کارڈ": 3,
         "تاریخ ختم": 2.5,
         "card": 1.5
-      }
+      },
+      "examples_en": [
+        "My identity card expired",
+        "I lost my CNIC",
+        "My card is broken"
+      ]
     },
     "no_death_certificate": {
       "label_en": "No death certificate",
@@ -1047,7 +1157,12 @@
         "darj nahi": 3,
         "وفات نامہ": 3,
         "nahi bana": 2
-      }
+      },
+      "examples_en": [
+        "The death was never registered",
+        "Where do I get a death certificate?",
+        "The union council did not give the certificate"
+      ]
     },
     "wrong_details": {
       "label_en": "My details are written wrong",
@@ -1084,7 +1199,12 @@
         "ہجے": 2.5,
         "تاریخ پیدائش": 2,
         "ghalti": 2.5
-      }
+      },
+      "examples_en": [
+        "My date of birth is wrong",
+        "You wrote my husband's name wrong",
+        "There is a mistake in my details"
+      ]
     },
     "household_change": {
       "label_en": "My household changed",
@@ -1127,7 +1247,12 @@
         "shadi": 2.5,
         "paida": 2.5,
         "ghar badal": 3
-      }
+      },
+      "examples_en": [
+        "I had a baby",
+        "My son started working",
+        "We moved to another house"
+      ]
     },
     "other_programmes": {
       "label_en": "Other help I can get",
@@ -1178,7 +1303,12 @@
         "sehat card": 3,
         "kaunsi scheme": 2.5,
         "aur kaunsi": 2
-      }
+      },
+      "examples_en": [
+        "What other help can I get?",
+        "Is there a BISP or ration scheme?",
+        "Any other government support?"
+      ]
     },
     "helper_visit": {
       "label_en": "Someone to help me at home",
@@ -1217,7 +1347,12 @@
         "parhna nahi": 3,
         "گھر آ جائے": 3,
         "چل نہیں سکتی": 3
-      }
+      },
+      "examples_en": [
+        "I cannot come to the office",
+        "Send someone to my house",
+        "I cannot read, please help me at home"
+      ]
     },
     "office_info": {
       "label_en": "Office address and hours",
@@ -1256,7 +1391,12 @@
         "address": 2,
         "کھلا رہتا": 3,
         "کس وقت": 2
-      }
+      },
+      "examples_en": [
+        "What are the office timings?",
+        "Give me the office address",
+        "When does the office open?"
+      ]
     },
     "urgent_help": {
       "label_en": "Urgent help / danger",
@@ -1307,7 +1447,12 @@
         "zaroori madad": 3,
         "بہت ضروری": 2.5,
         "فوری مدد": 3
-      }
+      },
+      "examples_en": [
+        "This is an emergency",
+        "Someone is threatening me",
+        "We have no food at home"
+      ]
     },
     "thanks_goodbye": {
       "label_en": "Thanks / goodbye",
@@ -1342,7 +1487,12 @@
         "اللہ حافظ": 3,
         "allah hafiz": 3,
         "thank": 2.5
-      }
+      },
+      "examples_en": [
+        "Thanks a lot",
+        "That is all, bye",
+        "Allah hafiz"
+      ]
     },
     "speak_slowly": {
       "label_en": "Please speak slowly",
@@ -1376,7 +1526,12 @@
         "tez na": 3,
         "aaram se": 2.5,
         "ٹھہر ٹھہر": 3
-      }
+      },
+      "examples_en": [
+        "Talk slower please",
+        "You are speaking too fast",
+        "Say it slowly"
+      ]
     }
   }
 }

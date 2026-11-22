@@ -5,7 +5,7 @@ logged-in person's own data. Audio and transcripts are never stored or logged.""
 import hashlib
 from pathlib import Path
 
-from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
@@ -58,15 +58,18 @@ def _answer(db: Session, user: User, res: dict, source: str, mode: str, rid: str
 
 @router.post("/voice/understand")
 def voice_understand(audio: UploadFile = File(..., description="webm/opus, ogg, m4a, mp3 or wav, up to 30 s"),
-                     db: Session = Depends(get_db), user: User = Depends(CITIZEN)):
-    """Recorded Urdu question -> Whisper -> intent. 422 = record again; 503 = voice not ready: type instead."""
+                     lang: str = Form("ur", pattern="^(ur|en)$"), db: Session = Depends(get_db), user: User = Depends(CITIZEN)):
+    """Recorded question (Urdu, or English with lang=en) -> Whisper -> intent. 422 = record again; 503 = voice not ready: type instead."""
     data = audio.file.read(MAX_AUDIO_BYTES + 1)
     if len(data) > MAX_AUDIO_BYTES:
         raise HTTPException(413, "Recording is too large")
     if not data:
         raise HTTPException(422, {"code": "record_again", "reason": "empty", "message_en": "Nothing was recorded. Please try again.",
                                   "message_ur": "کچھ ریکارڈ نہیں ہوا۔ دوبارہ کوشش کریں۔"})
-    call = ai_engines.understand_audio(data, audio.filename or "question.webm", audio.content_type)
+    call = ai_engines.understand_audio(data, audio.filename or "question.webm", audio.content_type, language=lang)
+    if call["status"] == ai_engines.OK and lang == "en":
+        from app.agent import english_intent
+        call["result"].update(english_intent(call["result"].get("transcript") or ""))
     if call["status"] == ai_engines.RECORD_AGAIN:
         raise HTTPException(422, {"code": "record_again", **call["detail"]})
     if call["status"] != ai_engines.OK:

@@ -167,8 +167,8 @@ _AUDIO_MSGS = {"unreadable_audio": ("The recording could not be played. Please r
 
 
 def understand_audio(data: bytes, filename: str = "question.webm", content_type: str | None = None,
-                     request_id: str | None = None, mock_transcript: str | None = None) -> dict:
-    """Recorded Urdu question -> transcript + intent (+ audio_quality: ok | silent | noisy).
+                     request_id: str | None = None, mock_transcript: str | None = None, language: str = "ur") -> dict:
+    """Recorded question (language 'ur' or 'en') -> transcript + intent (+ audio_quality: ok | silent | noisy).
     Mock mode 'hears' mock_transcript (or a fixed sentence); '<noise>' / '<silence>' simulate bad audio."""
     rid = request_id or new_request_id("voice")
     from urdu_intent import detect_intent
@@ -189,7 +189,7 @@ def understand_audio(data: bytes, filename: str = "question.webm", content_type:
             return {"status": UNAVAILABLE, "error": "Whisper is still starting", "request_id": rid}
     import voice_core
     try:
-        result = voice_core.understand_bytes(data)
+        result = voice_core.understand_bytes(data, language=language if language in ("ur", "en") else "ur")
     except voice_core.BadAudio as e:
         en, ur = _AUDIO_MSGS.get(e.reason, _AUDIO_MSGS["unreadable_audio"])
         return {"status": RECORD_AGAIN, "request_id": rid,

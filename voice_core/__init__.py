@@ -73,7 +73,7 @@ def decode(data: bytes) -> np.ndarray:
     return audio
 
 
-def transcribe(audio: np.ndarray, model: str | None = None) -> dict:
+def transcribe(audio: np.ndarray, model: str | None = None, language: str = "ur") -> dict:
     """quality: ok | silent (nothing said) | noisy (sound, but no clear speech: ask for a quieter place)."""
     seconds = len(audio) / 16000
     peak = float(np.abs(audio).max()) if len(audio) else 0.0
@@ -86,7 +86,7 @@ def transcribe(audio: np.ndarray, model: str | None = None) -> dict:
         # No initial_prompt: with a short or unclear clip Whisper repeated the prompt's word list for over a
         # minute (seen on a 2 s clip). Spelling of claim words is fixed afterwards by urdu_intent's
         # sound-alike correction instead. Output length is capped by the clip length for the same reason.
-        segments, _ = load_model(model).transcribe(audio, language="ur", task="transcribe", beam_size=5,
+        segments, _ = load_model(model).transcribe(audio, language=language, task="transcribe", beam_size=5,
                                                    vad_filter=True, condition_on_previous_text=False,
                                                    without_timestamps=True,
                                                    max_new_tokens=int(20 + 10 * seconds))
@@ -98,8 +98,9 @@ def transcribe(audio: np.ndarray, model: str | None = None) -> dict:
             "quality": quality}
 
 
-def understand_bytes(data: bytes) -> dict:
-    stt = transcribe(decode(data))
+def understand_bytes(data: bytes, language: str = "ur") -> dict:
+    """language: 'ur' (Urdu, default) or 'en' (English mode: the caller works out the intent)."""
+    stt = transcribe(decode(data), language=language)
     return {"transcript": stt["text"], "model": MODEL_NAME, "seconds_audio": stt["seconds_audio"],
-            "seconds_taken": stt["seconds_taken"], "audio_quality": stt.get("quality", "ok"),
+            "seconds_taken": stt["seconds_taken"], "audio_quality": stt.get("quality", "ok"), "language": language,
             **detect_intent(stt["text"])}

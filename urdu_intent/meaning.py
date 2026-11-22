@@ -83,6 +83,9 @@ def _examples() -> tuple[list[str], np.ndarray]:
         for ex in spec["examples"]:
             names.append(name)
             texts.append(correct(ex).text)
+        for ex in spec.get("examples_en", []):   # English questions (English mode), as written
+            names.append(name)
+            texts.append(ex)
     return names, _encoder().encode(texts)
 
 

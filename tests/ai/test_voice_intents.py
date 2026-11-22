@@ -94,3 +94,19 @@ def test_noon_ghunna_dropped_or_written_as_noon_changes_nothing():
 def test_yes_no_with_and_without_noon_ghunna(said, want):
     from app.agent import yes_no
     assert yes_no(said) is want
+
+
+# ---- English mode (app.agent.english_intent: meaning model + English keywords) ----
+def test_english_questions():
+    from app.agent import english_intent
+    from urdu_intent import meaning
+    tests = json.loads((HERE / "test_english.json").read_text(encoding="utf-8"))["tests"]
+    got = [(english_intent(t["text"])["intent"], t["intent"]) for t in tests]
+    wrong = [(g, w) for g, w in got if g != w and g != "unclear"]
+    right = sum(g == w for g, w in got) / len(got)
+    if meaning.available():
+        # first run of this set: 23/33 right, 1 wrong ("What time is it?" -> how long it takes)
+        assert len(wrong) <= 1 and right >= 0.65, (wrong, right)
+    else:
+        assert len(wrong) <= 3   # English keywords only
+    assert english_intent("When will I get my money?")["action"] == "lookup_payment"

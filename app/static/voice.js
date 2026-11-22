@@ -63,6 +63,7 @@
     const ext = t.indexOf("ogg") >= 0 ? "ogg" : t.indexOf("mp4") >= 0 ? "m4a" : "webm";
     const fd = new FormData();
     fd.append("audio", blob, "question." + ext);
+    fd.append("lang", (LM.lang && LM.lang()) === "en" ? "en" : "ur");   // Whisper listens in the screen's language
     return LM.api("/voice/understand", { method: "POST", body: fd });
   };
 
