@@ -34,7 +34,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Last Mile (prototype): the widow-support assistant as an Android app.
@@ -55,6 +57,8 @@ public class MainActivity extends Activity {
     private static final int REQ_CAMERA_FOR_FILE = 11;
     private static final int REQ_FILE = 20;
     private static final String START_PATH = "/assistant";
+    /** The free ngrok link shows browsers a warning page first; the app skips it with this header. */
+    private static final Map<String, String> HEADERS = Collections.singletonMap("ngrok-skip-browser-warning", "1");
 
     private FrameLayout root;
     private WebView web;
@@ -184,7 +188,7 @@ public class MainActivity extends Activity {
         root.addView(web, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         if (state != null && web.restoreState(state) != null) return;
-        web.loadUrl(server() + START_PATH);
+        web.loadUrl(server() + START_PATH, HEADERS);
         askMediaPermissions();   // ask once at the start, in the app's own words, not in the middle of a question
     }
 
@@ -209,7 +213,10 @@ public class MainActivity extends Activity {
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             Uri u = request.getUrl();
             Uri home = Uri.parse(server());
-            if (home.getHost() != null && home.getHost().equals(u.getHost())) return false;  // our own pages
+            if (home.getHost() != null && home.getHost().equals(u.getHost())) {   // our own pages
+                view.loadUrl(u.toString(), HEADERS);
+                return true;
+            }
             try {   // anything else (e.g. a help link) opens in the phone's browser
                 startActivity(new Intent(Intent.ACTION_VIEW, u));
             } catch (ActivityNotFoundException ignored) { }

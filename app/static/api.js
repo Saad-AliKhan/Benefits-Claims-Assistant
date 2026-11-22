@@ -8,6 +8,7 @@
   LM.getUid = () => { try { return String(JSON.parse(localStorage.getItem("lm_me") || "{}").id || ""); } catch (e) { return ""; } };
   LM.authHeaders = () => {
     const h = LM.token() ? { Authorization: "Bearer " + LM.token() } : {};
+    h["ngrok-skip-browser-warning"] = "1";   // free ngrok link (phone.bat): no warning page for API calls
     const acting = localStorage.getItem("lm_acting");
     if (acting) h["X-Acting-For"] = acting; // helper: which family
     return h;
