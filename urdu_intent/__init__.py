@@ -26,7 +26,7 @@ from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 
-from .correct import correct
+from .correct import correct, lexicon
 from .normalize import edit_distance, normalize, sound_key
 
 HERE = Path(__file__).resolve().parent
@@ -51,6 +51,34 @@ VETO_SIMILARITY = 0.45
 @lru_cache(maxsize=1)
 def intents() -> dict:
     return json.loads((HERE / "intents.json").read_text(encoding="utf-8"))["intents"]
+
+
+@lru_cache(maxsize=1)
+def guards() -> dict:
+    g = json.loads((HERE / "intents.json").read_text(encoding="utf-8")).get("guards", {})
+    return {k: tuple(g.get(k, ())) for k in ("noise", "off_topic", "anchors", "exempt")}
+
+
+def off_topic_reason(text: str, intent: str | None = None) -> str | None:
+    """'noise': words Whisper invents from noise or silence ('subscribe', 'ناظرین'), whatever the intent.
+    'off_topic': an everyday subject that is not the claim (a doctor's fee, a bus fare) and no claim word at
+    all. None: fine. Safety and conversation intents (guards.exempt) are never blocked as off-topic."""
+    g = guards()
+    t = f" {normalize(text or '')} "
+
+    sounds = {sound_key(w) for w in t.split() if not w.isascii()}
+
+    def has(term: str) -> bool:
+        n = normalize(term)
+        return f" {n} " in t or (" " not in n and not n.isascii() and sound_key(n) in sounds)
+    if any(has(w) for w in g["noise"]):
+        return "noise"
+    if intent in g["exempt"] or not any(has(w) for w in g["off_topic"]):
+        return None
+    keys = {sound_key(w) for w in t.split()}
+    if any(has(a) or sound_key(a) in keys for a in g["anchors"]):
+        return None
+    return "off_topic"
 
 
 def _ngrams(key: str) -> Counter:
@@ -87,7 +115,7 @@ def _model() -> _Model:
     for name, spec in specs.items():
         kws = []
         for kw, weight in spec["keywords"].items():
-            parts = tuple(sound_key(w) for w in normalize(kw).split())
+            parts = tuple(sound_key(w) for w in normalize(correct(kw).text).split())
             kws.append((kw, parts, float(weight), 0))
         keywords[name] = kws
     return _Model(idf, examples, keywords)
@@ -130,8 +158,12 @@ def detect_intent(text: str) -> dict:
     words = [sound_key(w) for w in fixed.text.split()]
     spans = {"".join(words[i:j]) for i in range(len(words)) for j in range(i + 1, min(len(words), i + 4) + 1)}
 
+    everyday = lexicon().protected_sounds
+
     def close(a: str, b: str) -> bool:
-        allowed = 0 if len(b) < 5 else 1
+        if a != b and a in everyday:
+            return False
+        allowed = 0 if len(b) < (6 if b.isascii() else 5) else 1
         return a == b or (allowed > 0 and abs(len(a) - len(b)) <= allowed and edit_distance(a, b, allowed) <= allowed)
 
     def hit(parts: tuple, _unused: int) -> bool:
@@ -154,6 +186,10 @@ def detect_intent(text: str) -> dict:
     ranked = sorted(scores.items(), key=lambda kv: -kv[1])
     (best, top), (_, second) = ranked[0], ranked[1]
     alternatives = [{"intent": n, "score": round(s, 3)} for n, s in ranked[:3]]
+    blocked = off_topic_reason(fixed.text, best)
+    if blocked:
+        return {**base, "intent": "unclear", "reason": blocked, "confidence": round(top, 3),
+                "alternatives": alternatives, "matched_keywords": hits[best]}
     unsure = "no_good_match" if top < MIN_SCORE else "ambiguous" if top - second < MIN_MARGIN else None
     if unsure:
         rescued = _by_meaning(fixed.text, {ranked[0][0]})

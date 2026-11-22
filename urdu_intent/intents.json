@@ -35,7 +35,12 @@
         "darkhwast ka kuch pata chala",
         "file kahan tak gayi",
         "application ka status check karna hai",
-        "mera claim approve hua"
+        "mera claim approve hua",
+        "مجھے اپنی درخواست کی کوئی خبر نہیں ملی",
+        "darkhast ka kuch pata nahi chala",
+        "اس بی بی کی درخواست کہاں تک پہنچی",
+        "میری application کہاں تک پہنچی",
+        "meri arzi da ki hoya"
       ],
       "keywords": {
         "صورتحال": 2.5,
@@ -97,7 +102,11 @@
         "kaun se kaghaz chahiye",
         "documents kya kya lagenge",
         "kya kya saath lana hai",
-        "kaghzat ki list bata dein"
+        "kaghzat ki list bata dein",
+        "کارڈ کے علاوہ کیا کیا چاہیے",
+        "kaunse kaghaz lane hain",
+        "امی کے کیس کے لیے کون سے کاغذ چاہییں",
+        "کون سے documents لگیں گے"
       ],
       "keywords": {
         "کاغذات": 3,
@@ -157,7 +166,12 @@
         "kya main is ke liye eligible hoon",
         "kya mujhe bhi mil sakta hai",
         "ye madad kis ko milti hai",
-        "kya bewa ko milta hai"
+        "kya bewa ko milta hai",
+        "کیا مجھے بھی یہ امداد مل سکتی ہے",
+        "kya main is ke qabil hoon",
+        "kya main layak hoon",
+        "شوہر پرائیویٹ نوکری کرتا تھا کیا پھر بھی ملے گی",
+        "میری ساس بیوہ ہیں کیا ان کا حق بنتا ہے"
       ],
       "keywords": {
         "اہل": 3,
@@ -186,7 +200,11 @@
         "kis ko milti": 2.5,
         "کو بھی ملتا": 2.5,
         "طلاق": 2,
-        "مطلقہ": 2
+        "مطلقہ": 2,
+        "layak": 3,
+        "لائق": 3,
+        "qabil": 2.5,
+        "پھر بھی ملے": 2.5
       },
       "examples_en": [
         "Can I get this support?",
@@ -221,7 +239,11 @@
         "kisi insaan se baat karni hai",
         "officer se baat karwa dein",
         "mujhe call kar lein",
-        "kisi bande se baat karao"
+        "kisi bande se baat karao",
+        "یہ کمپیوٹر میری بات نہیں سمجھتا کسی بندے سے بات کرائیں",
+        "کسی اصلی بندے سے بات کرنی ہے",
+        "koi banda bulao jo meri baat samjhe",
+        "کسی person سے بات کروا دیں"
       ],
       "keywords": {
         "افسر": 3,
@@ -251,7 +273,12 @@
         "کال کر": 2,
         "insaan": 2.5,
         "baat karwa": 2.5,
-        "call kar": 2
+        "call kar": 2,
+        "آدمی کو": 2,
+        "بندے سے": 2.5,
+        "bande se": 2.5,
+        "person": 2.5,
+        "مشین": 2
       },
       "examples_en": [
         "Let me speak to a real person",
@@ -285,7 +312,10 @@
         "payment kab aayegi",
         "raqam kab tak aayegi",
         "paison ka kya bana",
-        "paise bhej diye kya"
+        "paise bhej diye kya",
+        "میری payment کب آئے گی",
+        "paise kado milan ge",
+        "ان کی رقم کب آئے گی"
       ],
       "keywords": {
         "پیسے": 2,
@@ -344,7 +374,11 @@
         "form kaise bharna hai",
         "mere shohar ka inteqal ho gaya madad chahiye",
         "naam likhwana hai",
-        "registration karwani hai"
+        "registration karwani hai",
+        "naam kaise likhwaun",
+        "naam kaise darj hoga program mein",
+        "میں اپنی بہن کی درخواست دینا چاہتا ہوں",
+        "مجھے apply کرنا ہے کیسے کروں"
       ],
       "keywords": {
         "اپلائی": 3,
@@ -369,7 +403,11 @@
         "انتقال": 2,
         "form": 1.5,
         "registration": 2.5,
-        "inteqal": 2
+        "inteqal": 2,
+        "درخواست دینا": 3,
+        "naam kaise": 2.5,
+        "naam likhwa": 2.5,
+        "naam darj": 2.5
       },
       "examples_en": [
         "I want to apply for help",
@@ -401,7 +439,10 @@
         "meri maloomat kaun dekhega",
         "mera data safe hai",
         "ijazat wapas leni hai",
-        "meri details aage to nahi jayengi"
+        "meri details aage to nahi jayengi",
+        "میری privacy کا خیال رکھا جائے گا",
+        "میرا ڈیٹا کہاں استعمال ہوگا",
+        "میرے کارڈ کی معلومات کسی اور کو تو نہیں دی جائیں گی"
       ],
       "keywords": {
         "رضامندی": 3,
@@ -414,7 +455,9 @@
         "ijazat": 2.5,
         "data": 2.5,
         "محفوظ": 2,
-        "maloomat": 2
+        "maloomat": 2,
+        "privacy": 3,
+        "استعمال": 2
       },
       "examples_en": [
         "Is my data safe?",
@@ -452,7 +495,11 @@
         "agent paise maang raha hai",
         "ye fraud to nahi",
         "kisi ne pin poocha",
-        "rishwat mangi"
+        "rishwat mangi",
+        "ایک آدمی نام لکھوانے کے پیسے مانگ رہا ہے",
+        "کوئی بندہ فیس لے رہا ہے فارم بھرنے کی",
+        "kisi ne OTP manga",
+        "koi mera code mang raha hai"
       ],
       "keywords": {
         "دھوکہ": 3,
@@ -488,7 +535,14 @@
         "otp": 3,
         "او ٹی پی": 3,
         "نام ڈلوا": 2.5,
-        "ڈلوا دوں": 2.5
+        "ڈلوا دوں": 2.5,
+        "fees le": 3,
+        "fees mang": 3,
+        "فیس لے رہا": 3,
+        "فیس مانگ": 3,
+        "خود کو افسر": 3,
+        "افسر بن کر": 3,
+        "khud ko afsar": 3
       },
       "examples_en": [
         "A man wants money to get my claim approved",
@@ -516,7 +570,11 @@
         "میرے ساتھ زیادتی ہوئی ہے",
         "ایک ملازم نے بدتمیزی کی",
         "koi meri baat nahi sun raha",
-        "staff ne bad tameezi ki"
+        "staff ne bad tameezi ki",
+        "main shikayat karna chahti hoon",
+        "mujhe complain karni hai",
+        "مجھے عملے کے خلاف شکایت کرنی ہے",
+        "staff ne bura sulook kiya"
       ],
       "keywords": {
         "شکایت": 3,
@@ -530,7 +588,14 @@
         "بدتمیزی": 3,
         "چکر": 1.5,
         "tameezi": 2.5,
-        "complain": 3
+        "complain": 3,
+        "کے خلاف شکایت": 3,
+        "staff": 2,
+        "shikayat karni": 3,
+        "نہیں سنتا": 2.5,
+        "نہیں سنتے": 2.5,
+        "nahi sunta": 2.5,
+        "nahi sunte": 2.5
       },
       "examples_en": [
         "The staff were rude to me",
@@ -558,7 +623,11 @@
         "میرا پرانا نمبر بند ہو گیا",
         "پیسے نئے اکاؤنٹ میں بھیجیں",
         "naya number likh lein",
-        "address change ho gaya"
+        "address change ho gaya",
+        "نیا بینک اکاؤنٹ کھلوایا ہے وہ لکھ لیں",
+        "میرا address بدل گیا ہے",
+        "address update karna hai",
+        "ان کا نمبر بدلنا ہے سم بند ہے"
       ],
       "keywords": {
         "تبدیل": 2.5,
@@ -579,7 +648,14 @@
         "naya number": 3,
         "نیا اکاؤنٹ": 3,
         "naya account": 3,
-        "khulwaya": 2
+        "khulwaya": 2,
+        "کھلوایا": 2.5,
+        "نیا بینک": 3,
+        "update": 2.5,
+        "address update": 3,
+        "پتہ بدل": 3,
+        "address badal": 3,
+        "address change": 3
       },
       "examples_en": [
         "I have a new mobile number",
@@ -639,7 +715,9 @@
         "dobara bolein",
         "phir se batayen",
         "samajh nahi aayi",
-        "kya kaha"
+        "kya kaha",
+        "آخری بات دوبارہ سنا دیں",
+        "jo kaha woh phir se sunao"
       ],
       "keywords": {
         "دوبارہ": 2.5,
@@ -651,7 +729,10 @@
         "سنا نہیں": 2.5,
         "کیا کہا": 2.5,
         "ایک دفعہ اور": 2.5,
-        "kya kaha": 2.5
+        "kya kaha": 2.5,
+        "دوبارہ سنا": 3,
+        "پھر سے سنا": 3,
+        "phir se suna": 3
       },
       "examples_en": [
         "I did not hear you",
@@ -682,7 +763,10 @@
         "کل کتنی رقم بنتی ہے",
         "پچیس ہزار ہی ملیں گے یا زیادہ",
         "kitna milega",
-        "amount kitna hai"
+        "amount kitna hai",
+        "ہر مہینے کتنی رقم ملتی ہے",
+        "mahine ka kitna milta hai",
+        "total kitni raqam hogi"
       ],
       "keywords": {
         "کتنی": 2.5,
@@ -697,7 +781,9 @@
         "rupay": 1,
         "کتنا ملے": 3,
         "kitna milega": 3,
-        "amount": 2.5
+        "amount": 2.5,
+        "کتنا ملتا": 3,
+        "kitna milta": 3
       },
       "examples_en": [
         "What is the amount?",
@@ -729,7 +815,12 @@
         "paise nahi aaye abhi tak",
         "account mein paise nahi pohanche",
         "message aaya magar paise nahi mile",
-        "raqam nahi mili"
+        "raqam nahi mili",
+        "کہا گیا تھا پیسے بھیج دیے مگر اکاؤنٹ میں کچھ نہیں آیا",
+        "قسط نہیں ملی ابھی تک",
+        "paise ni aaye",
+        "paise ni mile",
+        "raqam abhi tak nahi aayi"
       ],
       "keywords": {
         "نہیں آئے": 3,
@@ -744,7 +835,12 @@
         "خالی": 2.5,
         "کہیں اور": 2,
         "nahi pohanche": 3,
-        "nahi mili": 2
+        "nahi mili": 2,
+        "قسط نہیں": 3,
+        "رقم نہیں": 2.5,
+        "qist nahi": 3,
+        "اکاؤنٹ میں کچھ نہیں": 3,
+        "account mein kuch nahi": 3
       },
       "examples_en": [
         "The money has not reached my account",
@@ -776,7 +872,10 @@
         "paise kahan se nikalun",
         "cash milega ya account mein",
         "bank jana parega kya",
-        "atm se nikal sakti hoon"
+        "atm se nikal sakti hoon",
+        "پیسے کس بینک سے نکلیں گے",
+        "raqam kis bank se niklegi",
+        "کیا میں ان کی جگہ پیسے نکلوا سکتا ہوں"
       ],
       "keywords": {
         "کہاں سے": 2.5,
@@ -784,7 +883,7 @@
         "نکالوں": 3,
         "نکلوانے": 3,
         "کیش": 2.5,
-        "لینے کہاں": 2,
+        "لینے کہاں": 3,
         "kahan se": 2.5,
         "nikalwaun": 3,
         "nikalna": 2.5,
@@ -797,7 +896,15 @@
         "بینک جانا": 2.5,
         "atm": 2.5,
         "nikalun": 3,
-        "bank jana": 2.5
+        "bank jana": 2.5,
+        "نکلیں": 3,
+        "نکلیں گے": 3,
+        "niklenge": 3,
+        "کس بینک": 2.5,
+        "kis bank": 2.5,
+        "lene kahan": 3,
+        "کہاں جاؤں": 2.5,
+        "kahan jaun": 2.5
       },
       "examples_en": [
         "How do I take out the money?",
@@ -828,7 +935,9 @@
         "mujhe kyun mana kiya",
         "reject kyun hua",
         "wajah kya hai",
-        "faisla aisa kyun hua"
+        "faisla aisa kyun hua",
+        "میرا کیس افسر کو کیوں بھیجا گیا",
+        "انکار کس وجہ سے ہوا"
       ],
       "keywords": {
         "کیوں": 3,
@@ -870,7 +979,10 @@
         "کیا کچھ رہ گیا ہے",
         "ab kya karna hai",
         "kya reh gaya hai",
-        "kami kya hai"
+        "kami kya hai",
+        "کون سی چیز کم ہے",
+        "کون سا کاغذ رہ گیا ہے",
+        "فائل میں کیا کمی رہ گئی"
       ],
       "keywords": {
         "کمی": 3,
@@ -886,7 +998,11 @@
         "آگے کیا": 2.5,
         "reh gaya": 2.5,
         "ab kya": 2,
-        "aage kya": 2.5
+        "aage kya": 2.5,
+        "کم ہے": 2.5,
+        "بھیجنا پڑے": 2.5,
+        "کچھ اور": 2.5,
+        "kuch aur": 2.5
       },
       "examples_en": [
         "Is anything still missing?",
@@ -915,7 +1031,10 @@
         "ہفتہ لگے گا یا مہینہ",
         "kitna time lagega",
         "faisla kab tak hoga",
-        "kab tak jawab aayega"
+        "kab tak jawab aayega",
+        "جواب میں کتنی دیر لگے گی",
+        "kinne din lagan ge",
+        "کتنی دیر انتظار کرنا ہوگا"
       ],
       "keywords": {
         "دن": 2.5,
@@ -934,7 +1053,10 @@
         "ٹائم": 2,
         "کب تک جواب": 2.5,
         "kitne din": 3,
-        "time lagega": 3
+        "time lagega": 3,
+        "کتنی دیر": 3,
+        "دیر لگ": 3,
+        "kitni der": 3
       },
       "examples_en": [
         "How many days does it take?",
@@ -963,7 +1085,11 @@
         "مجھے انصاف چاہیے دوبارہ چیک کریں",
         "فیصلے کے خلاف درخواست دینی ہے",
         "dobara check karein",
-        "case phir se dekhein"
+        "case phir se dekhein",
+        "فیصلہ دوبارہ دیکھا جائے",
+        "faisla phir se dekhein",
+        "یہ ناانصافی ہے فیصلہ بدلیں",
+        "نظرثانی کی درخواست کرنی ہے"
       ],
       "keywords": {
         "اپیل": 3,
@@ -976,13 +1102,17 @@
         "نہیں مانتی": 3,
         "غور": 2,
         "انصاف": 2.5,
-        "خلاف": 2.5,
+        "خلاف": 1.5,
         "پھر سے دیکھا": 2.5,
         "dobara check": 2.5,
         "مطمئن نہیں": 3,
         "نظر ثانی": 3,
         "dobara dekhein": 2.5,
-        "faisle ke khilaf": 3
+        "faisle ke khilaf": 3,
+        "فیصلے کے خلاف": 3,
+        "faisla dobara": 3,
+        "کیس دوبارہ": 2.5,
+        "dobara dekh": 2.5
       },
       "examples_en": [
         "I do not agree with this decision",
@@ -1008,7 +1138,10 @@
         "کیس بند کر دیں",
         "میری درخواست کینسل کر دیں",
         "application cancel kar dein",
-        "case band kar dein"
+        "case band kar dein",
+        "میرا نام پروگرام سے نکلوا دیں",
+        "کیس بند کروا دیں",
+        "mujhe ab yeh nahi chahiye cancel kar dein"
       ],
       "keywords": {
         "منسوخ": 3,
@@ -1023,7 +1156,15 @@
         "band kar": 2.5,
         "ختم کروانا": 3,
         "wapas lena": 2.5,
-        "wapas leni": 2.5
+        "wapas leni": 2.5,
+        "نام نکال": 3,
+        "نام نکلوا": 3,
+        "کیس بند": 3,
+        "بند کروا": 3,
+        "naam nikal": 3,
+        "case band": 3,
+        "نکال دیں": 3,
+        "نکلوا دیں": 3
       },
       "examples_en": [
         "Close my case please",
@@ -1095,7 +1236,10 @@
         "شناختی کارڈ چوری ہو گیا",
         "card expire ho gaya",
         "id card nahi hai",
-        "naya card banwana hai"
+        "naya card banwana hai",
+        "شناختی کارڈ بنا ہی نہیں",
+        "card abhi bana nahi",
+        "کارڈ ایکسپائر ہو گیا"
       ],
       "keywords": {
         "گم": 3,
@@ -1111,7 +1255,9 @@
         "چوری": 2.5,
         "نیا کارڈ": 3,
         "تاریخ ختم": 2.5,
-        "card": 1.5
+        "card": 1.5,
+        "کارڈ نہیں بنا": 3,
+        "card nahi bana": 3
       },
       "examples_en": [
         "My identity card expired",
@@ -1140,7 +1286,9 @@
         "سرٹیفکیٹ کے بغیر درخواست ہو سکتی ہے",
         "certificate kahan se banega",
         "wafat darj nahi hui",
-        "certificate kho gaya"
+        "certificate kho gaya",
+        "maut ka certificate kahan se banwaun",
+        "موت کا سرٹیفکیٹ کہاں سے بنے گا"
       ],
       "keywords": {
         "سرٹیفکیٹ نہیں": 3,
@@ -1228,7 +1376,9 @@
         "بچے اب میرے ساتھ نہیں رہتے",
         "ghar badal liya",
         "bacha paida hua hai",
-        "beta kamane laga hai"
+        "beta kamane laga hai",
+        "کمانے کا کوئی ذریعہ نہیں رہا",
+        "بیٹے کی نوکری لگ گئی ہے"
       ],
       "keywords": {
         "بچے": 1.5,
@@ -1280,7 +1430,10 @@
         "aur koi madad hai",
         "bisp mein naam kaise aayega",
         "rashan ki scheme",
-        "sehat card kaise banega"
+        "sehat card kaise banega",
+        "اور کون سے پروگرام ہیں",
+        "aur kaunse programs hain",
+        "بچوں کی پڑھائی کے لیے کوئی سکیم"
       ],
       "keywords": {
         "کوئی اور": 3,
@@ -1302,7 +1455,9 @@
         "rashan": 2.5,
         "sehat card": 3,
         "kaunsi scheme": 2.5,
-        "aur kaunsi": 2
+        "aur kaunsi": 2,
+        "programs": 2.5,
+        "اور کون سے": 2.5
       },
       "examples_en": [
         "What other help can I get?",
@@ -1331,7 +1486,10 @@
         "لیڈی ہیلتھ ورکر کو بھیجیں",
         "koi ghar aa kar madad kare",
         "main daftar nahi aa sakti",
-        "mujhe parhna nahi aata"
+        "mujhe parhna nahi aata",
+        "میں بیمار ہوں دفتر نہیں آ سکتی کوئی گھر آ جائے",
+        "میں دفتر نہیں جا سکتی",
+        "دفتر تک نہیں آ سکتی"
       ],
       "keywords": {
         "گھر آ کر": 3,
@@ -1346,7 +1504,9 @@
         "ghar aa": 3,
         "parhna nahi": 3,
         "گھر آ جائے": 3,
-        "چل نہیں سکتی": 3
+        "چل نہیں سکتی": 3,
+        "نہیں آ سکتی": 3,
+        "nahi aa sakti": 3
       },
       "examples_en": [
         "I cannot come to the office",
@@ -1422,7 +1582,10 @@
         "ہسپتال جانا ہے پیسے نہیں",
         "emergency hai",
         "jaan ko khatra hai",
-        "khane ko kuch nahi"
+        "khane ko kuch nahi",
+        "سسرال والے گھر سے نکال رہے ہیں",
+        "susral walay mujhe ghar se nikal rahe hain",
+        "مجھے گھر سے نکال دیا"
       ],
       "keywords": {
         "دھمکی": 3,
@@ -1446,7 +1609,10 @@
         "emergency": 3,
         "zaroori madad": 3,
         "بہت ضروری": 2.5,
-        "فوری مدد": 3
+        "فوری مدد": 3,
+        "nikal rahe": 3,
+        "سسرال": 2,
+        "susral": 2
       },
       "examples_en": [
         "This is an emergency",
@@ -1473,7 +1639,9 @@
         "بس اتنا ہی خدا حافظ",
         "ٹھیک ہے شکریہ بس",
         "اور کچھ نہیں شکریہ",
-        "thank you"
+        "thank you",
+        "بس یہی پوچھنا تھا",
+        "bas itna hi poochna tha"
       ],
       "keywords": {
         "شکریہ": 3,
@@ -1486,7 +1654,10 @@
         "بھلا کرے": 2.5,
         "اللہ حافظ": 3,
         "allah hafiz": 3,
-        "thank": 2.5
+        "thank": 2.5,
+        "اتنا ہی پوچھنا": 3,
+        "یہی پوچھنا": 3,
+        "itna hi poochna": 3
       },
       "examples_en": [
         "Thanks a lot",
@@ -1533,5 +1704,126 @@
         "Say it slowly"
       ]
     }
+  },
+  "guards": {
+    "_about": "Checked after the score. 'noise': words speech recognition invents from noise or silence (it was trained on video subtitles) -> always 'unclear'. 'off_topic': everyday subjects that are not about the claim (a doctor's fee, a bus fare, the electricity bill) -> 'unclear', unless the sentence also has a claim word from 'anchors'. Safety and conversation intents ('exempt') are never blocked.",
+    "noise": [
+      "سبسکرائب",
+      "ناظرین",
+      "subscribe",
+      "watching",
+      "سبسکرائب کریں"
+    ],
+    "off_topic": [
+      "ڈاکٹر",
+      "doctor",
+      "کرایہ",
+      "kiraya",
+      "fare",
+      "bus",
+      "بجلی",
+      "bijli",
+      "electricity",
+      "بل",
+      "bill",
+      "گیس",
+      "gas",
+      "میٹر",
+      "meter",
+      "ٹرین",
+      "train",
+      "موسم",
+      "mausam",
+      "weather",
+      "بارش",
+      "barish",
+      "rain",
+      "کرکٹ",
+      "cricket",
+      "میچ",
+      "match",
+      "سکور",
+      "score",
+      "بریانی",
+      "biryani",
+      "recipe",
+      "ٹی وی",
+      "tv",
+      "بیلنس",
+      "balance",
+      "امتحان",
+      "imtihan",
+      "exam",
+      "دکان",
+      "dukan",
+      "shop",
+      "قصائی",
+      "گانا",
+      "gana",
+      "song",
+      "joke",
+      "لطیفہ",
+      "چائے",
+      "chai"
+    ],
+    "anchors": [
+      "پیسے",
+      "پیسوں",
+      "رقم",
+      "امداد",
+      "قسط",
+      "ادائیگی",
+      "درخواست",
+      "کیس",
+      "فائل",
+      "فارم",
+      "کلیم",
+      "اکاؤنٹ",
+      "شناختی",
+      "کارڈ",
+      "سرٹیفکیٹ",
+      "افسر",
+      "دفتر",
+      "بیوہ",
+      "شوہر",
+      "وفات",
+      "انتقال",
+      "پروگرام",
+      "سکیم",
+      "paise",
+      "raqam",
+      "madad",
+      "qist",
+      "darkhwast",
+      "darkhast",
+      "case",
+      "file",
+      "form",
+      "claim",
+      "account",
+      "card",
+      "certificate",
+      "afsar",
+      "office",
+      "bewa",
+      "shohar",
+      "payment",
+      "scheme",
+      "program",
+      "money",
+      "application",
+      "officer",
+      "husband",
+      "widow",
+      "death",
+      "documents"
+    ],
+    "exempt": [
+      "urgent_help",
+      "greeting",
+      "thanks_goodbye",
+      "repeat",
+      "speak_slowly"
+    ]
   }
 }

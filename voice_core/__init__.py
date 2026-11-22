@@ -12,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-from urdu_intent import detect_intent
+from urdu_intent import detect_intent, off_topic_reason
 
 HERE = Path(__file__).resolve().parent.parent  # project root: urdu_intent/ lives there
 MODEL_NAME = os.environ.get("WHISPER_MODEL") or "small"   # base | small | medium | large-v3-turbo
@@ -94,8 +94,22 @@ def transcribe(audio: np.ndarray, model: str | None = None, language: str = "ur"
         text = " ".join(s.text.strip() for s in segments).strip()
     no_speech = max((s.no_speech_prob for s in segments), default=1.0)
     quality = "ok" if text and no_speech < 0.6 else ("noisy" if rms > 0.02 or text else "silent")
+    if noise_transcript(text):
+        quality = "noisy"
     return {"text": text, "seconds_audio": round(seconds, 1), "seconds_taken": round(time.time() - t0, 1),
             "quality": quality}
+
+
+def noise_transcript(text: str) -> bool:
+    """Words Whisper produces from noise, not speech: 'subscribe' / 'ناظرین' (it learned from video subtitles),
+    or one word over and over ('ایسا ایسا ایسا ایسا', seen on loud fan-like noise). The app then asks for a
+    quieter place instead of acting on them."""
+    if not text:
+        return False
+    if off_topic_reason(text) == "noise":
+        return True
+    words = text.split()
+    return len(words) >= 4 and max(words.count(w) for w in set(words)) >= 4 and len(set(words)) * 2 <= len(words)
 
 
 def understand_bytes(data: bytes, language: str = "ur") -> dict:

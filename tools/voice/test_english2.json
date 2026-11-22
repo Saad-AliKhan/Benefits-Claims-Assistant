@@ -1,0 +1,225 @@
+{
+ "_about": "English held-out set 2 (2026-11-22): written BEFORE the 3rd tuning round, never used to change English keywords, examples or thresholds.",
+ "tests": [
+  {
+   "text": "When will the money be transferred?",
+   "intent": "payment_status"
+  },
+  {
+   "text": "Any update on my payment?",
+   "intent": "payment_status"
+  },
+  {
+   "text": "How much is the monthly support?",
+   "intent": "payment_amount"
+  },
+  {
+   "text": "What's the total I would receive?",
+   "intent": "payment_amount"
+  },
+  {
+   "text": "The money never arrived in my account",
+   "intent": "payment_not_received"
+  },
+  {
+   "text": "I was told it was paid but I got nothing",
+   "intent": "payment_not_received"
+  },
+  {
+   "text": "What's happening with my application?",
+   "intent": "application_status"
+  },
+  {
+   "text": "Has my claim been approved yet?",
+   "intent": "application_status"
+  },
+  {
+   "text": "How many days does it usually take?",
+   "intent": "how_long"
+  },
+  {
+   "text": "How long do I have to wait for a decision?",
+   "intent": "how_long"
+  },
+  {
+   "text": "Why was my claim turned down?",
+   "intent": "why_decision"
+  },
+  {
+   "text": "What was the reason for the rejection?",
+   "intent": "why_decision"
+  },
+  {
+   "text": "I want the decision reviewed",
+   "intent": "appeal"
+  },
+  {
+   "text": "This decision is unfair, I want to challenge it",
+   "intent": "appeal"
+  },
+  {
+   "text": "What else do you need from me?",
+   "intent": "what_is_missing"
+  },
+  {
+   "text": "Is anything missing from my file?",
+   "intent": "what_is_missing"
+  },
+  {
+   "text": "Which papers should I bring?",
+   "intent": "required_documents"
+  },
+  {
+   "text": "What documents do I need?",
+   "intent": "required_documents"
+  },
+  {
+   "text": "How do I register for this help?",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "My husband passed away, how can I get support?",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "Do I qualify for this programme?",
+   "intent": "eligibility"
+  },
+  {
+   "text": "Can a divorced woman get this too?",
+   "intent": "eligibility"
+  },
+  {
+   "text": "Can I talk to a real human please?",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "Put me through to an officer",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "Someone called asking for my PIN",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "A man wants a fee to put my name on the list",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "I want to file a complaint about the staff",
+   "intent": "complaint"
+  },
+  {
+   "text": "The office staff were rude to me",
+   "intent": "complaint"
+  },
+  {
+   "text": "I have a new phone number",
+   "intent": "update_details"
+  },
+  {
+   "text": "I need to change my bank account",
+   "intent": "update_details"
+  },
+  {
+   "text": "I lost my ID card",
+   "intent": "cnic_problem"
+  },
+  {
+   "text": "My CNIC has expired",
+   "intent": "cnic_problem"
+  },
+  {
+   "text": "I don't have my husband's death certificate",
+   "intent": "no_death_certificate"
+  },
+  {
+   "text": "Where do I register the death?",
+   "intent": "no_death_certificate"
+  },
+  {
+   "text": "My name is spelled wrong in your records",
+   "intent": "wrong_details"
+  },
+  {
+   "text": "My son got a job",
+   "intent": "household_change"
+  },
+  {
+   "text": "My daughter got married",
+   "intent": "household_change"
+  },
+  {
+   "text": "Are there other schemes I can apply for?",
+   "intent": "other_programmes"
+  },
+  {
+   "text": "What about BISP?",
+   "intent": "other_programmes"
+  },
+  {
+   "text": "I can't read, can someone come to my house?",
+   "intent": "helper_visit"
+  },
+  {
+   "text": "Where is your office and when is it open?",
+   "intent": "office_info"
+  },
+  {
+   "text": "My in-laws are threatening me",
+   "intent": "urgent_help"
+  },
+  {
+   "text": "We have no food at home",
+   "intent": "urgent_help"
+  },
+  {
+   "text": "I want to send a photo of my certificate",
+   "intent": "send_document"
+  },
+  {
+   "text": "Please cancel my application",
+   "intent": "withdraw_claim"
+  },
+  {
+   "text": "Good morning",
+   "intent": "greeting"
+  },
+  {
+   "text": "Thank you, that's all",
+   "intent": "thanks_goodbye"
+  },
+  {
+   "text": "Sorry, can you say that again?",
+   "intent": "repeat"
+  },
+  {
+   "text": "Please speak more slowly",
+   "intent": "speak_slowly"
+  },
+  {
+   "text": "Who can see my information?",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "What's the weather today?",
+   "intent": "unclear"
+  },
+  {
+   "text": "Tell me a joke",
+   "intent": "unclear"
+  },
+  {
+   "text": "How much is the bus fare?",
+   "intent": "unclear"
+  },
+  {
+   "text": "yes",
+   "intent": "unclear"
+  },
+  {
+   "text": "Thanks for watching!",
+   "intent": "unclear"
+  }
+ ]
+}

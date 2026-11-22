@@ -141,7 +141,8 @@ EN_KEYWORDS = [   # checked in this order: specific phrases first
     ("urgent_help", ("urgent", "emergency", "danger", "threat", "no food", "hospital")),
     ("report_fraud", ("fraud", "scam", "bribe", "otp", "pin", "asked me for money", "agent")),
     ("payment_not_received", ("not received", "not receive", "didn't receive", "did not get", "didn't get",
-                              "not arrived", "not reached", "no money came", "account is empty")),
+                              "not arrived", "not reached", "no money came", "account is empty", "never arrived",
+                              "never came", "got nothing")),
     ("no_death_certificate", ("death certificate", "death was never", "not registered")),
     ("cnic_problem", ("id card", "identity card", "cnic", "card is lost", "card expired", "lost my card")),
     ("wrong_details", ("wrong", "mistake", "spelled", "spelling")),
@@ -173,7 +174,11 @@ EN_KEYWORDS = [   # checked in this order: specific phrases first
 ]
 
 def english_intent(text: str) -> dict:
+    from urdu_intent import off_topic_reason
     r = _english_intent(text)
+    blocked = off_topic_reason(text, r["intent"]) if r["intent"] != "unclear" or "subscri" in (text or "").lower() else None
+    if blocked:   # Whisper's 'Thanks for watching!' from noise; a bus fare is not the claim
+        r = {"intent": "unclear", "action": None, "alternatives": r.get("alternatives", []), "reason": blocked}
     if r["intent"] != "unclear":
         from urdu_intent import intents
         spec = intents()[r["intent"]]

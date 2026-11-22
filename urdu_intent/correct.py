@@ -41,6 +41,7 @@ class Lexicon:
     domain: tuple[tuple[str, str], ...]       # (canonical single word, its sound key)
     domain_phrases: tuple[tuple[str, str], ...]  # (canonical multi-word term, sound key)
     protected: frozenset[str]
+    protected_sounds: frozenset[str] = frozenset()
 
 
 @lru_cache(maxsize=1)
@@ -69,7 +70,7 @@ def lexicon() -> Lexicon:
     singles = tuple((c, sound_key(c)) for c in sorted(targets) if " " not in c and len(c) >= 3)
     multis = tuple((c, sound_key(c)) for c in sorted(targets) if " " in c)
     ordered = tuple(sorted(phrase_map.items(), key=lambda kv: -len(kv[0])))
-    return Lexicon(ordered, singles, multis, frozenset(protected))
+    return Lexicon(ordered, singles, multis, frozenset(protected), frozenset(sound_key(w) for w in protected))
 
 
 def _allowed_edits(key: str) -> int:
@@ -101,6 +102,8 @@ def correct(text: str) -> Corrected:
                          and words[i] + words[i + 1] not in lex.protected):  # Urdu script only
             key = sound_key(words[i] + words[i + 1])
             match = _best(key, lex.domain + lex.domain_phrases)
+            if match and " " in match and not _each_word_close(words[i:i + 2], match.split()):
+                match = None
             if match and len(key) >= 4:
                 joined.append(match)
                 out.append(Correction(f"{words[i]} {words[i + 1]}", match, "joined split word"))
@@ -113,7 +116,7 @@ def correct(text: str) -> Corrected:
     # 3. fuzzy by sound, for words that are not everyday Urdu
     fixed = []
     for w in words:
-        if w in lex.protected or len(w) < 3 or not re.search(r"[؀-ۿ]", w):
+        if w in lex.protected or len(w) < 3 or not re.search(r"[؀-ۿ]", w) or sound_key(w) in lex.protected_sounds:
             fixed.append(w)
             continue
         match = _best(sound_key(w), lex.domain)
@@ -123,6 +126,17 @@ def correct(text: str) -> Corrected:
         else:
             fixed.append(w)
     return Corrected(" ".join(fixed), out)
+
+
+def _each_word_close(words: list[str], parts: list[str]) -> bool:
+    if len(words) != len(parts):
+        return False
+    for w, p in zip(words, parts):
+        kw, kp = sound_key(w), sound_key(p)
+        inflected = min(len(kw), len(kp)) >= 2 and (kw.startswith(kp) or kp.startswith(kw))   # 'دنوں' ~ 'دن'
+        if not inflected and edit_distance(kw, kp, _allowed_edits(kp)) > _allowed_edits(kp):
+            return False
+    return True
 
 
 def _best(key: str, candidates) -> str | None:

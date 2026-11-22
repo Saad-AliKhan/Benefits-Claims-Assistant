@@ -1,0 +1,145 @@
+{
+ "_about": "English held-out set 3 (2026-11-22): written BEFORE the 3rd tuning round, run once for a summary only, then once after tuning. Never used to change English keywords, examples or thresholds.",
+ "tests": [
+  {
+   "text": "Is my money on the way?",
+   "intent": "payment_status"
+  },
+  {
+   "text": "Did the payment go out?",
+   "intent": "payment_status"
+  },
+  {
+   "text": "How much will I be paid each month?",
+   "intent": "payment_amount"
+  },
+  {
+   "text": "Nothing has come into my account yet",
+   "intent": "payment_not_received"
+  },
+  {
+   "text": "Where is my claim right now?",
+   "intent": "application_status"
+  },
+  {
+   "text": "Was my form accepted?",
+   "intent": "application_status"
+  },
+  {
+   "text": "When will I hear back?",
+   "intent": "how_long"
+  },
+  {
+   "text": "Why did they refuse me?",
+   "intent": "why_decision"
+  },
+  {
+   "text": "I think the decision is wrong, please look again",
+   "intent": "appeal"
+  },
+  {
+   "text": "Do you need anything more from me?",
+   "intent": "what_is_missing"
+  },
+  {
+   "text": "What papers must I show?",
+   "intent": "required_documents"
+  },
+  {
+   "text": "How can a widow apply here?",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "Who is eligible for this money?",
+   "intent": "eligibility"
+  },
+  {
+   "text": "I would like to speak to a person",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "Someone on the phone asked for my code",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "I want to complain about how I was treated",
+   "intent": "complaint"
+  },
+  {
+   "text": "My mobile number has changed",
+   "intent": "update_details"
+  },
+  {
+   "text": "My ID card is broken",
+   "intent": "cnic_problem"
+  },
+  {
+   "text": "The death was never registered",
+   "intent": "no_death_certificate"
+  },
+  {
+   "text": "My husband's name is wrong on the form",
+   "intent": "wrong_details"
+  },
+  {
+   "text": "We had a new baby",
+   "intent": "household_change"
+  },
+  {
+   "text": "Is there any other help for my children?",
+   "intent": "other_programmes"
+  },
+  {
+   "text": "Can someone visit me at home to help?",
+   "intent": "helper_visit"
+  },
+  {
+   "text": "What are the office timings?",
+   "intent": "office_info"
+  },
+  {
+   "text": "I am in danger, please help",
+   "intent": "urgent_help"
+  },
+  {
+   "text": "Can I upload my document?",
+   "intent": "send_document"
+  },
+  {
+   "text": "I want to withdraw my claim",
+   "intent": "withdraw_claim"
+  },
+  {
+   "text": "Hello",
+   "intent": "greeting"
+  },
+  {
+   "text": "Thanks, goodbye",
+   "intent": "thanks_goodbye"
+  },
+  {
+   "text": "I did not hear that",
+   "intent": "repeat"
+  },
+  {
+   "text": "Slow down please",
+   "intent": "speak_slowly"
+  },
+  {
+   "text": "Is my data safe with you?",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "Who won the cricket match?",
+   "intent": "unclear"
+  },
+  {
+   "text": "How much does a doctor visit cost?",
+   "intent": "unclear"
+  },
+  {
+   "text": "Please like and subscribe",
+   "intent": "unclear"
+  }
+ ]
+}

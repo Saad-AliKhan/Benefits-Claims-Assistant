@@ -26,7 +26,8 @@ JOINED = {
     "ملکر": "مل کر", "کرکے": "کر کے", "ہوگیا": "ہو گیا", "ہوگئی": "ہو گئی", "ہوگئے": "ہو گئے",
     "جائیگا": "جائے گا", "جائیگی": "جائے گی", "ملیگا": "ملے گا", "ملیگی": "ملے گی", "ملینگے": "ملیں گے",
     "کرینگے": "کریں گے", "ہونگے": "ہوں گے", "آئیگی": "آئے گی", "آئیگا": "آئے گا", "کیلئے": "کے لیے",
-    "کیلیے": "کے لیے", "چاہئیے": "چاہیے", "چاہئے": "چاہیے",
+    "کیلیے": "کے لیے", "چاہئیے": "چاہیے", "چاہئے": "چاہیے", "کےساتھ": "کے ساتھ", "کیساتھ": "کے ساتھ",
+    "کےلیے": "کے لیے", "کےبعد": "کے بعد", "کیبعد": "کے بعد",
     # Noon ghunna (ں) dropped or written as a full noon by speech recognition: very common words only
     # (and none that is a different real word: 'کہا' = said and 'نئی' = new are NOT changed).
     "نہی": "نہیں", "نہین": "نہیں", "نئیں": "نہیں", "نیں": "نہیں", "نہیئں": "نہیں",
@@ -34,6 +35,8 @@ JOINED = {
     "کیون": "کیوں", "کیو": "کیوں", "کہان": "کہاں", "یہان": "یہاں", "وہان": "وہاں",
     "کرون": "کروں", "جاؤن": "جاؤں", "لون": "لوں", "دون": "دوں", "بنواؤ": "بنواؤں", "بنواؤن": "بنواؤں",
     "کریں": "کریں", "کرین": "کریں", "ملین": "ملیں", "آئین": "آئیں", "جائین": "جائیں",
+    # Punjabi-influenced Urdu (many widows speak Punjabi at home): the question words, said the Punjabi way
+    "کدوں": "کب", "کنے": "کتنے", "کتھوں": "کہاں سے", "کتھے": "کہاں", "مینوں": "مجھے", "دا": "کا",
 }
 
 
@@ -79,7 +82,11 @@ ROMAN_SYNONYMS = {
     "hain": "hai", "hy": "hai", "he": "hai", "hay": "hai",
     "kyon": "kyun", "kiyon": "kyun", "kiun": "kyun", "kyoon": "kyun", "q": "kyun",
     "kia": "kya", "kiya": "kya", "mein": "main", "men": "main", "me": "main",
-    "kon": "kaun", "kaon": "kaun", "kb": "kab", "ap": "aap", "ji": "jee",
+    "kon": "kaun", "kaon": "kaun", "kb": "kab", "ap": "aap", "ji": "jee", "ni": "nahi", "nahy": "nahi", "nahe": "nahi",
+    "nehi": "nahi",
+    # Punjabi-influenced Roman Urdu: 'paise kado aan ge', 'kinne din', 'certificate kithon'
+    "kado": "kab", "kadon": "kab", "kinne": "kitne", "kinna": "kitna", "kinni": "kitni", "kithon": "kahan",
+    "kithe": "kahan", "ajj": "aaj", "da": "ka", "banya": "bana", "hoya": "hua",
 }
 
 

@@ -14,7 +14,11 @@ HERE = Path(__file__).resolve().parents[2] / "tools" / "voice"  # the utterance 
 # With the meaning model (models/meaning) the bars are higher; without it (keywords only) a little lower.
 # test_heldout2.json: written before the 2nd round of examples; its first run gave 69% correct and 5-6 wrong
 # intents, which led to the veto rule and some keywords, so it is no longer untouched.
-BARS = {"test_utterances.json": (0.90, 0.90), "test_heldout.json": (0.80, 0.75), "test_heldout2.json": (0.88, 0.85)}
+# test_heldout3.json (162) and test_heldout4.json (101): written before the 3rd tuning round. First runs: set 3 78%
+# right / 8 wrong, set 4 78% / 3 wrong (summary only). After tuning on set 3's mistakes, set 4 untouched: 80% / 2 wrong;
+# its 2 wrong were then fixed too, so both are no longer untouched.
+BARS = {"test_utterances.json": (0.90, 0.90), "test_heldout.json": (0.80, 0.75), "test_heldout2.json": (0.88, 0.85),
+        "test_heldout3.json": (0.93, 0.90), "test_heldout4.json": (0.80, 0.76)}
 
 
 @pytest.mark.parametrize("name", list(BARS))
@@ -110,3 +114,80 @@ def test_english_questions():
     else:
         assert len(wrong) <= 3   # English keywords only
     assert english_intent("When will I get my money?")["action"] == "lookup_payment"
+
+
+@pytest.mark.parametrize("name,min_right", [("test_english2.json", 0.88), ("test_english3.json", 0.85)])
+def test_english_held_out_sets(name, min_right):
+    # written before the 3rd round. First runs: set 2 85% right / 3 wrong, set 3 89% / 0 wrong (summary only);
+    # after: set 2 93% / 0 (its mistakes were looked at), set 3 89% / 0 (untouched)
+    from app.agent import english_intent
+    from urdu_intent import meaning
+    tests = json.loads((HERE / name).read_text(encoding="utf-8"))["tests"]
+    got = [(english_intent(t["text"])["intent"], t["intent"]) for t in tests]
+    wrong = [(g, w) for g, w in got if g != w and g != "unclear"]
+    if meaning.available():
+        assert not wrong and sum(g == w for g, w in got) / len(got) >= min_right, wrong
+    else:
+        assert len(wrong) <= 3
+
+
+# ---- guards: noise words from Whisper, and everyday subjects that are not the claim ----
+@pytest.mark.parametrize("text,reason", [
+    ("ڈاکٹر کی فیس کتنی ہے", "off_topic"), ("bijli ka bill kaise jama karun", "off_topic"),
+    ("میرے بیٹے کا امطحان کب ہی", "off_topic"),           # misheard 'امتحان' is still an exam
+    ("قصائی کی دکان کتنے بجے کھلتی ہے", "off_topic"), ("سبسکرائب کریں", "noise"), ("ناظرین", "noise"),
+])
+def test_off_topic_and_noise_are_unclear(text, reason):
+    r = detect_intent(text)
+    assert r["intent"] == "unclear" and r["reason"] == reason, r
+
+
+@pytest.mark.parametrize("text", [
+    "ڈاکٹر کے پیسے نہیں ہیں بچہ بہت بیمار ہے",             # danger is never blocked as off-topic
+    "بجلی کا بل بھرنے کے لیے امداد کی رقم کب آئے گی",        # a claim word keeps the question in scope
+])
+def test_claim_words_or_danger_keep_a_sentence_in_scope(text):
+    r = detect_intent(text)
+    assert r["intent"] != "unclear", r
+
+
+def test_english_noise_and_off_topic():
+    from app.agent import english_intent
+    assert english_intent("Thanks for watching!")["intent"] == "unclear"
+    assert english_intent("How much is the bus fare?")["intent"] == "unclear"
+    assert english_intent("How much money will I get?")["intent"] == "payment_amount"
+
+
+# ---- correction must not turn everyday words into claim words ----
+@pytest.mark.parametrize("said,has,lacks", [
+    ("کیا شنآختی کارڈ کی کاپی لگے گی", "کیا", "نیا"),          # not 'نیا شناختی' (a new ID card)
+    ("درخواست کےساتھ کون سے کاغذ لگیں گے", "کے ساتھ", "کیسے"),
+    ("کون سی چیزیں جمع کرآنی پڑیں گی", "کرآنی", "کمانے"),       # 'get it submitted' is not 'earn'
+    ("آپ کے بینگ اکاؤنٹ میں", "بینک", "بینگ"),                  # Whisper's real mistakes on clear Urdu speech
+    ("شناختی قارڈ کی تصویر", "کارڈ", "قارڈ"),
+])
+def test_correction_keeps_everyday_words(said, has, lacks):
+    from urdu_intent.correct import correct
+    t = correct(said).text
+    assert has in t and lacks not in t.split(), t
+
+
+# ---- Roman Urdu typed fast, and Punjabi-influenced speech ----
+@pytest.mark.parametrize("text,intent", [
+    ("main complain karna chahti hoon", "complaint"),         # 'karna' is not 'kitna'
+    ("paise kado aan ge", "payment_status"), ("kinne din lagne ne", "how_long"),
+    ("paise ni aaye ajj tak", "payment_not_received"), ("paise account mein nahy aaye", "payment_not_received"),
+    ("maut da certificate kithon banwaiye", "no_death_certificate"), ("meri darkhwast da ki banya", "application_status"),
+    ("میری application کا status بتا دیں", "application_status"), ("کسی نے OTP مانگا ہے", "report_fraud"),
+])
+def test_roman_dialect_and_mixed_english(text, intent):
+    assert detect_intent(text)["intent"] == intent
+
+
+@pytest.mark.parametrize("text,noise", [
+    ("ایسا ایسا ایسا ایسا", True), ("Thanks for watching!", True), ("like and subscribe", True),
+    ("نہیں نہیں نہیں", False), ("میرے پیسے کب آئیں گے", False), ("", False),
+])
+def test_whisper_noise_transcripts(text, noise):
+    from voice_core import noise_transcript
+    assert noise_transcript(text) is noise

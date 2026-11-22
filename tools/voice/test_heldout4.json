@@ -1,0 +1,446 @@
+{
+ "_about": "Held-out set 4 (2026-11-22): written BEFORE the 3rd tuning round, run once for a summary only (no look at single errors), then once after tuning. Never used to change keywords, examples or thresholds.",
+ "tests": [
+  {
+   "text": "میرے کیس میں کوئی پیش رفت ہوئی",
+   "intent": "application_status"
+  },
+  {
+   "text": "kya meri file aage barhi",
+   "intent": "application_status",
+   "tag": "roman"
+  },
+  {
+   "text": "میری امی کی درخواست کا نتیجہ آیا",
+   "intent": "application_status",
+   "tag": "helper"
+  },
+  {
+   "text": "درخواست کے ساتھ کون سے کاغذ لگیں گے",
+   "intent": "required_documents"
+  },
+  {
+   "text": "kya kya saath lana hoga",
+   "intent": "required_documents",
+   "tag": "roman"
+  },
+  {
+   "text": "کون سی چیزیں جمع کرانی پڑیں گی",
+   "intent": "required_documents"
+  },
+  {
+   "text": "کیا دوسری شادی کرنے والی بیوہ بھی حقدار ہے",
+   "intent": "eligibility"
+  },
+  {
+   "text": "meri umar sattar saal hai kya mujhe milega",
+   "intent": "eligibility",
+   "tag": "roman"
+  },
+  {
+   "text": "کیا مجھ جیسی عورت کو یہ سہولت مل سکتی ہے",
+   "intent": "eligibility"
+  },
+  {
+   "text": "مجھے انچارج سے بات کرنی ہے",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "kisi zimmedar se milwa do",
+   "intent": "talk_to_officer",
+   "tag": "roman"
+  },
+  {
+   "text": "کیا میں کسی بندے سے فون پر بات کر سکتی ہوں",
+   "intent": "talk_to_officer"
+  },
+  {
+   "text": "میرے پیسے کب آئیں گے",
+   "intent": "payment_status"
+  },
+  {
+   "text": "raqam kab tak milegi",
+   "intent": "payment_status",
+   "tag": "roman"
+  },
+  {
+   "text": "اس مہینے کی قسط آ گئی",
+   "intent": "payment_status"
+  },
+  {
+   "text": "میں بیوہ ہوں مجھے بھی امداد چاہیے کیسے ملے گی",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "registration kaise hoti hai",
+   "intent": "how_to_apply",
+   "tag": "roman"
+  },
+  {
+   "text": "میرا نام لسٹ میں کیسے آئے گا",
+   "intent": "how_to_apply"
+  },
+  {
+   "text": "کیا میری تصویریں محفوظ ہیں",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "meri maloomat kisi aur ko to nahi di jayengi",
+   "intent": "consent_privacy",
+   "tag": "roman"
+  },
+  {
+   "text": "میں اپنی اجازت ختم کرنا چاہتی ہوں",
+   "intent": "consent_privacy"
+  },
+  {
+   "text": "ایک عورت کہہ رہی ہے دو ہزار دو تو کارڈ بنوا دوں گی",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "koi mujh se pin code maang raha tha",
+   "intent": "report_fraud",
+   "tag": "roman"
+  },
+  {
+   "text": "یہ جعلی کال لگ رہی ہے",
+   "intent": "report_fraud"
+  },
+  {
+   "text": "دفتر کا عملہ بات ہی نہیں سنتا",
+   "intent": "complaint"
+  },
+  {
+   "text": "mujhe shikayat darj karwani hai",
+   "intent": "complaint",
+   "tag": "roman"
+  },
+  {
+   "text": "انہوں نے مجھے ذلیل کیا",
+   "intent": "complaint"
+  },
+  {
+   "text": "مجھے اپنا فون نمبر بدلوانا ہے",
+   "intent": "update_details"
+  },
+  {
+   "text": "account number change karna hai",
+   "intent": "update_details",
+   "tag": "roman"
+  },
+  {
+   "text": "میرا پتہ بدل گیا ہے",
+   "intent": "update_details"
+  },
+  {
+   "text": "سلام",
+   "intent": "greeting"
+  },
+  {
+   "text": "hello ji assalam o alaikum",
+   "intent": "greeting",
+   "tag": "roman"
+  },
+  {
+   "text": "دوبارہ بتائیں",
+   "intent": "repeat"
+  },
+  {
+   "text": "phir se boliye samajh nahi aaya",
+   "intent": "repeat",
+   "tag": "roman"
+  },
+  {
+   "text": "یہ امداد کتنے کی ہے",
+   "intent": "payment_amount"
+  },
+  {
+   "text": "kitne rupay milte hain",
+   "intent": "payment_amount",
+   "tag": "roman"
+  },
+  {
+   "text": "بچوں کے حساب سے کتنا بنے گا",
+   "intent": "payment_amount"
+  },
+  {
+   "text": "قسط ابھی تک نہیں ملی",
+   "intent": "payment_not_received"
+  },
+  {
+   "text": "account khali hai paise nahi pohanche",
+   "intent": "payment_not_received",
+   "tag": "roman"
+  },
+  {
+   "text": "سب کو مل گئے مجھے نہیں ملے",
+   "intent": "payment_not_received"
+  },
+  {
+   "text": "رقم کیسے وصول کروں",
+   "intent": "how_to_collect"
+  },
+  {
+   "text": "paise lene kahan jaun",
+   "intent": "how_to_collect",
+   "tag": "roman"
+  },
+  {
+   "text": "بینک سے نکلوانے کا طریقہ کیا ہے",
+   "intent": "how_to_collect"
+  },
+  {
+   "text": "میرا فارم کیوں مسترد ہوا",
+   "intent": "why_decision"
+  },
+  {
+   "text": "inkaar ki wajah kya hai",
+   "intent": "why_decision",
+   "tag": "roman"
+  },
+  {
+   "text": "میری درخواست کیوں روکی گئی",
+   "intent": "why_decision"
+  },
+  {
+   "text": "میری فائل میں کیا رہ گیا ہے",
+   "intent": "what_is_missing"
+  },
+  {
+   "text": "aur kya chahiye aap ko",
+   "intent": "what_is_missing",
+   "tag": "roman"
+  },
+  {
+   "text": "کیا کچھ اور بھی بھیجنا پڑے گا",
+   "intent": "what_is_missing"
+  },
+  {
+   "text": "کتنے دن انتظار کروں",
+   "intent": "how_long"
+  },
+  {
+   "text": "faisla kab tak hoga",
+   "intent": "how_long",
+   "tag": "roman"
+  },
+  {
+   "text": "کب تک جواب آئے گا",
+   "intent": "how_long"
+  },
+  {
+   "text": "میں فیصلے کو چیلنج کرنا چاہتی ہوں",
+   "intent": "appeal"
+  },
+  {
+   "text": "mujhe ye faisla manzoor nahi",
+   "intent": "appeal",
+   "tag": "roman"
+  },
+  {
+   "text": "دوبارہ غور کیا جائے",
+   "intent": "appeal"
+  },
+  {
+   "text": "مجھے درخواست ختم کرنی ہے",
+   "intent": "withdraw_claim"
+  },
+  {
+   "text": "apna naam wapas lena hai",
+   "intent": "withdraw_claim",
+   "tag": "roman"
+  },
+  {
+   "text": "یہ کیس منسوخ کر دیں",
+   "intent": "withdraw_claim"
+  },
+  {
+   "text": "کاغذ کی تصویر کیسے بھیجوں",
+   "intent": "send_document"
+  },
+  {
+   "text": "certificate ki photo bhejni hai",
+   "intent": "send_document",
+   "tag": "roman"
+  },
+  {
+   "text": "میں دستاویز اپلوڈ کرنا چاہتی ہوں",
+   "intent": "send_document"
+  },
+  {
+   "text": "شناختی کارڈ چوری ہو گیا",
+   "intent": "cnic_problem"
+  },
+  {
+   "text": "mera id card toot gaya hai",
+   "intent": "cnic_problem",
+   "tag": "roman"
+  },
+  {
+   "text": "کارڈ کی میعاد پوری ہو گئی",
+   "intent": "cnic_problem"
+  },
+  {
+   "text": "وفات نامہ نہیں ہے",
+   "intent": "no_death_certificate"
+  },
+  {
+   "text": "death certificate kahan se milega",
+   "intent": "no_death_certificate",
+   "tag": "roman"
+  },
+  {
+   "text": "شوہر کی موت کا اندراج نہیں ہوا",
+   "intent": "no_death_certificate"
+  },
+  {
+   "text": "میرے شوہر کا نام غلط درج ہے",
+   "intent": "wrong_details"
+  },
+  {
+   "text": "tareekh e paidaish ghalat likhi hai",
+   "intent": "wrong_details",
+   "tag": "roman"
+  },
+  {
+   "text": "ریکارڈ میں غلطی ہے",
+   "intent": "wrong_details"
+  },
+  {
+   "text": "میری بیٹی کی شادی ہو گئی ہے",
+   "intent": "household_change"
+  },
+  {
+   "text": "ghar mein ab koi kamane wala hai",
+   "intent": "household_change",
+   "tag": "roman"
+  },
+  {
+   "text": "بیٹا کمانے لگا ہے",
+   "intent": "household_change"
+  },
+  {
+   "text": "صحت کارڈ کیسے بنے گا",
+   "intent": "other_programmes"
+  },
+  {
+   "text": "aur koi sarkari madad hai",
+   "intent": "other_programmes",
+   "tag": "roman"
+  },
+  {
+   "text": "پنشن کے لیے کیا کروں",
+   "intent": "other_programmes"
+  },
+  {
+   "text": "مجھے پڑھنا نہیں آتا کوئی مدد کرے",
+   "intent": "helper_visit"
+  },
+  {
+   "text": "koi ghar bhej dein",
+   "intent": "helper_visit",
+   "tag": "roman"
+  },
+  {
+   "text": "میں چل نہیں سکتی کوئی گھر آ جائے",
+   "intent": "helper_visit"
+  },
+  {
+   "text": "دفتر کا پتہ بتائیں",
+   "intent": "office_info"
+  },
+  {
+   "text": "office kitne baje khulta hai",
+   "intent": "office_info",
+   "tag": "roman"
+  },
+  {
+   "text": "آپ کا مرکز کہاں ہے",
+   "intent": "office_info"
+  },
+  {
+   "text": "میرا دیور مجھے مارتا ہے",
+   "intent": "urgent_help"
+  },
+  {
+   "text": "khane ko kuch nahi hai",
+   "intent": "urgent_help",
+   "tag": "roman"
+  },
+  {
+   "text": "فوری مدد چاہیے بچہ ہسپتال میں ہے",
+   "intent": "urgent_help"
+  },
+  {
+   "text": "شکریہ بیٹا",
+   "intent": "thanks_goodbye"
+  },
+  {
+   "text": "bas theek hai allah hafiz",
+   "intent": "thanks_goodbye",
+   "tag": "roman"
+  },
+  {
+   "text": "اللہ آپ کا بھلا کرے",
+   "intent": "thanks_goodbye"
+  },
+  {
+   "text": "آرام سے بولیں",
+   "intent": "speak_slowly"
+  },
+  {
+   "text": "ahista bolo please",
+   "intent": "speak_slowly",
+   "tag": "roman"
+  },
+  {
+   "text": "اتنا تیز نہ بولیں",
+   "intent": "speak_slowly"
+  },
+  {
+   "text": "کل بارش ہو گی",
+   "intent": "unclear"
+  },
+  {
+   "text": "میں نے چائے پی لی",
+   "intent": "unclear"
+  },
+  {
+   "text": "ٹی وی کیسے ٹھیک کروں",
+   "intent": "unclear",
+   "tag": "hard_negative"
+  },
+  {
+   "text": "کرکٹ کا سکور کیا ہے",
+   "intent": "unclear"
+  },
+  {
+   "text": "ٹرین کب آئے گی",
+   "intent": "unclear",
+   "tag": "hard_negative"
+  },
+  {
+   "text": "قصائی کی دکان کتنے بجے کھلتی ہے",
+   "intent": "unclear",
+   "tag": "hard_negative"
+  },
+  {
+   "text": "doctor ki fees kitni hai",
+   "intent": "unclear",
+   "tag": "hard_negative"
+  },
+  {
+   "text": "اچھا",
+   "intent": "unclear"
+  },
+  {
+   "text": "ہیلو",
+   "intent": "unclear"
+  },
+  {
+   "text": "ناظرین",
+   "intent": "unclear",
+   "tag": "hard_negative"
+  }
+ ]
+}
