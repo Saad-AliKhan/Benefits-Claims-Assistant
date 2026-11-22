@@ -1,30 +1,59 @@
-{% extends "base.html" %}
-{% block content %}
-  <header class="o-top">
-    <h1>Admin</h1>
-    <span class="o-user"><span id="who"></span> <button id="out" type="button" class="link">Log out</button></span>
-  </header>
-  <nav class="tabs" role="tablist">
-    <button type="button" class="chip on" data-tab="rules">Decision rules</button>
+{% extends "staff.html" %}
+{% block sidenav %}
+  <nav class="tabs" role="tablist" aria-label="Admin">
+    <button type="button" class="chip on" data-tab="users">People and access</button>
+    <button type="button" class="chip" data-tab="rules">Decision rules</button>
     <button type="button" class="chip" data-tab="keys">API keys</button>
-    <button type="button" class="chip" data-tab="users">Users</button>
   </nav>
-  <section id="rules" class="tab">
-    <p class="muted">Changing a rule saves a <b>new version</b>; the very next decision uses it and records the version
+  <nav aria-label="Other portals"><a href="/auditor">Auditor view</a></nav>
+{% endblock %}
+{% block content %}
+  <section id="users" class="tab">
+    <div class="inline">
+      <input id="u-q" placeholder="Search name, email or mobile" aria-label="Search">
+      <select id="u-role" aria-label="Role"><option value="">Everyone</option><option value="officer">Officers</option>
+        <option value="auditor">Auditors</option><option value="helper">Helpers</option><option value="admin">Admins</option>
+        <option value="citizen">Citizens</option></select>
+      <button id="u-add" type="button" class="btn primary">Add staff member</button>
+    </div>
+    <div id="user-list"></div>
+  </section>
+  <section id="rules" class="tab" hidden>
+    <p class="muted">Changing a rule saves a new version; the very next decision uses it and records the version
       number. Old versions are never edited.</p>
-    <form id="rule-form" class="rules"></form>
+    <form id="rule-form" class="rules card"></form>
     <h2>History</h2>
     <div id="history"></div>
   </section>
   <section id="keys" class="tab" hidden>
-    <p class="muted">Keys for the public API (<code>/api/v1</code>, see <a href="/docs">/docs</a>). A key is shown once.</p>
+    <p class="muted">Keys let a partner system read claim status through the public API (<a href="/docs">documentation</a>).
+      A key is shown once.</p>
     <form id="key-form" class="inline"><input id="key-name" placeholder="Partner name" required minlength="3">
       <button class="btn primary">Create key</button></form>
     <p id="new-key" class="flash" hidden></p>
     <div id="key-list"></div>
   </section>
-  <section id="users" class="tab" hidden><div id="user-list"></div></section>
-  <div id="toast" role="status" hidden></div>
+  <dialog id="add-dlg" class="sheet">
+    <form id="add-form" method="dialog">
+      <h2>Add a staff member</h2>
+      <div class="field"><label for="a-name">Full name</label><input id="a-name" required minlength="3"></div>
+      <div class="field"><label for="a-email">Work email</label><input id="a-email" type="email" required></div>
+      <div class="field"><label for="a-role">Role</label>
+        <select id="a-role"><option value="officer">Officer: decides claims sent to a person</option>
+          <option value="helper">Helper: helps families who allow it</option>
+          <option value="auditor">Auditor: read-only checks</option><option value="admin">Admin: people, rules, keys</option></select></div>
+      <div class="field"><label for="a-phone">Mobile (optional)</label><input id="a-phone" inputmode="tel" placeholder="0300 1234567"></div>
+      <p id="add-err" class="err" hidden></p>
+      <div class="actions"><button class="btn primary" value="ok" id="add-ok">Create account</button>
+        <button class="btn" value="cancel" formnovalidate>Cancel</button></div>
+    </form>
+  </dialog>
+  <dialog id="pw-dlg" class="sheet">
+    <h2 id="pw-title">Temporary password</h2>
+    <p>Give this to <b id="pw-who"></b> in person or by phone. It works once: they choose their own password at the first sign-in.</p>
+    <p class="secret" id="pw-val"></p>
+    <form method="dialog" class="actions"><button class="btn primary">Done</button></form>
+  </dialog>
 {% endblock %}
 {% block scripts %}
   <script src="/static/api.js"></script>

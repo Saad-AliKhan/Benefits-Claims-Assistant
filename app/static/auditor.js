@@ -71,6 +71,7 @@
   document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => {
     document.querySelectorAll("[data-tab]").forEach((x) => x.classList.toggle("on", x === b));
     document.querySelectorAll(".tab").forEach((t) => { t.hidden = t.id !== b.dataset.tab; });
+    $("page-title").textContent = b.textContent;
     ({ eval: loadEval, dec: loadDecisions, log: loadLog, cons: loadConsents })[b.dataset.tab]().catch((e) => toast(e.message));
   }));
   $("log-form").addEventListener("submit", (ev) => loadLog(ev).catch((e) => toast(e.message)));

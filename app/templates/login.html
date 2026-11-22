@@ -1,36 +1,92 @@
 {% extends "base.html" %}
 {% block content %}
   <header class="brand">
-    <img src="/static/icon.svg" alt="" width="72" height="72">
+    <img src="/static/icon.svg" alt="">
     <div>
-      <h1>آسرا <span>Aasra</span></h1>
-      <p lang="ur" dir="rtl">بیوہ خواتین کی امداد، آواز سے · آسان، محفوظ، مفت</p>
-      <p class="muted">Widow support, by voice. Simple, safe, free.</p>
+      <h1><b lang="ur">آسرا</b><span>Aasra</span></h1>
+      <p class="promise" lang="ur" dir="rtl">بیوہ خواتین کی امداد، آواز سے</p>
+      <p class="muted">Widow support, by voice</p>
     </div>
   </header>
-  <h2 class="login-h">Log in</h2>
-  <form id="f" class="login" autocomplete="on">
-    <label for="email">Email</label>
-    <input id="email" type="email" required autofocus autocomplete="username">
-    <label for="pw">Password</label>
-    <input id="pw" type="password" required autocomplete="current-password">
-    <button class="btn primary" type="submit">Log in</button>
-    <p id="err" class="err" role="alert" hidden></p>
-  </form>
-  <section class="demo">
-    <h2>Demo accounts <span class="muted">(password <code>demo1234</code>)</span></h2>
-    <p class="muted">Each role sees a different page. Tap one to fill the form.</p>
+
+  <section id="citizen" class="panel-card" aria-label="For citizens and families">
+    <div class="seg2" role="tablist">
+      <button type="button" role="tab" data-v="in" aria-selected="true"><span class="ur" lang="ur">لاگ اِن</span>Sign in</button>
+      <button type="button" role="tab" data-v="new" aria-selected="false"><span class="ur" lang="ur">نیا اکاؤنٹ</span>New account</button>
+      <button type="button" role="tab" data-v="reset" aria-selected="false"><span class="ur" lang="ur">پن بھول گئیں</span>Forgot PIN</button>
+    </div>
+
+    <form id="f-in" class="view">
+      <div class="field"><label for="in-phone" class="bi"><span class="ur" lang="ur">موبائل نمبر</span><span class="en">Mobile number</span></label>
+        <input id="in-phone" class="big-input" inputmode="tel" autocomplete="tel" placeholder="0300 1234567" required></div>
+      <div class="field"><label for="in-pin" class="bi"><span class="ur" lang="ur">پن</span><span class="en">PIN</span></label>
+        <input id="in-pin" class="pin-input" type="password" inputmode="numeric" autocomplete="current-password" maxlength="6" required></div>
+      <button class="btn primary go-btn"><span class="ur" lang="ur">لاگ اِن کریں</span><span class="en">Sign in</span></button>
+    </form>
+
+    <form id="f-new" class="view" hidden>
+      <div id="new-a">
+        <div class="field"><label for="new-name" class="bi"><span class="ur" lang="ur">پورا نام (شناختی کارڈ والا)</span><span class="en">Full name, as on the CNIC</span></label>
+          <input id="new-name" autocomplete="name" required minlength="3"></div>
+        <div class="field"><label for="new-cnic" class="bi"><span class="ur" lang="ur">شناختی کارڈ نمبر</span><span class="en">CNIC number</span></label>
+          <input id="new-cnic" class="big-input" inputmode="numeric" placeholder="35202-1234567-1" required></div>
+        <div class="field"><label for="new-phone" class="bi"><span class="ur" lang="ur">موبائل نمبر</span><span class="en">Mobile number (we send a code)</span></label>
+          <input id="new-phone" class="big-input" inputmode="tel" autocomplete="tel" placeholder="0300 1234567" required></div>
+        <button class="btn primary go-btn" data-step="send"><span class="ur" lang="ur">کوڈ بھیجیں</span><span class="en">Send code</span></button>
+      </div>
+      <div id="new-b" hidden></div>
+    </form>
+
+    <form id="f-reset" class="view" hidden>
+      <div id="reset-a">
+        <div class="field"><label for="reset-phone" class="bi"><span class="ur" lang="ur">موبائل نمبر</span><span class="en">Mobile number</span></label>
+          <input id="reset-phone" class="big-input" inputmode="tel" placeholder="0300 1234567" required></div>
+        <button class="btn primary go-btn" data-step="send"><span class="ur" lang="ur">کوڈ بھیجیں</span><span class="en">Send code</span></button>
+      </div>
+      <div id="reset-b" hidden></div>
+    </form>
+    <p id="c-err" class="err" role="alert" hidden></p>
+    <p class="muted small">A helper can sign up for a widow with her CNIC and her own mobile number. The money only ever goes to an account in her name.</p>
+  </section>
+
+  <p class="staff-toggle"><button id="staff-link" type="button" class="link">Staff sign-in</button></p>
+  <section id="staff" class="panel-card" aria-label="Staff sign-in" hidden>
+    <h2 class="login-h">Staff sign-in</h2>
+    <form id="f-staff">
+      <div class="field"><label for="email">Work email</label><input id="email" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required></div>
+      <button class="btn primary go-btn">Sign in</button>
+      <p id="err" class="err" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <section id="change" class="panel-card" hidden>
+    <h2 class="login-h">Choose your own password</h2>
+    <p class="muted">You signed in with a temporary password. Choose a new one: at least 10 characters, with letters and numbers.</p>
+    <form id="f-change">
+      <div class="field"><label for="ch-cur">Temporary password</label><input id="ch-cur" type="password" autocomplete="current-password" required></div>
+      <div class="field"><label for="ch-new">New password</label><input id="ch-new" type="password" autocomplete="new-password" minlength="10" required></div>
+      <div class="field"><label for="ch-new2">New password again</label><input id="ch-new2" type="password" autocomplete="new-password" minlength="10" required></div>
+      <button class="btn primary go-btn">Save and continue</button>
+      <p id="ch-err" class="err" role="alert" hidden></p>
+    </form>
+  </section>
+
+  {% if demo %}
+  <section class="demo" id="demo">
+    <h2>Demo accounts <span class="muted">(password demo1234)</span></h2>
     <div class="demo-list">
-      <button type="button" class="chip" data-e="rukhsana@demo.pk">Citizen: Rukhsana (clean claim)</button>
-      <button type="button" class="chip" data-e="saima@demo.pk">Citizen: Saima (asked for proof)</button>
-      <button type="button" class="chip" data-e="zubaida@demo.pk">Citizen: Zubaida (no death record)</button>
-      <button type="button" class="chip" data-e="kulsoom@demo.pk">Citizen: Kulsoom (2nd claim, same death)</button>
+      <button type="button" class="chip" data-e="rukhsana@demo.pk">Rukhsana, citizen</button>
+      <button type="button" class="chip" data-e="saima@demo.pk">Saima, asked for proof</button>
+      <button type="button" class="chip" data-e="zubaida@demo.pk">Zubaida, no death record</button>
+      <button type="button" class="chip" data-e="kulsoom@demo.pk">Kulsoom, second claim</button>
       <button type="button" class="chip" data-e="helper@demo.pk">Helper</button>
       <button type="button" class="chip" data-e="officer@demo.pk">Officer</button>
       <button type="button" class="chip" data-e="admin@demo.pk">Admin</button>
       <button type="button" class="chip" data-e="auditor@demo.pk">Auditor</button>
     </div>
   </section>
+  {% endif %}
 {% endblock %}
 {% block scripts %}
   <script src="/static/api.js"></script>

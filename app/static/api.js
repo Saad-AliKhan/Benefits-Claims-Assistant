@@ -87,6 +87,7 @@
     try {
       const me = await LM.api("/auth/me");
       localStorage.setItem("lm_me", JSON.stringify(me));
+      if (me.must_change_password) { location.replace("/login?change=1"); return null; }   // temporary password first
       if (roles.indexOf(me.role) === -1) { location.replace(me.home || "/login"); return null; }
       return me;
     } catch (e) {
@@ -98,7 +99,7 @@
   /* Staff pages: name + role + log out in the top bar. */
   LM.topbar = function (me) {
     const who = document.getElementById("who");
-    if (who) who.textContent = me.name + " (" + me.role + ")";
+    if (who) who.replaceChildren(LM.el("b", { text: me.name }), LM.el("div", { class: "small", text: me.email || me.phone || me.role }));
     const out = document.getElementById("out");
     if (out) out.addEventListener("click", LM.logout);
   };

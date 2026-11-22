@@ -14,7 +14,8 @@ STATIC = Path(__file__).resolve().parents[1] / "static"
 
 
 def _page(request: Request, name: str, title: str, **extra):
-    return templates.TemplateResponse(request, name, {"title": title, "label": settings.prototype_label, **extra})
+    label = settings.prototype_label if settings.demo_mode else ""
+    return templates.TemplateResponse(request, name, {"title": title, "label": label, "demo": settings.demo_mode, **extra})
 
 
 @router.get("/")
@@ -24,7 +25,7 @@ def home():
 
 @router.get("/login", response_class=HTMLResponse)
 def login_page(request: Request):
-    return _page(request, "login.html", "Log in")
+    return _page(request, "login.html", "Sign in", body_class="login-page")
 
 
 @router.get("/citizen", response_class=HTMLResponse)
@@ -60,17 +61,17 @@ def record_page(request: Request):
 
 @router.get("/officer", response_class=HTMLResponse)
 def officer_page(request: Request):
-    return _page(request, "officer.html", "Officer queue", body_class="wide")
+    return _page(request, "officer.html", "Officer queue", body_class="staff", heading="Claims queue", portal="Officer portal")
 
 
 @router.get("/admin", response_class=HTMLResponse)
 def admin_page(request: Request):
-    return _page(request, "admin.html", "Admin", body_class="wide")
+    return _page(request, "admin.html", "Admin", body_class="staff", heading="People and access", portal="Admin portal")
 
 
 @router.get("/auditor", response_class=HTMLResponse)
 def auditor_page(request: Request):
-    return _page(request, "auditor.html", "Auditor", body_class="wide")
+    return _page(request, "auditor.html", "Auditor", body_class="staff", heading="Accuracy", portal="Auditor portal")
 
 
 @router.get("/sw.js")

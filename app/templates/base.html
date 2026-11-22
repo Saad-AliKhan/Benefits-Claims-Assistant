@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b6b3a">
+  <meta name="theme-color" content="#0e5a3a">
   <link rel="manifest" href="/static/manifest.json">
   <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
   <link rel="icon" href="/static/favicon-64.png" sizes="64x64" type="image/png">
@@ -11,13 +11,16 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <title>{{ title }} - Aasra</title>
+  <link rel="preload" href="/static/fonts/IBMPlexSans-Regular-Latin1.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body class="{{ body_class | default('') }}">
-  <div class="banner">{{ label }}</div>
+  {% if label %}<div class="banner">{{ label }}</div>{% endif %}
+  {% block body %}
   <main>
     {% block content %}{% endblock %}
   </main>
+  {% endblock %}
   {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -43,7 +43,19 @@ home-screen icon, opens full screen on the assistant, and the mic and camera wor
 time `phone.bat` starts, and works only while the laptop is on.
 Settings: copy `.env.example` to `.env`. <http://127.0.0.1:8080/health/ai> says whether OCR and Whisper are loaded.
 
-### Demo accounts (password `demo1234`, also one tap on the login page)
+### Accounts (live)
+
+* **Citizens** sign up on the sign-in page: name, CNIC and mobile, a 6-digit code to the mobile (shown on screen until an
+  SMS gateway is connected: `SMS_MODE=screen`), then a 4-6 digit PIN. They sign in with mobile + PIN; "Forgot PIN"
+  sends a new code. A helper can sign up a widow with her CNIC and her mobile.
+* **Staff** (officer, auditor, helper, admin) are added by an admin on **Admin → People and access**: a temporary
+  password is shown once and must be changed at the first sign-in (10+ characters, letters and numbers). Admins can
+  reset passwords and deactivate accounts (signed out at once). The last active admin cannot be deactivated.
+* Every account: 5 wrong tries lock it for 15 minutes. Changing a password or PIN signs out every other device.
+* **Live mode** (`DEMO_MODE=false` in `.env`): no demo accounts or fake claims; the first start asks for the first
+  admin (`python -m scripts.create_admin`). Set a long random `SECRET_KEY`.
+
+### Demo accounts (demo mode only; password `demo1234`, one tap on the sign-in page)
 
 | Role | Account | Sees |
 |---|---|---|

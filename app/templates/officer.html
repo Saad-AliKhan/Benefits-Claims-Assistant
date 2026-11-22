@@ -1,15 +1,15 @@
-{% extends "base.html" %}
+{% extends "staff.html" %}
+{% block sidenav %}
+  <nav aria-label="Officer"><a href="/officer" aria-current="page">Claims queue</a></nav>
+{% endblock %}
+{% block tools %}<button id="refresh" type="button" class="btn">Refresh</button>{% endblock %}
 {% block content %}
-  <header class="o-top">
-    <h1>Officer queue</h1>
-    <span class="o-user"><span id="who"></span> <button id="out" type="button" class="link">Log out</button></span>
-  </header>
   <section class="o-bar">
     <div id="filters" role="group" aria-label="Filter the queue">
       <button type="button" data-f="" class="chip on">All <b id="c-all">0</b></button>
-      <button type="button" data-f="officer" class="chip red">Needs an officer <b id="c-off">0</b></button>
+      <button type="button" data-f="officer" class="chip">Needs an officer <b id="c-off">0</b></button>
       <button type="button" data-f="mine" class="chip">Mine <b id="c-mine">0</b></button>
-      <button type="button" data-f="citizen" class="chip yellow">Waiting for the citizen <b id="c-cit">0</b></button>
+      <button type="button" data-f="citizen" class="chip">Waiting for the citizen <b id="c-cit">0</b></button>
     </div>
     <label class="o-sort">Sort by
       <select id="sort">
@@ -18,14 +18,12 @@
         <option value="oldest">Oldest first</option>
       </select>
     </label>
-    <button id="refresh" type="button" class="btn">Refresh</button>
   </section>
   <p id="how" class="muted"></p>
   <div class="o-grid">
     <section id="list" aria-live="polite"></section>
     <aside id="detail" hidden></aside>
   </div>
-  <div id="toast" role="status" hidden></div>
 {% endblock %}
 {% block scripts %}
   <script src="/static/api.js"></script>

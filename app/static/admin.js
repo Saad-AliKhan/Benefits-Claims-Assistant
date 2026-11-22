@@ -56,16 +56,54 @@
     catch (e) { toast(e.message, true); }
   });
 
-  async function loadUsers() {
-    const us = await api("/admin/users");
-    $("user-list").replaceChildren(table(["Id", "Name", "Email", "Role"], us.map((u) => [String(u.id), u.name, u.email, u.role])));
+  /* ---- people and access: staff accounts (temporary password, deactivate) and citizen accounts ---- */
+  const ROLE = { officer: "Officer", auditor: "Auditor", helper: "Helper", admin: "Admin", citizen: "Citizen" };
+  let ME = null;
+  function showPassword(name, pw, title) {
+    $("pw-title").textContent = title || "Temporary password"; $("pw-who").textContent = name; $("pw-val").textContent = pw;
+    $("pw-dlg").showModal();
   }
+  async function loadUsers() {
+    const q = $("u-q").value.trim(), role = $("u-role").value;
+    const us = await api("/admin/users?" + new URLSearchParams(Object.assign(q ? { q: q } : {}, role ? { role: role } : {})));
+    if (!us.length) { $("user-list").replaceChildren(el("p", { class: "empty", text: q || role ? "No one matches." : "No accounts yet. Add the first staff member." })); return; }
+    $("user-list").replaceChildren(table(["Name", "Role", "Sign-in", "Last sign-in", "Status", ""], us.map((u) => {
+      const state = !u.active ? el("span", { class: "state-off", text: "Deactivated" })
+        : u.locked ? el("span", { class: "state-off", text: "Locked (wrong passwords)" })
+        : u.must_change_password ? el("span", { class: "state-temp", text: "Has not signed in yet" }) : "Active";
+      const acts = el("div", { class: "actions" });
+      if (u.role !== "citizen" && u.active) acts.append(el("button", { type: "button", class: "btn", onclick: async () => {
+        try { const r = await api("/admin/users/" + u.id + "/reset-password", { method: "POST" });
+          showPassword(u.name, r.temporary_password, "New temporary password"); loadUsers(); } catch (e) { toast(e.message, true); } } }, "Reset password"));
+      if (!ME || u.id !== ME.id) acts.append(el("button", { type: "button", class: u.active ? "btn danger" : "btn", onclick: async () => {
+        if (u.active && !confirm("Deactivate " + u.name + "? They are signed out at once and cannot sign in.")) return;
+        try { await api("/admin/users/" + u.id + "/active", { method: "POST", body: { active: !u.active } });
+          toast(u.active ? "Deactivated " + u.name : "Reactivated " + u.name); loadUsers(); } catch (e) { toast(e.message, true); } } },
+        u.active ? "Deactivate" : "Reactivate"));
+      return [el("div", {}, el("b", { text: u.name })), el("span", { class: "role-tag", text: ROLE[u.role] || u.role }),
+        u.email || u.phone || "", u.last_login_at ? LM.when(u.last_login_at) : "Never", state, acts];
+    })));
+  }
+  let searchTimer = null;
+  $("u-q").addEventListener("input", () => { clearTimeout(searchTimer); searchTimer = setTimeout(() => loadUsers().catch((e) => toast(e.message, true)), 300); });
+  $("u-role").addEventListener("change", () => loadUsers().catch((e) => toast(e.message, true)));
+  $("u-add").addEventListener("click", () => { $("add-form").reset(); $("add-err").hidden = true; $("add-dlg").showModal(); });
+  $("add-form").addEventListener("submit", async (ev) => {
+    if (ev.submitter && ev.submitter.value === "cancel") return;
+    ev.preventDefault();
+    try {
+      const r = await api("/admin/users", { method: "POST", body: { full_name: $("a-name").value, email: $("a-email").value,
+        role: $("a-role").value, phone: $("a-phone").value || null } });
+      $("add-dlg").close(); showPassword(r.name, r.temporary_password); loadUsers();
+    } catch (e) { $("add-err").hidden = false; $("add-err").textContent = e.message; }
+  });
 
   document.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => {
     document.querySelectorAll("[data-tab]").forEach((x) => x.classList.toggle("on", x === b));
     document.querySelectorAll(".tab").forEach((t) => { t.hidden = t.id !== b.dataset.tab; });
+    $("page-title").textContent = b.textContent;
     ({ rules: loadRules, keys: loadKeys, users: loadUsers })[b.dataset.tab]().catch((e) => toast(e.message, true));
   }));
 
-  (async () => { const me = await LM.requireRole(["admin"]); if (!me) return; LM.topbar(me); loadRules().catch((e) => toast(e.message, true)); })();
+  (async () => { const me = await LM.requireRole(["admin"]); if (!me) return; ME = me; LM.topbar(me); loadUsers().catch((e) => toast(e.message, true)); })();
 })();
