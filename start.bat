@@ -42,9 +42,10 @@ if /i "%DEMO_MODE%"=="false" if defined FRESH (
   set "FRESH="
 )
 if defined FRESH (
-  echo Wiping the demo database and uploaded photos...
+  echo Wiping the demo database and uploaded photos, and signing everyone out...
   del /q lastmile.db lastmile.db-wal lastmile.db-shm 2>nul
   if exist uploads rmdir /s /q uploads
+  set "SESSION_EPOCH=%RANDOM%%RANDOM%%RANDOM%"
 )
 %P% -m alembic upgrade head || goto :fail
 if not exist data\scenarios.json %P% -m scripts.make_fake_people || goto :fail

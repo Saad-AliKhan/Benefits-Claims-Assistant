@@ -63,7 +63,11 @@ def normalize_cnic(cnic: str | None) -> str | None:
 
 
 def name_score(a: str, b: str) -> float:
-    """0..1. Takes the stricter of 'whole name' and 'distinctive words only'."""
+    """0..1. Takes the stricter of 'whole name' and 'distinctive words only'. When either name is written in
+    Urdu, the English one is converted into Urdu and the two are compared there (app/urdu_names.py)."""
+    from app.urdu_names import has_urdu, same_name_score
+    if has_urdu(a) or has_urdu(b):
+        return same_name_score(a, b)
     ta, tb = tokens(a), tokens(b)
     if not ta or not tb:
         return 0.0
@@ -91,14 +95,15 @@ def match_name(name: str, cnic: str | None, candidates: list[dict], rules: dict,
         "thresholds_used": {"name_match_auto_min": auto_min, "name_match_review_min": review_min},
         "rule_version": rule_version,
     }
-    if not tokens(name):
+    from app.urdu_names import has_urdu
+    if not tokens(name) and not has_urdu(name):
         reasons.append("The name is empty or has no readable letters.")
         return result
 
     # 1) collapse exact duplicates (same CNIC listed twice)
     seen, unique = set(), []
     for c in candidates:
-        key = normalize_cnic(c.get("cnic")) or f"name:{' '.join(tokens(c.get('name', '')))}"
+        key = normalize_cnic(c.get("cnic")) or f"name:{' '.join(tokens(c.get('name', ''))) or c.get('name', '')}"
         if key in seen:
             result["duplicates_collapsed"] += 1
             continue
@@ -167,4 +172,4 @@ def match_name(name: str, cnic: str | None, candidates: list[dict], rules: dict,
 
     result.update(status=status, action=action, confidence=round(confidence, 4),
                   best=best["candidate"], alternatives=[r["candidate"] for r in rest[:3]])
-    return result
+    return result

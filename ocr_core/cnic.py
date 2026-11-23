@@ -29,7 +29,8 @@ from .datatypes import BadImage, Extraction, Field, Flag, Line
 
 SMART_LABELS = {
     "name": ["name"],
-    "father_or_husband_name": ["father name", "husband name", "father's name", "husband's name"],
+    "father_or_husband_name": ["father name", "husband name", "father's name", "husband's name",
+                               "father's / husband's name", "father / husband name", "father's/husband's name"],
     "gender": ["gender"],
     "country_of_stay": ["country of stay"],
     "identity_number": ["identity number"],
@@ -116,14 +117,67 @@ def _extract_detected(engine, img: np.ndarray, boxes: dict, quality: dict, today
 
 def extract_cnic(engine, img: np.ndarray, today: date | None = None) -> Extraction:
     today = today or date.today()
+    detected = None
     detector = load_detector()
     if detector is not None:
         quality = check_quality(img)
         boxes = detector.detect(img)
         if _detector_says_smart(boxes):
-            ex = _extract_detected(engine, img, boxes, quality, today)
-            if ex is not None:
-                return ex
+            detected = _extract_detected(engine, img, boxes, quality, today)
+            if detected is not None and _overall(detected) >= SETTINGS.REVIEW_BELOW:
+                return detected
+    if detected is None:
+        return _extract_by_labels(engine, img, today)
+    # The detector found a smart card but missed or doubted a key field (its boxes can land on the wrong
+    # line, e.g. the father's name read as the name): read the card by its printed labels too and combine.
+    try:
+        labelled = _extract_by_labels(engine, img, today)
+    except BadImage:
+        return detected
+    return _combine(detected, labelled, today)
+
+
+def _overall(ex: Extraction) -> float:
+    vals = [ex.fields[k].confidence if ex.fields.get(k) and ex.fields[k].value is not None else 0.0
+            for k in ex.key_fields]
+    return min(vals) if vals else 0.0
+
+
+def _combine(detected: Extraction, labelled: Extraction, today: date) -> Extraction:
+    """Two independent readings of one smart card. When both read the same CNIC number, the label reading
+    is clearly reading this card, so its values fill the detector's gaps and win a disagreement when they
+    are more confident (the disagreement is still marked for review). When the numbers differ, nothing is
+    trusted beyond the detector's reading and every filled-in or disputed value goes to a person."""
+    d_num, l_num = detected.fields["cnic"].value, labelled.fields["cnic"].value
+    same_number = d_num is not None and d_num == l_num
+    f = dict(detected.fields)
+    for key, lab in labelled.fields.items():
+        if key == "card.type" or lab.value is None:
+            continue
+        det = f.get(key)
+        if det is None or det.value is None:
+            if same_number:
+                f[key] = Field(lab.value, lab.confidence, lab.needs_review, lab.raw, lab.method + "+labels", lab.note)
+            else:
+                f[key] = Field(lab.value, min(lab.confidence, 0.6), True, lab.raw, lab.method + "+labels",
+                               "read only by the labels, and the two readings of the CNIC number differ: check it")
+        elif det.value == lab.value:
+            joint = min(0.995, 1 - (1 - det.confidence) * (1 - lab.confidence))
+            f[key] = review(Field(det.value, joint, False, det.raw, det.method + "+labels_agree", det.note))
+        else:
+            keep, other = (lab, det) if (same_number and key != "cnic" and lab.confidence > det.confidence) else (det, lab)
+            f[key] = Field(keep.value, min(keep.confidence, 0.7), True, keep.raw, keep.method + "+disputed",
+                           f"two readings differ: {keep.value} vs {other.value}")
+    if f.get("gender") is not None and f["gender"].value is None:
+        f["gender"] = _gender_from_cnic(f["cnic"])
+    _issue_expiry_agree(f)
+    quality = {**detected.quality, "labels_cross_check": True, "cnic_readings_agree": same_number}
+    return Extraction("cnic", f, _flags(f, "smart", today), quality, KEY_FIELDS)
+
+
+def _extract_by_labels(engine, img: np.ndarray, today: date) -> Extraction:
+    """The label-based reading: find the printed labels ('Identity Number', 'Date of Birth') and read the
+    value under each. Works for both card generations; the only reader for the old green card."""
     prep = prepare(engine, img, SETTINGS.CNIC_LONG_SIDE, _anchor_score, min_score=3,
                    min_long_side=SETTINGS.CNIC_MIN_LONG_SIDE)
     lines, image = prep.lines, prep.image
@@ -158,9 +212,12 @@ def extract_cnic(engine, img: np.ndarray, today: date | None = None) -> Extracti
             f[key] = name_field([value_below(lines, hit.line)] if hit and value_below(lines, hit.line) else []) \
                 if hit else not_found(key.replace("_", " "))
         hit = hits.get("father_or_husband_name")
+        label = hit.line.text.lower() if hit else ""
+        both = "husband" in label and "father" in label   # newer cards: "Father's / Husband's Name"
         f["father_or_husband.relation"] = Field(
-            ("Husband" if "husband" in hit.line.text.lower() else "Father") if hit else None,
-            0.9 if hit else 0.0, method="label" if hit else "not_found")
+            None if (not hit or both) else ("Husband" if "husband" in label else "Father"),
+            0.0 if (not hit or both) else 0.9,
+            method="not_determined" if both else ("label" if hit else "not_found"))
         hit = hits.get("gender")
         below = value_below(lines, hit.line) if hit else None
         f["gender"] = choice_field([below], "", "gender") if below else _gender_from_cnic(f["cnic"])

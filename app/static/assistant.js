@@ -9,13 +9,13 @@
   const W = {
     ur: { weak: "کنکشن کمزور ہے، آپ کا کام محفوظ ہے۔ سگنل آتے ہی بھیج دوں گی۔", retry: "دوبارہ بھیجیں", talk: "بولیں",
           stop: "بس", listening: "سن رہی ہوں…", thinking: "سوچ رہی ہوں…", type: "لکھ کر بتائیں", send: "بھیجیں",
-          snap: "تصویر لیں", pick: "گیلری سے تصویر", card: "کارڈ اس نشان کے اندر رکھیں", page: "پورا صفحہ اس نشان کے اندر",
+          snap: "تصویر لیں", hold: "کارڈ ساکت رکھیں…", pick: "گیلری سے تصویر", card: "کارڈ اس نشان کے اندر رکھیں", page: "پورا صفحہ اس نشان کے اندر", page_side: "صفحہ آڑا (لٹا کر) اس نشان کے اندر رکھیں",
           again: "دوبارہ شروع کریں", you: "آپ", photo: "📷 تصویر بھیجی", nosms: "ابھی کوئی SMS نہیں۔", play: "دوبارہ سنیں",
           novoice: "آواز ابھی دستیاب نہیں۔ بٹن دبائیں یا لکھیں۔", nomic: "مائیکروفون کی اجازت نہیں ملی۔ بٹن دبائیں یا لکھیں۔" },
     en: { weak: "Connection is weak, your work is saved. I will send it when the signal is back.", retry: "Send again",
           talk: "Speak", stop: "Done", listening: "Listening…", thinking: "Thinking…", type: "Type instead", send: "Send",
-          snap: "Take photo", pick: "Photo from gallery", card: "Keep the card inside this frame",
-          page: "Keep the whole page inside this frame", again: "Start again", you: "You", photo: "📷 Photo sent",
+          snap: "Take photo", hold: "Hold still…", pick: "Photo from gallery", card: "Keep the card inside this frame",
+          page: "Keep the whole page inside this frame", page_side: "Turn the page sideways and keep it inside this frame", again: "Start again", you: "You", photo: "📷 Photo sent",
           nosms: "No SMS yet.", play: "Listen again", novoice: "Voice is not available now. Tap a button or type.",
           nomic: "No microphone permission. Tap a button or type." },
   };
@@ -137,22 +137,83 @@
     send({}, { photo: [small, (file.name || "photo.jpg")] }, { text: w("photo"), img: img });
   }
 
-  /* camera with a guide frame (card shape for the CNIC, page shape for the certificate) */
+  /* camera with a guide frame (card shape for the CNIC, page shape for the certificate).
+     Three things make the photo readable (checked on the specimen cards: a 640x480 webcam frame is always too
+     small, a 1280x720 frame cropped to the frame reads the card at 0.99):
+       1. ask the camera for its largest picture (up to 1920x1080) instead of the 640x480 default;
+       2. take a short burst and keep the sharpest frame (hand shake, autofocus still settling);
+       3. send only what is inside the frame (plus a margin), so the card fills the photo. */
+  const CAM = { burst: 6, gapMs: 110, margin: 0.08 };
+
+  function sharpness(src, sx, sy, sw, sh) {
+    // variance of a Laplacian on a small grey copy of the frame area: higher = sharper
+    const w = 320, h = Math.max(1, Math.round(w * sh / sw));
+    const c = document.createElement("canvas"); c.width = w; c.height = h;
+    const g = c.getContext("2d", { willReadFrequently: true });
+    g.drawImage(src, sx, sy, sw, sh, 0, 0, w, h);
+    const d = g.getImageData(0, 0, w, h).data, grey = new Float32Array(w * h);
+    for (let i = 0; i < w * h; i++) grey[i] = 0.299 * d[4 * i] + 0.587 * d[4 * i + 1] + 0.114 * d[4 * i + 2];
+    let n = 0, sum = 0, sq = 0;
+    for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) {
+      const i = y * w + x, lap = 4 * grey[i] - grey[i - 1] - grey[i + 1] - grey[i - w] - grey[i + w];
+      n++; sum += lap; sq += lap * lap;
+    }
+    return n ? sq / n - (sum / n) ** 2 : 0;
+  }
+
+  function frameArea(v, frame) {
+    // the guide frame's position on screen, in the camera's own pixels, with a margin; whole picture if unknown
+    const vr = v.getBoundingClientRect(), fr = frame.getBoundingClientRect();
+    if (!vr.width || !fr.width || !v.videoWidth) return [0, 0, v.videoWidth, v.videoHeight];
+    const k = v.videoWidth / vr.width, mx = fr.width * CAM.margin, my = fr.height * CAM.margin;
+    const x0 = Math.max(0, (fr.left - vr.left - mx) * k), y0 = Math.max(0, (fr.top - vr.top - my) * k);
+    const x1 = Math.min(v.videoWidth, (fr.right - vr.left + mx) * k), y1 = Math.min(v.videoHeight, (fr.bottom - vr.top + my) * k);
+    return (x1 - x0 > 50 && y1 - y0 > 50) ? [x0, y0, x1 - x0, y1 - y0] : [0, 0, v.videoWidth, v.videoHeight];
+  }
+
   async function startCam(box, hint) {
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) return false;
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
+      let stream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: false, video: {
+          facingMode: "environment", width: { ideal: 1920 }, height: { ideal: 1080 } } });
+      } catch (e) {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
+      }
+      const track = stream.getVideoTracks()[0];
+      try { await track.applyConstraints({ advanced: [{ focusMode: "continuous" }] }); } catch (e) { /* not supported */ }
       const v = el("video", { autoplay: true, playsinline: true, muted: true });
       v.srcObject = stream;
-      const frame = el("div", { class: "frame " + (hint === "certificate" ? "page" : "card") });
+      const frame = el("div", { class: "frame " + (hint === "certificate" ? "f-page" : "f-card") });
+      const label = el("span", { text: w("snap") });
       const snap = el("button", { class: "big go", type: "button", onclick: async () => {
-        const c = document.createElement("canvas");
-        c.width = v.videoWidth; c.height = v.videoHeight;
-        c.getContext("2d").drawImage(v, 0, 0);
-        c.toBlob((b) => photo(new File([b], hint + ".jpg", { type: "image/jpeg" })), "image/jpeg", 0.9);
-      } }, el("span", { class: "ico", text: "📸" }), w("snap"));
+        if (snap.disabled || !v.videoWidth) return;
+        snap.disabled = true; label.textContent = w("hold");
+        try {
+          const [sx, sy, sw, sh] = frameArea(v, frame);
+          let best = null, bestScore = -1;
+          for (let i = 0; i < CAM.burst; i++) {
+            if (i) await new Promise((r) => setTimeout(r, CAM.gapMs));
+            const c = document.createElement("canvas");
+            c.width = Math.round(sw); c.height = Math.round(sh);
+            c.getContext("2d").drawImage(v, sx, sy, sw, sh, 0, 0, c.width, c.height);
+            const score = sharpness(c, 0, 0, c.width, c.height);
+            if (score > bestScore) { best = c; bestScore = score; }
+          }
+          best.toBlob((b) => photo(new File([b], hint + ".jpg", { type: "image/jpeg" })), "image/jpeg", 0.92);
+        } finally { snap.disabled = false; label.textContent = w("snap"); }
+      } }, el("span", { class: "ico", text: "📸" }), label);
+      const tip = el("p", { class: "muted", text: w(hint === "certificate" ? "page" : "card") });
+      v.addEventListener("loadedmetadata", () => {
+        // a laptop webcam is wide: an upright page would be too small to read, so it is held sideways
+        // (the reader turns it upright); a phone held upright keeps the upright page frame
+        if (hint === "certificate" && v.videoWidth > v.videoHeight) {
+          frame.className = "frame f-page-side"; tip.textContent = w("page_side");
+        }
+      });
       S.cam = stream;
-      box.replaceChildren(el("div", { class: "cam" }, v, frame), el("p", { class: "muted", text: w(hint === "certificate" ? "page" : "card") }), snap);
+      box.replaceChildren(el("div", { class: "cam" }, v, frame), tip, snap);
       return true;
     } catch (e) { return false; }
   }
@@ -177,7 +238,7 @@
                       onchange: (e) => photo(e.target.files[0]) }));
       a.append(box, pick);
       startCam(box, turn.photo_hint || "cnic").then((ok) => {
-        if (!ok) box.replaceChildren(el("div", { class: "frame-static " + (turn.photo_hint === "certificate" ? "page" : "card") }),
+        if (!ok) box.replaceChildren(el("div", { class: "frame-static " + (turn.photo_hint === "certificate" ? "f-page" : "f-card") }),
                                      el("p", { class: "muted", text: w(turn.photo_hint === "certificate" ? "page" : "card") }));
       });
     }

@@ -22,6 +22,7 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 
 from app import ai_engines as ai_clients, doc_check
 from app.config import settings
+from ocr_core.normalize import cnic_problems
 
 # OCR service flags that a NEW PHOTO can fix. Every other warning/critical flag goes to a human;
 # 'info' flags (QR_NOT_READ, URDU_ONLY_FIELDS) are only noted.
@@ -190,8 +191,15 @@ def read_cnic(data: bytes, rules: dict, rule_version: int | None = None, claimed
     printed = _digits(printed_str)
     overall = float(res.get("overall_confidence") or 0.0)
     ocr_min = rules["ocr_min_confidence"]
+    # A number no CNIC can have (00000-0000000-0 on sample cards, a province code that does not exist): tell
+    # her that, not "the photo is unclear", which would send her round taking the same photo again.
+    invalid = cnic_problems(printed_str) if printed_str else []
 
     flags, human, ask, reasons = _service_flags(res)
+    if invalid:
+        flags.append("invalid_cnic_number")
+        ask.add("invalid_cnic_number")
+        reasons.append(f"The number on the card ({printed_str}) is not a valid CNIC number: {'; '.join(invalid)}.")
     reasons.insert(0, f"Document reader confidence {overall:.2f} (its least certain key field; "
                       f"needs at least {ocr_min:.2f} to be read safely).")
     if overall < ocr_min:
@@ -204,7 +212,7 @@ def read_cnic(data: bytes, rules: dict, rule_version: int | None = None, claimed
         ask.add("no_cnic_found")
 
     printed_vs_account = None
-    if printed and claimed:
+    if printed and claimed and not invalid:
         printed_vs_account = printed == claimed
         if not printed_vs_account:
             flags.append("printed_account_mismatch")
@@ -239,6 +247,11 @@ def read_cnic(data: bytes, rules: dict, rule_version: int | None = None, claimed
         "qr": qr, "printed_cnic_matches_account": printed_vs_account, "edit_checks": edit,
         "thresholds_used": {"ocr_min_confidence": ocr_min}, "rule_version": rule_version, "reasons": reasons,
         "service": {**_service_summary(res, CNIC_FIELDS_SHOWN), "outcome": "ok"},
+        **({"retake": {"reason": "invalid_cnic_number",
+                       "say_ur": f"اس کارڈ پر لکھا شناختی کارڈ نمبر ({printed_str}) درست نمبر نہیں ہے۔ "
+                                 "براہ کرم اپنے اصل شناختی کارڈ کے سامنے والے رخ کی تصویر لیں۔",
+                       "say_en": f"The CNIC number on this card ({printed_str}) is not a valid number. "
+                                 "Please take a photo of the front of your own CNIC."}} if invalid else {}),
     }
 
 

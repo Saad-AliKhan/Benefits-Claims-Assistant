@@ -8,6 +8,11 @@ from app.config import settings
 ALGORITHM = "HS256"
 
 
+def _signing_key() -> str:
+    """The secret plus the session epoch: a fresh demo start changes the epoch and so ends every old login."""
+    return settings.secret_key + settings.session_epoch
+
+
 def _prepare(password: str) -> bytes:
     # bcrypt only reads the first 72 bytes of a password
     return password.encode("utf-8")[:72]
@@ -29,12 +34,12 @@ def create_access_token(user_id: int, role: str, version: int = 0) -> str:
     """version: the user's token_version; changing a password raises it, so older tokens stop working."""
     expires = datetime.now(timezone.utc) + timedelta(minutes=settings.access_token_minutes)
     payload = {"sub": str(user_id), "role": role, "ver": version, "exp": expires}
-    return jwt.encode(payload, settings.secret_key, algorithm=ALGORITHM)
+    return jwt.encode(payload, _signing_key(), algorithm=ALGORITHM)
 
 
 def decode_access_token(token: str) -> dict | None:
     """Returns the token contents, or None if it is fake, tampered with or expired."""
     try:
-        return jwt.decode(token, settings.secret_key, algorithms=[ALGORITHM])
+        return jwt.decode(token, _signing_key(), algorithms=[ALGORITHM])
     except jwt.PyJWTError:
         return None

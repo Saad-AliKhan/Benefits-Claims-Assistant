@@ -29,6 +29,7 @@ from app.config import settings
 from app.consent import CLAIM_PURPOSES, has_consent
 from app.mock_services import api as mock
 from app.models import AgentSession, Case, User
+from app.urdu_names import to_urdu
 
 MAX_TRIES = 2
 
@@ -173,9 +174,33 @@ EN_KEYWORDS = [   # checked in this order: specific phrases first
     ("greeting", ("hello", "assalam", "salam", "good morning")),
 ]
 
+# Everyday Roman Urdu words that English sentences don't contain ('se', 'me' and 'is' are left out on
+# purpose: 'see', 'me' and 'is' are English too).
+ROMAN_URDU_MARKERS = ("hai", "hain", "ka", "kya", "kab", "kaise", "kahan", "kitne", "kitna", "mujhe", "mera",
+                      "meri", "mere", "nahi", "chahiye", "karna", "karni", "deni", "dena", "paise", "raqam",
+                      "darkhwast", "madad", "hoga", "milega", "milenge", "batayen", "bata")
+
+
+def looks_roman_urdu(text: str | None) -> bool:
+    """True for text in Latin letters with at least two everyday Roman Urdu words."""
+    if not text or not re.search(r"[a-zA-Z]", text):
+        return False
+    from urdu_intent.normalize import roman_key
+    markers = {roman_key(w) for w in ROMAN_URDU_MARKERS}
+    words = re.findall(r"[a-z]+", text.lower())
+    return sum(roman_key(w) in markers for w in words) >= 2
+
+
 def english_intent(text: str) -> dict:
-    from urdu_intent import off_topic_reason
+    from urdu_intent import detect_intent, off_topic_reason
     r = _english_intent(text)
+    if r["intent"] == "unclear" and looks_roman_urdu(text):
+        # Many people who choose English still type or say Roman Urdu ('mujhe darkhwast deni hai'):
+        # give the Urdu / Roman Urdu engine a turn before asking again. Only for clear Roman Urdu: on
+        # real English sentences ('Why was my claim turned down?') the Urdu engine guesses wrong.
+        roman = detect_intent(text)
+        if roman["intent"] != "unclear":
+            return roman
     blocked = off_topic_reason(text, r["intent"]) if r["intent"] != "unclear" or "subscri" in (text or "").lower() else None
     if blocked:   # Whisper's 'Thanks for watching!' from noise; a bus fare is not the claim
         r = {"intent": "unclear", "action": None, "alternatives": r.get("alternatives", []), "reason": blocked}
@@ -271,7 +296,9 @@ class Agent:
     # ---- output helpers
     def say(self, key: str, **v):
         ur, en = ANSWERS.get(key) or T[key]
-        ur, en = ur.format(**v), en.format(**v)
+        # a person's name is said in Urdu script in the Urdu sentence ('آپ کا نام رخسانہ بی بی ہے')
+        vu = {**v, "name": to_urdu(v["name"])} if v.get("name") else v
+        ur, en = ur.format(**vu), en.format(**v)
         if self.male:  # the few feminine forms, for widowers
             ur = (ur.replace("چاہیں گی", "چاہیں گے").replace("چاہتی ہیں", "چاہتے ہیں").replace("سکتی ہیں", "سکتے ہیں")
                     .replace("آپ کے شوہر", "آپ کی اہلیہ").replace("آپ سے ملنے آئے گی", "آپ سے ملنے آئے گا"))
@@ -487,9 +514,13 @@ class Agent:
         n = self.data.get("retakes_" + hint, 0) + 1
         self.set(**{"retakes_" + hint: n})
         if n < 2:
-            why = ((doc.get("retake") or {}).get("message_ur") or "روشنی میں، سیدھا رکھ کر، قریب سے تصویر لیں۔",
-                   (doc.get("retake") or {}).get("message_en") or "Use good light, hold it flat, and come closer.")
-            self.say_text(T["retake"][0].format(why=why[0]), T["retake"][1].format(why=why[1]))
+            rt = doc.get("retake") or {}
+            if rt.get("say_ur"):   # a whole message of its own (e.g. a card whose number is not a real CNIC)
+                self.say_text(rt["say_ur"], rt.get("say_en") or rt["say_ur"])
+            else:
+                why = (rt.get("message_ur") or "روشنی میں، سیدھا رکھ کر، قریب سے تصویر لیں۔",
+                       rt.get("message_en") or "Use good light, hold it flat, and come closer.")
+                self.say_text(T["retake"][0].format(why=why[0]), T["retake"][1].format(why=why[1]))
             self.ask(question, state, "photo", "id_photo" if hint == "cnic" else None, **self.spouse())
             self.photo_hint = hint
             return

@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     # --- login (JWT)
     secret_key: str = "change-me-before-deploying"
     access_token_minutes: int = 8 * 60
+    # start.bat fresh sets a new random value, so every login from before the reset stops working and the
+    # browser (and the phone app) opens on the login page instead of the last demo account
+    session_epoch: str = ""
     max_failed_logins: int = 5      # then the account is locked for lockout_minutes
     lockout_minutes: int = 15
     code_minutes: int = 10          # a one-time SMS code is valid this long

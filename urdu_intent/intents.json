@@ -204,7 +204,9 @@
         "layak": 3,
         "لائق": 3,
         "qabil": 2.5,
-        "پھر بھی ملے": 2.5
+        "پھر بھی ملے": 2.5,
+        "madad mil sakti": 3,
+        "mil sakta": 1.5
       },
       "examples_en": [
         "Can I get this support?",
@@ -407,7 +409,13 @@
         "درخواست دینا": 3,
         "naam kaise": 2.5,
         "naam likhwa": 2.5,
-        "naam darj": 2.5
+        "naam darj": 2.5,
+        "darkhwast kaise": 2.5,
+        "darkhwast du": 3,
+        "darkhwast dun": 3,
+        "form bhar": 2.5,
+        "form kahan": 2.5,
+        "apply karna": 3
       },
       "examples_en": [
         "I want to apply for help",
@@ -542,7 +550,10 @@
         "فیس مانگ": 3,
         "خود کو افسر": 3,
         "افسر بن کر": 3,
-        "khud ko afsar": 3
+        "khud ko afsar": 3,
+        "paise mange": 3,
+        "phone kar ke paise": 3,
+        "naam pe paise": 3
       },
       "examples_en": [
         "A man wants money to get my claim approved",
@@ -655,7 +666,10 @@
         "address update": 3,
         "پتہ بدل": 3,
         "address badal": 3,
-        "address change": 3
+        "address change": 3,
+        "account badal": 3,
+        "account change": 3,
+        "number change": 3
       },
       "examples_en": [
         "I have a new mobile number",
@@ -1764,7 +1778,10 @@
       "joke",
       "لطیفہ",
       "چائے",
-      "chai"
+      "chai",
+      "school",
+      "سکول",
+      "اسکول"
     ],
     "anchors": [
       "پیسے",

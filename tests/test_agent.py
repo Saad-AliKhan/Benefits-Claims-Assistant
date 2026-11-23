@@ -172,6 +172,6 @@ def test_someone_elses_card_is_noticed_in_the_conversation(env, monkeypatch):
     t = Talk(env)
     t.say(choice="ur"); t.say(choice="how_to_apply"); t.say(choice="yes"); t.say(choice="yes")
     t.say(photo="cnic.jpg")
-    assert "مختلف" in t.last["say"] and "Rukhsana" in t.last["say"]   # her own name, not the card's
+    assert "مختلف" in t.last["say"] and "رخسانہ" in t.last["say"]   # her own name (in Urdu), not the card's
     t.say(choice="yes"); t.say(choice="no")
     assert t.last["claim"]["status"] == "escalated"

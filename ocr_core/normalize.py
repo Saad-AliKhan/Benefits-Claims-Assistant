@@ -213,6 +213,17 @@ def split_camel(text: str) -> str:
     return re.sub(r"(?<=[a-z])(?=[A-Z])", " ", text)
 
 
+def split_joined_name(word: str) -> list[str] | None:
+    """'Muhammadaslam' -> ['Muhammad', 'aslam'] when both halves are known names and the whole is not."""
+    low, names = word.lower(), known_names()
+    if len(low) < 7 or low in names:
+        return None
+    for i in range(3, len(low) - 2):
+        if low[:i] in names and low[i:] in names:
+            return [word[:i], word[i:]]
+    return None
+
+
 def clean_name(text: str | None) -> tuple[str | None, list[str], bool]:
     """Return (name, notes, unknown_words). unknown_words is True when a word is neither a known
     name nor confidently corrected; such names are still returned but get a lower confidence."""
@@ -221,7 +232,10 @@ def clean_name(text: str | None) -> tuple[str | None, list[str], bool]:
     if not t or len(re.sub(r"[^A-Za-z]", "", t)) < 2:
         return None, [], False
     out, notes, unknown = [], [], False
-    for w in t.split():
+    words = []
+    for w in t.split():   # 'MUHAMMADASLAM': capitals hide the joined words, so split on two known names
+        words.extend(split_joined_name(w.strip(".'-")) or [w])
+    for w in words:
         core = w.strip(".'-")
         if len(core) <= 2:
             out.append(core.upper() if len(core) == 1 else core.capitalize())
@@ -287,8 +301,18 @@ def clean_address(text: str | None) -> str | None:
     return re.sub(r"[A-Za-z]+", fix, t)
 
 
+URDU_GENDERS = {"عورت": "Female", "خاتون": "Female", "مرد": "Male", "خواجہ سرا": "Transgender"}
+
+
 def normalize_gender(text: str | None) -> str | None:
-    return best_choice(text, GENDERS, cutoff=0.75)
+    """'F', 'Female', and newer cards' bilingual 'F / عورت' (the Urdu half often misread, e.g. 'F/1S')."""
+    if not text:
+        return None
+    for urdu, value in URDU_GENDERS.items():
+        if urdu in text:
+            return value
+    first = re.split(r"[/|\\]", text)[0].strip()
+    return best_choice(first, GENDERS, cutoff=0.75) or best_choice(text, GENDERS, cutoff=0.75)
 
 
 def normalize_relation(text: str | None) -> str | None:

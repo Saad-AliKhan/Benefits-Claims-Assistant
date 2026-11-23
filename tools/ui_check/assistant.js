@@ -92,7 +92,7 @@ async function login(email) {
   await say("<noise>");
   must(/خاموش جگہ/.test(lastBot()), "noise: asks for a quiet place");
   await tap("ہاں");
-  must(/شناختی کارڈ/.test(lastBot()) && d.querySelector(".frame-static.card"), "4 asks for the CNIC photo with a card guide");
+  must(/شناختی کارڈ/.test(lastBot()) && d.querySelector(".frame-static.f-card"), "4 asks for the CNIC photo with a card guide");
   OFFLINE = true;
   await photo("cnic.jpg");
   await waitFor(() => !d.getElementById("weak").hidden);

@@ -87,6 +87,15 @@ ROMAN_SYNONYMS = {
     # Punjabi-influenced Roman Urdu: 'paise kado aan ge', 'kinne din', 'certificate kithon'
     "kado": "kab", "kadon": "kab", "kinne": "kitne", "kinna": "kitna", "kinni": "kitni", "kithon": "kahan",
     "kithe": "kahan", "ajj": "aaj", "da": "ka", "banya": "bana", "hoya": "hua",
+    # Texting shorthand (WhatsApp style): vowels dropped, 'ha' / 'h' for 'hai', 'mai' for 'main'
+    "ha": "hai", "h": "hai", "hn": "hain", "mai": "main", "mn": "main", "mjhe": "mujhe", "mje": "mujhe",
+    "mjhy": "mujhe", "mujy": "mujhe", "kr": "kar", "krna": "karna", "krni": "karni", "krne": "karne",
+    "krwa": "karwa", "krwani": "karwani", "krwana": "karwana", "krwen": "karwaen", "skti": "sakti",
+    "skta": "sakta", "skte": "sakte", "msg": "message", "aoa": "aoa",
+    # 'darkhwast' (application) is typed many ways; 'darkhast' must not turn into 'qist' (instalment)
+    "darkhast": "darkhwast", "darkhaast": "darkhwast", "darkhuast": "darkhwast", "darkhuwast": "darkhwast",
+    "darkhawast": "darkhwast", "darkhwaast": "darkhwast", "darkwast": "darkhwast", "darkhasat": "darkhwast",
+    "darkhawst": "darkhwast", "darkhwst": "darkhwast",
 }
 
 

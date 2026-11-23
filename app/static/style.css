@@ -174,10 +174,13 @@ html[dir="rtl"] .bub.bot p { font-family: var(--urdu); line-height: 2.2; font-si
         display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; justify-content: space-between; }
 .cam { position: relative; border-radius: var(--r-md); overflow: hidden; background: #000; }
 .cam video { width: 100%; display: block; }
-.frame { position: absolute; inset: 0; margin: auto; border: 3px dashed var(--marigold); border-radius: var(--r-md); box-shadow: 0 0 0 999px rgba(0, 0, 0, .45); }
-.frame.card { width: 84%; aspect-ratio: 85.6 / 54; height: auto; } .frame.page { height: 90%; aspect-ratio: 210 / 297; width: auto; }
+/* Guide frames use f-card / f-page, not .card / .page: .card is the white staff panel further down and would
+   paint a solid white box over the camera. */
+.frame { position: absolute; inset: 0; margin: auto; border: 3px dashed var(--marigold); border-radius: var(--r-md); box-shadow: 0 0 0 999px rgba(0, 0, 0, .45); background: transparent; pointer-events: none; }
+.frame.f-card { width: 84%; aspect-ratio: 85.6 / 54; height: auto; } .frame.f-page { height: 90%; aspect-ratio: 210 / 297; width: auto; }
+.frame.f-page-side { height: 94%; aspect-ratio: 297 / 210; width: auto; }
 .frame-static { margin: .4rem auto; border: 3px dashed var(--pine); border-radius: var(--r-md); background: #fff; }
-.frame-static.card { width: 70%; aspect-ratio: 85.6 / 54; } .frame-static.page { width: 40%; aspect-ratio: 210 / 297; }
+.frame-static.f-card { width: 70%; aspect-ratio: 85.6 / 54; } .frame-static.f-page { width: 40%; aspect-ratio: 210 / 297; }
 .sms { max-width: 30rem; width: 92%; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); }
 .sms h2 { margin-top: 0; } .sms-row { border-bottom: 1px solid var(--line); padding: .5rem 0; } .sms-row p { margin: 0 0 .2rem; }
 .install { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); z-index: 50; font: inherit; font-weight: 600; padding: .75rem 1.3rem;

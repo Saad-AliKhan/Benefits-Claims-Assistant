@@ -1,4 +1,4 @@
-const CACHE = "lm-shell-v9"; // bump the number whenever you change a cached file
+const CACHE = "lm-shell-v11"; // bump the number whenever you change a cached file
 const SHELL = ["/citizen", "/assistant", "/static/assistant.js", "/static/style.css", "/static/api.js", "/static/i18n.js", "/static/offline.js",
                "/static/voice.js", "/static/citizen.js", "/static/manifest.json", "/static/icon.svg",
                "/static/icon-192.png", "/static/icon-512.png", "/static/apple-touch-icon.png"];
