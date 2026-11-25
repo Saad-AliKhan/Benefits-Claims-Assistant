@@ -34,7 +34,8 @@ OK, RETAKE, RECORD_AGAIN, UNAVAILABLE = "ok", "retake", "record_again", "unavail
 FIXTURES = Path(__file__).resolve().parent.parent / "data" / "ocr_fixtures"
 MOCK_SENTENCE = "مجھے پیسے کب ملیں گے"
 
-_state = {"ocr": None, "ocr_error": None, "voice_ready": False, "voice_error": None}
+_state = {"ocr": None, "ocr_error": None, "voice_ready": False, "voice_error": None, "voice_model": None,
+          "voice_note": None}
 _ocr_lock = threading.Lock()     # one OCR job at a time (CPU and memory bound)
 _started = threading.Event()
 
@@ -46,28 +47,49 @@ def new_request_id(prefix: str) -> str:
 # --------------------------------------------------------------------------- start-up
 def _load_ocr():
     try:
+        import os
+        os.environ.setdefault("OCR_VL", settings.ocr_vl)   # read by ocr_core/vl.py (.env is not in os.environ)
         import numpy as np
         from ocr_core import load_engine
         engine = load_engine()
         engine.read(np.full((64, 256, 3), 255, np.uint8))  # warm-up
         _state["ocr"] = engine
         log.info("OCR engine ready: %s", engine.name)
+        from ocr_core import vl
+        vl.get()  # the second reader (PaddleOCR-VL), if switched on and downloaded: load it now, not on a claim
     except Exception as e:  # missing package, broken model file...
         _state["ocr_error"] = f"{type(e).__name__}: {e}"
         log.error("OCR engine could not start: %s", _state["ocr_error"])
 
 
 def _load_voice():
+    """Loads WHISPER_MODEL. If it cannot start (e.g. 'indic' not downloaded yet, or torch not installed) it loads
+    WHISPER_FALLBACK instead, so voice keeps working; /health/ai says which model is in use and why."""
     try:
         import os
         os.environ["WHISPER_MODEL"] = settings.whisper_model  # read by voice_core when it is imported
         import voice_core
-        voice_core.load_model()  # first start downloads the Whisper model (about 500 MB for 'small')
-        _state["voice_ready"] = True
-        log.info("Whisper model ready: %s", voice_core.MODEL_NAME)
-    except Exception as e:  # no internet on first start, missing package...
+    except Exception as e:  # missing package
         _state["voice_error"] = f"{type(e).__name__}: {e}"
-        log.error("Whisper could not start: %s", _state["voice_error"])
+        log.error("speech recognition could not start: %s", _state["voice_error"])
+        return
+    tries = [settings.whisper_model]
+    if settings.whisper_fallback and settings.whisper_fallback != settings.whisper_model:
+        tries.append(settings.whisper_fallback)
+    problems = []
+    for name in tries:
+        try:
+            voice_core.load_model(name)  # first start downloads a Whisper model (about 500 MB for 'small')
+        except Exception as e:  # no internet on first start, model not downloaded, package missing...
+            problems.append(f"{name}: {type(e).__name__}: {e}")
+            log.error("speech model %s could not start: %s", name, e)
+            continue
+        voice_core.MODEL_NAME = name
+        _state.update(voice_ready=True, voice_error=None, voice_model=name,
+                      voice_note=("; ".join(problems) + f" -> using {name}") if problems else None)
+        log.info("speech model ready: %s", name)
+        return
+    _state["voice_error"] = "; ".join(problems)
 
 
 def start_loading() -> None:
@@ -100,14 +122,24 @@ def _meaning_status() -> dict:
         return {"on": False, "error": str(e)}
 
 
+def _vl_status() -> dict:
+    try:
+        from ocr_core import vl
+        return vl.status()
+    except Exception as e:  # noqa: BLE001
+        return {"mode": "off", "error": str(e)}
+
+
 def status() -> dict:
     """For GET /health/ai: is each engine ready?"""
     return {
         "ocr": {"mock": settings.ocr_mock, "ready": settings.ocr_mock or _state["ocr"] is not None,
                 "error": _state["ocr_error"]},
         "voice": {"mock": settings.voice_mock, "ready": settings.voice_mock or _state["voice_ready"],
-                  "whisper_model": None if settings.voice_mock else settings.whisper_model,
-                  "error": _state["voice_error"]},
+                  "whisper_model": None if settings.voice_mock else (_state["voice_model"] or settings.whisper_model),
+                  "asked_for": None if settings.voice_mock else settings.whisper_model,
+                  "note": _state["voice_note"], "error": _state["voice_error"]},
+        "second_reader": _vl_status(),
         "intent": {"ready": True, "meaning_model": _meaning_status()},
         "fallbacks": {"local_ocr": settings.local_ocr_fallback},
     }

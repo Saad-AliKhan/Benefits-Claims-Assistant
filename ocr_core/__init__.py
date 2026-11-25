@@ -17,6 +17,7 @@ from .death_certificate import extract_death_certificate
 from .engine import load_engine
 from .imaging import load_image
 from .datatypes import BadImage, Extraction
+from . import vl
 
 __version__ = "1.0.0"
 __all__ = ["load_engine", "read_document", "BadImage", "DOC_TYPES", "__version__"]
@@ -49,4 +50,5 @@ def read_document(engine, doc_type: str, data: bytes, today: date | None = None)
     t0 = time.perf_counter()
     img = load_image(data)
     ex = DOC_TYPES[doc_type](engine, img, today=today)
+    vl.second_opinion(ex, img)   # PaddleOCR-VL, only when it can help and is installed (ocr_core/vl.py)
     return to_result(ex, engine.name, int((time.perf_counter() - t0) * 1000))

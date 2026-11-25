@@ -32,7 +32,7 @@ _HUMAN_LOCAL = {"qr_cnic_mismatch", "qr_account_mismatch", "edited_software", "e
 _ASK_LOCAL = {"qr_unreadable_payload"}
 
 CNIC_FIELDS_SHOWN = ("cnic", "name", "date_of_birth", "father_or_husband_name", "gender", "card.type",
-                     "date_of_expiry")
+                     "date_of_expiry", "name_ur", "father_or_husband_name_ur", "father_or_husband.relation")
 DEATH_FIELDS_SHOWN = ("certificate.tracking_id", "deceased.name", "deceased.cnic", "deceased.date_of_death",
                       "applicant.name", "applicant.cnic", "applicant.relation", "spouse.relation")
 
@@ -107,7 +107,24 @@ def _service_summary(res: dict, keys: tuple) -> dict:
             "mock": res.get("mock"), "overall_confidence": res.get("overall_confidence"),
             "needs_review_fields": res.get("needs_review_fields", []),
             "flags": [{"code": f.get("code"), "severity": f.get("severity")} for f in res.get("flags", [])],
-            "fields": _compact_fields(res.get("fields", {}), keys), "processing_ms": res.get("processing_ms")}
+            "fields": _compact_fields(res.get("fields", {}), keys), "processing_ms": res.get("processing_ms"),
+            "second_reader": (res.get("quality") or {}).get("second_reader")}
+
+
+def _second_reader_reasons(res: dict) -> list[str]:
+    """What PaddleOCR-VL (the second reader) added, in words for the officer and the auditor."""
+    sr = (res.get("quality") or {}).get("second_reader") or {}
+    results = sr.get("results") or {}
+    out = []
+    agree = [k for k, v in results.items() if v == "agree"]
+    differ = [k for k, v in results.items() if v == "differ"]
+    if agree:
+        out.append("The second reader (PaddleOCR-VL) read the same " + ", ".join(agree) + ".")
+    if differ:
+        out.append("The second reader (PaddleOCR-VL) read a DIFFERENT " + ", ".join(differ) + ": a person checks it.")
+    if results.get("name_ur") == "read":
+        out.append("The Urdu name on the card was read by the second reader.")
+    return out
 
 
 def _service_flags(res: dict) -> tuple[list[str], set, set, list[str]]:
@@ -207,6 +224,13 @@ def read_cnic(data: bytes, rules: dict, rule_version: int | None = None, claimed
         ask.add("low_ocr_confidence")
     if res.get("needs_review_fields"):
         reasons.append("A person should check: " + ", ".join(res["needs_review_fields"]) + ".")
+    reasons += _second_reader_reasons(res)
+    en_name, ur_name = val("name"), val("name_ur")
+    if en_name and ur_name and en_name != ur_name:
+        from app.urdu_names import same_name_score
+        sc = same_name_score(en_name, ur_name)
+        reasons.append(f"The English and Urdu names on the card {'agree' if sc >= 0.75 else 'do NOT clearly agree'} "
+                       f"(score {sc:.2f}).")
     if not printed:
         flags.append("no_cnic_found")
         ask.add("no_cnic_found")
@@ -242,7 +266,8 @@ def read_cnic(data: bytes, rules: dict, rule_version: int | None = None, claimed
         "source": "ocr_engine", "doc_type": "cnic", "action": action, "confidence": round(conf, 4), "flags": flags,
         "ocr": {"confidence": overall, "text": "",
                 "fields": {"cnic": printed_str, "name": val("name"), "date_of_birth": val("date_of_birth"),
-                           "father_or_husband_name": val("father_or_husband_name"), "gender": val("gender")}},
+                           "father_or_husband_name": val("father_or_husband_name"), "gender": val("gender"),
+                           "name_ur": val("name_ur"), "father_or_husband_name_ur": val("father_or_husband_name_ur")}},
         "blur": {"score": quality.get("sharpness"), "min_required": None, "is_blurry": False},
         "qr": qr, "printed_cnic_matches_account": printed_vs_account, "edit_checks": edit,
         "thresholds_used": {"ocr_min_confidence": ocr_min}, "rule_version": rule_version, "reasons": reasons,
@@ -283,6 +308,7 @@ def read_death_certificate(data: bytes, rules: dict, rule_version: int | None = 
         ask.add("low_ocr_confidence")
     if res.get("needs_review_fields"):
         reasons.append("A person should check: " + ", ".join(res["needs_review_fields"]) + ".")
+    reasons += _second_reader_reasons(res)
 
     applicant, deceased = _digits(f("applicant.cnic").get("value")), _digits(f("deceased.cnic").get("value"))
     applicant_is_claimant = None

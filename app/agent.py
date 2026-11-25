@@ -30,6 +30,7 @@ from app.consent import CLAIM_PURPOSES, has_consent
 from app.mock_services import api as mock
 from app.models import AgentSession, Case, User
 from app.urdu_names import to_urdu
+from urdu_intent.numbers import spoken_digits
 
 MAX_TRIES = 2
 
@@ -279,7 +280,8 @@ def language(text: str | None) -> str | None:
 
 
 def digits_cnic(text: str | None) -> str | None:
-    d = re.sub(r"\D", "", (text or "").translate(str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789")))
+    # 'تین پانچ دو ...' (number words, as Indic-Transcribe Core writes them) count as digits too
+    d = re.sub(r"\D", "", spoken_digits(text or "").translate(str.maketrans("۰۱۲۳۴۵۶۷۸۹", "0123456789")))
     return mock.norm_cnic(d) if len(d) == 13 else None
 
 

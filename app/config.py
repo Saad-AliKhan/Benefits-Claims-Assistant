@@ -29,7 +29,11 @@ class Settings(BaseSettings):
     ocr_mock: bool = False          # true: instant fake OCR answers from data/ocr_fixtures (for building screens)
     voice_mock: bool = False        # true: no Whisper; every recording "says" one fixed sentence
     voice_preload: bool = True      # load Whisper when the app starts (first start downloads ~500 MB)
-    whisper_model: str = "small"    # base (fast, weak Urdu) | small | medium
+    # speech model: Whisper (base | small | medium | turbo) or Indic-Transcribe Core (indic | indic-onnx)
+    whisper_model: str = "small"
+    whisper_fallback: str = "turbo" # used when whisper_model cannot start (e.g. indic not downloaded); "" = none
+    # second document reader, PaddleOCR-VL-1.6 (ocr_core/vl.py; needs tools/ocr/fetch_vl.py first):
+    ocr_vl: str = "when_unsure"     # off | when_unsure (green cards + documents with a key value to check) | always
     ocr_timeout_s: float = 60.0     # how long a request waits for the OCR engine when it is busy
     local_ocr_fallback: bool = True # OCR engine down: read CNICs with Tesseract (app/doc_check.py), if installed
 

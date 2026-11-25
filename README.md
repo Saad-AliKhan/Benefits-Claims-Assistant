@@ -159,6 +159,48 @@ right / unclear / WRONG through the same intent step, and seconds per second of 
 Add a Whisper mistake to `urdu_intent/sound_alikes.json`, a new way of asking to `urdu_intent/intents.json`,
 then run `python tools/voice/evaluate_intents.py` ("wrong intent" must stay 0).
 
+### Optional, larger models (not yet measured on this laptop)
+
+**Indic-Transcribe Core** (speech, `voice_core/indic.py`). A 1.2B speech recogniser from Bodhan AI (IIT Madras) with
+AI4Bharat, trained on 25 Indian languages including Urdu (Voice of India benchmark, Urdu: OIWER 5.0, Indian
+speakers). It is not a Whisper model and runs through its own code. Set it up once:
+
+1. Accept its licence on <https://huggingface.co/bodhan-ai/indic-transcribe-core> (access may need approval).
+2. Run `hf auth login`.
+3. `pip install -r requirements-indic.txt --extra-index-url https://download.pytorch.org/whl/cpu`
+4. `python tools/voice/fetch_indic.py`: 4.6 GB, about 5 GB of RAM. Or `--onnx`: the community int8 export,
+   1.5 GB, about 2.5 GB of RAM.
+5. Set `WHISPER_MODEL=indic` (or `indic-onnx`) in `.env`.
+
+If it cannot start, the app uses `WHISPER_FALLBACK` (default `turbo`), and `/health/ai` says why. The wrapper does
+four extra jobs:
+* It always passes the language, because its own language detection often hears Urdu as Hindi.
+* It sends only the part of the clip with speech (Silero voice detection), because it writes words on silence.
+* It turns spoken number words into digits (`urdu_intent/numbers.py`), because it writes "تین پانچ دو" rather than
+  352. This means a CNIC said aloud still works.
+* It drops "filler" words written over silence.
+
+Before relying on it, compare it on real voices: `python tools/voice/compare_asr.py --models indic turbo`.
+
+Licence: Indic Open Model License v1.0. Credit Bodhan AI; non-profit, government and commercial use are allowed.
+Running it as a service for third parties needs Bodhan AI's written approval unless the operator is a non-profit,
+government or academic body. The base model is nvidia/canary-1b-v2 (CC-BY-4.0).
+
+**PaddleOCR-VL-1.6** (second document reader, `ocr_core/vl.py`). A 0.9B vision-language document reader for 109
+languages including Urdu (Apache-2.0). It is too slow on a CPU to read every document, so it only does two jobs:
+* It reads the **Urdu names** on a CNIC, which the main reader cannot. On old green cards these are the only names,
+  and the Urdu label also tells "والد" (father) from "شوہر" (husband).
+* It **re-checks key values the main reader is unsure of.** If both readers agree, confidence goes up. If they
+  differ, the value goes to a person. It never changes a value silently.
+
+To set it up:
+1. `pip install -r requirements-vl.txt --extra-index-url https://download.pytorch.org/whl/cpu`
+2. `python tools/ocr/fetch_vl.py` (about 2 GB, not gated).
+
+`OCR_VL=when_unsure` (the default: green cards and unsure documents) | `always` | `off`. Measure it with
+`python tools/ocr/evaluate_vl.py --n 5` on specimens: silent errors must not go up. Use `--photos <folder>` to check
+the Urdu names it reads on real cards by eye.
+
 ## Tests
 
 ```
@@ -171,10 +213,11 @@ then run `python tools/voice/evaluate_intents.py` ("wrong intent" must stay 0).
 | Real (runs here) | Simulated |
 |---|---|
 | Login, roles, consent checks, audit log, decision engine, officer queue, rule versions, public API | NADRA, the death records system, the bank, the programme list (`app/mock_services`, fake data) |
-| OCR of photos, Urdu speech recognition, intent detection, scam classifier | Payments ("MOCKPAY" references; no money moves) |
+| OCR of photos (+ optional PaddleOCR-VL second reader), Urdu speech recognition (Whisper, or optional Indic-Transcribe Core), intent detection, scam classifier | Payments ("MOCKPAY" references; no money moves) |
 | Speech out (gTTS) needs internet; the browser's own voice is the fallback | The documents and people (SPECIMEN, invented) |
 
-**Limits:** Urdu text on documents is not read (old green CNICs give names only in Urdu); only the Punjab death
+**Limits:** Urdu text on documents is read only by the optional second reader (PaddleOCR-VL, above), and always
+goes to a person to confirm; only the Punjab death
 certificate layout is tested; the CNIC detector uses Ultralytics YOLO (AGPL-3.0, review before any real use);
 Urdu screen and spoken text should be checked by a native speaker (names come from the registry in English letters, so the Urdu voice reads them less well); the assistant speaks Urdu and English only (Sindhi, Punjabi, Pashto are not supported yet: it apologises and continues in Urdu); SQLite suits a demo, not many users at once.
 

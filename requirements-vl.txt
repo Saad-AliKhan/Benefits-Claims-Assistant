@@ -1,0 +1,7 @@
+# Optional: PaddleOCR-VL-1.6 as the second document reader (ocr_core/vl.py). Install AFTER requirements.txt:
+#   pip install -r requirements-vl.txt --extra-index-url https://download.pytorch.org/whl/cpu
+# Its model card asks for transformers 5 (the model class is built in); with an older transformers the model's own
+# code is used (trust_remote_code). Same torch as requirements-indic.txt, so both can be installed together.
+torch>=2.4
+transformers>=5.0
+huggingface_hub>=0.34

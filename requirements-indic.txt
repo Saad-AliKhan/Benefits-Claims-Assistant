@@ -1,0 +1,11 @@
+# Optional: Indic-Transcribe Core speech engine (WHISPER_MODEL=indic). Install AFTER requirements.txt:
+#   pip install -r requirements-indic.txt --extra-index-url https://download.pytorch.org/whl/cpu
+# The CPU-only PyTorch build is ~200 MB; the default build from PyPI on Windows is also CPU-only.
+# Not needed for WHISPER_MODEL=indic-onnx (the ONNX export runs on onnxruntime, already installed), except
+# huggingface_hub for the download.
+torch>=2.4
+torchaudio>=2.4
+transformers>=4.48
+sentencepiece>=0.2
+soundfile>=0.12
+huggingface_hub>=0.34
